@@ -12,7 +12,7 @@ public class AuthHttpService(
     ILocalStorageService localStorage,
     IApplicationSettings applicationSettings) : BaseHttpService(localStorage, applicationSettings, "Auth")
 {
-    public async Task<LoginResultModel?> Login(UserProfileViewModel model)
+    public async Task<LoginResultModel?> Login(UserLoginViewModel model)
     {
         try
         {

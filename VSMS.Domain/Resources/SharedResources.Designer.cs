@@ -58,5 +58,32 @@ namespace VSMS.Domain.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_login_email_not_valid {
+            get {
+                return ResourceManager.GetString("user_login_email_not_valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_login_email_required {
+            get {
+                return ResourceManager.GetString("user_login_email_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_login_password_required {
+            get {
+                return ResourceManager.GetString("user_login_password_required", resourceCulture);
+            }
+        }
     }
 }
