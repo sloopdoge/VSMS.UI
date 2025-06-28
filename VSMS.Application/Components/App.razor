@@ -7,13 +7,20 @@
     <base href="/"/>
     <link rel="stylesheet" href="@Assets["app.css"]"/>
     <link rel="stylesheet" href="@Assets["VSMS.Application.styles.css"]"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="@Assets["_content/MudBlazor/MudBlazor.min.css"]" rel="stylesheet" />
     <ImportMap/>
-    <HeadOutlet @rendermode="InteractiveServer"/>
+    <HeadOutlet @rendermode="new InteractiveServerRenderMode(prerender: false)" />
 </head>
 
 <body>
-<Routes @rendermode="InteractiveServer"/>
-<script src="_framework/blazor.web.js"></script>
+    <Routes @rendermode="new InteractiveServerRenderMode(prerender: false)" />
+    <Routes @rendermode="InteractiveServer"/>
+    <script src="_framework/blazor.web.js"></script>
+    <script src="@Assets["_content/MudBlazor/MudBlazor.min.js"]"></script>
+    <script src="js/cookieHelper.js"></script>
+    <script src="js/webHelper.js"></script>
+    <script src="js/timezone.js"></script>
 </body>
 
 </html>

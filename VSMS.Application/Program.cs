@@ -1,4 +1,11 @@
+using Microsoft.AspNetCore.Components.Authorization;
+using MudBlazor.Services;
+using Serilog;
+using Serilog.Sinks.Grafana.Loki;
 using VSMS.Application.Components;
+using VSMS.Application.Identity;
+using VSMS.Infrastructure.Extensions;
+using VSMS.Infrastructure.Settings;
 
 namespace VSMS.Application;
 
@@ -7,29 +14,108 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        
+        #region Serilog Logger
 
-        // Add services to the container.
-        builder.Services.AddRazorComponents()
-            .AddInteractiveServerComponents();
-
-        var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
-        if (!app.Environment.IsDevelopment())
+        if (builder.Environment.IsDevelopment())
         {
-            app.UseExceptionHandler("/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            app.UseHsts();
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(builder.Configuration)
+                .CreateLogger();
         }
 
-        app.UseHttpsRedirection();
+        if (builder.Environment.IsProduction())
+        {
+            var lokiUri = builder.Configuration.GetValue<string>("LokiSettings:Url");
+            var appName = builder.Configuration.GetValue<string>("LokiSettings:AppName");
+            
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(builder.Configuration)
+                .WriteTo.GrafanaLoki(lokiUri, labels: new[]
+                {
+                    new LokiLabel{ Key = "app", Value = appName}
+                }, propertiesAsLabels: new[] { "app" })
+                .CreateLogger();
+        }
 
-        app.UseAntiforgery();
+        builder.Logging.ClearProviders();
+        builder.Host.UseSerilog();
 
-        app.MapStaticAssets();
-        app.MapRazorComponents<App>()
-            .AddInteractiveServerRenderMode();
+        #endregion
 
-        app.Run();
+        Log.Warning("Starting web host");
+        try
+        {
+            builder.Services.AddRazorComponents()
+                .AddInteractiveServerComponents();
+            
+            builder.Services.AddAntiforgery(options => 
+                options.SuppressXFrameOptionsHeader = true);
+            
+            builder.Services.AddMudServices();
+            
+            builder.Services.AddBlazoredConfiguration();
+            builder.Services.AddHelpersConfiguration();
+            builder.Services.AddHttpServicesConfiguration();
+            builder.Services.AddHubsConfiguration();
+            
+            builder.Services.AddSingleton<IApplicationSettings, ApplicationSettings>( sp => 
+                builder.Configuration.GetSection("ApplicationSettings").Get<ApplicationSettings>()!);
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+            
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddAuthorizationCore();
+            
+            builder.Services.AddLocalization(options =>
+                {
+                    options.ResourcesPath = "SharedResources";
+                });
+            builder.Services.AddMvc()
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization();
+            
+            builder.Services.AddServerSideBlazor()
+                .AddCircuitOptions(options => { options.DetailedErrors = true; });
+
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseAntiforgery();
+
+            app.MapStaticAssets();
+            app.MapRazorComponents<App>()
+                .AddInteractiveServerRenderMode();
+
+            Log.Information(app.Services.GetService<IApplicationSettings>()!.ToString()!);
+            
+            var allowedLocalizations = new[]
+            {
+                "en-us", 
+                "uk-ua"
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions()
+                .SetDefaultCulture("en-us")
+                .AddSupportedCultures(allowedLocalizations)
+                .AddSupportedUICultures(allowedLocalizations));
+
+            app.Run();
+        }
+        catch (Exception e)
+        {
+            Log.Fatal(e, e.Message);
+        }
+        finally
+        {
+            Log.Warning("Web host shutdown");
+            Log.CloseAndFlush();
+        }
     }
 }

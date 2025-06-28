@@ -10,4 +10,10 @@
       <ProjectReference Include="..\VSMS.Domain\VSMS.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+      <PackageReference Include="Blazored.SessionStorage" Version="2.4.0" />
+      <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.4" />
+    </ItemGroup>
+
 </Project>
