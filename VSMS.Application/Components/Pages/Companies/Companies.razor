@@ -1,0 +1,86 @@
+﻿@page "/Companies"
+@using VSMS.Infrastructure.Extensions
+
+<PageTitle>@Localizer["companies_page_title"]</PageTitle>
+
+<MudContainer Fixed="true" 
+              Class="companies-container" 
+              Gutters="true">
+    <MudDataGrid @ref="@_dataGrid"
+                 T="CompanyViewModel"
+                 ServerData="@RefreshGrid"
+                 Filterable="false" 
+                 Dense="true" 
+                 Hover="true"
+                 Loading="@IsLoading">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">@Localizer["companies_grid_title"]</MudText>
+            
+            <MudSpacer />
+            
+            <MudStack Row="true" 
+                      Spacing="5"
+                      Class="toolbar-actions">
+                <MudTextField T="string"
+                              ValueChanged="@(s => OnSearch(s))"
+                              Placeholder="@Localizer["companies_grid_search_placeholder"]"
+                              Adornment="@Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Rounded.Search"
+                              IconSize="@Size.Medium"
+                              Class="mt-0" />
+                <MudTooltip Text="@Localizer["companies_grid_column_actions_tooltip_text_add"]"
+                            Placement="@Placement.Bottom" Class="pr-3">
+                    <MudIconButton Icon="@Icons.Material.Rounded.AddCircle"
+                                   Size="@Size.Small"
+                                   Variant="@Variant.Outlined"
+                                   Color="@Color.Secondary"
+                                   OnClick="@OnCreateCompanyClick" />
+                </MudTooltip>
+            </MudStack>
+        </ToolBarContent>
+        <Columns>
+            <TemplateColumn Title="@Localizer["companies_grid_column_title_name"]">
+                <CellTemplate>
+                    <MudTooltip Text="@Localizer["companies_grid_column_name_tooltip_text"]"
+                                Placement="@Placement.Bottom">
+                        <MudLink Href="@($"/Company/{context.Item.Id}")"
+                                 Underline="Underline.Always">
+                            @context.Item.Title
+                        </MudLink>
+                    </MudTooltip>
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone)" 
+                            Title="@Localizer["companies_grid_column_title_updated_at"]" />
+            <PropertyColumn Property="x => x.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone)" 
+                            Title="@Localizer["companies_grid_column_title_created_at"]" />
+            <TemplateColumn StickyRight="true" 
+                            Title="@Localizer["companies_grid_column_title_actions"]" 
+                            CellClass="column-actions" >
+                <CellTemplate>
+                    <MudStack Row="true">
+                        <MudTooltip Text="@Localizer["companies_grid_column_actions_tooltip_text_edit"]" 
+                                    Placement="@Placement.Bottom">
+                                <MudIconButton Icon="@Icons.Material.Rounded.Edit" 
+                                               Size="@Size.Small"
+                                               Variant="@Variant.Outlined"
+                                               Color="@Color.Info"
+                                               OnClick="@(() => OnEditClick(context.Item.Id))"/>
+                        </MudTooltip>
+                        <MudTooltip Text="@Localizer["companies_grid_column_actions_tooltip_text_delete"]"
+                                    Placement="@Placement.Bottom">
+                                <MudIconButton Icon="@Icons.Material.Rounded.Delete"
+                                               Size="@Size.Small" 
+                                               Variant="@Variant.Outlined"
+                                               Color="@Color.Warning"
+                                               OnClick="@(() => OnDeleteClick(context.Item.Id))"/>
+                        </MudTooltip>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="CompanyViewModel" />
+        </PagerContent>
+    </MudDataGrid>
+</MudContainer>

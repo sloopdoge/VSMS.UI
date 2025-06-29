@@ -1,0 +1,26 @@
+﻿@page "/Logout"
+@using VSMS.Application.Identity
+@using VSMS.Infrastructure.Helpers
+
+@code
+{
+    [Inject] private ILogger<Logout> Logger { get; set; }
+    [Inject] private WebPageHelper WebPageHelper { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await ((CustomAuthStateProvider)AuthenticationStateProvider).NotifyUserLogout();
+            
+            NavigationManager.NavigateTo("/Login", forceLoad: true);
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e.Message);
+            await WebPageHelper.ReloadPage();
+        }
+    }
+}

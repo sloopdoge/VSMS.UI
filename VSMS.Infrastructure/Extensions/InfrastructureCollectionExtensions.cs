@@ -37,6 +37,7 @@ public static class InfrastructureCollectionExtensions
     public static IServiceCollection AddHubsConfiguration(this IServiceCollection services)
     {
         services.AddTransient<ApplicationHub>();
+        services.AddTransient<StocksHub>();
         
         return services;
     }

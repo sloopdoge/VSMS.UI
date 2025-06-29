@@ -88,4 +88,49 @@ public class StocksHttpService(
             return false;
         }
     }
+    
+    public async Task<StockPerformanceViewModel?> GetStocksPerformanceById(Guid stockId)
+    {
+        try
+        {
+            var result = await Client.GetAsync(Url($"StocksPerformance/{stockId}"));
+            var content = await result.Content.ReadFromJsonAsync<StockPerformanceViewModel>();
+            return content;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, e.Message);
+            return null;
+        }
+    }
+
+    public async Task<List<StockPerformanceViewModel>?> GetStocksPerformanceByCompanyId(Guid companyId)
+    {
+        try
+        {
+            var result = await Client.GetAsync(Url($"StocksPerformance/Company/{companyId}"));
+            var content = await result.Content.ReadFromJsonAsync<List<StockPerformanceViewModel>>();
+            return content;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, e.Message);
+            return null;
+        }
+    }
+
+    public async Task<List<StockPerformanceViewModel>?> GetAllStocksPerformance()
+    {
+        try
+        {
+            var result = await Client.GetAsync(Url($"StocksPerformance"));
+            var content = await result.Content.ReadFromJsonAsync<List<StockPerformanceViewModel>>();
+            return content;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, e.Message);
+            return null;
+        }
+    }
 }

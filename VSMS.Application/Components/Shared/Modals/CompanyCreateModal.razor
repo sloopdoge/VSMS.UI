@@ -1,0 +1,39 @@
+﻿<EditForm EditContext="@_editContext" 
+          OnValidSubmit="HandleAddCompany">
+    <MudDialog Class="company-add-modal-container" 
+               Gutters="true"
+               ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3">
+        <TitleContent>
+            <MudText Color="@Color.Primary" 
+                     GutterBottom="true" 
+                     Typo="@Typo.h4">
+                @Localizer["company_add_modal_title"]
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            <DataAnnotationsValidator/>
+
+            <MudTextField @bind-Value="@CreateModel.Title" 
+                          For="@(() => CreateModel.Title)"
+                          InputMode="@InputMode.text" 
+                          InputType="@InputType.Text" 
+                          Label="@Localizer["company_add_modal_field_label_name"]" 
+                          Margin="@Margin.Dense" 
+                          T="string" 
+                          Variant="@Variant.Outlined" />
+        </DialogContent>
+        <DialogActions>
+            <MudButton ButtonType="@ButtonType.Button"
+                       Color="@Color.Warning"
+                       Variant="@Variant.Filled"
+                       OnClick="@(MudDialog.Cancel)">
+                @Localizer["company_add_modal_action_cancel"]
+            </MudButton>
+            <MudButton ButtonType="@ButtonType.Submit"
+                       Color="@Color.Tertiary"
+                       Variant="@Variant.Filled">
+                @Localizer["company_add_modal_action_add"]
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>

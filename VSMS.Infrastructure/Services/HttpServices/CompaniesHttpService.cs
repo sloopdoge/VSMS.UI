@@ -26,6 +26,21 @@ public class CompaniesHttpService(
         }
     }
     
+    public async Task<List<CompanyViewModel>?> GetAllCompanies()
+    {
+        try
+        {
+            var result = await Client.GetAsync(Url());
+            var content = await result.Content.ReadFromJsonAsync<List<CompanyViewModel>>();
+            return content;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, e.Message);
+            return null;
+        }
+    }
+    
     public async Task<List<UserProfileViewModel>?> GetAllUsersInCompany(Guid companyId)
     {
         try
@@ -74,7 +89,7 @@ public class CompaniesHttpService(
         }
     }
     
-    public async Task<bool> DeleteCompany(Guid companyId)
+    public async Task<bool> DeleteCompanyById(Guid companyId)
     {
         try
         {
