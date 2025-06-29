@@ -66,11 +66,11 @@
         <comment>companies_grid_title</comment>
     </data>
     <data name="companies_grid_search_placeholder" xml:space="preserve">
-        <value>Search by name...</value>
+        <value>Search by title...</value>
         <comment>companies_grid_search_placeholder</comment>
     </data>
     <data name="companies_grid_column_title_name" xml:space="preserve">
-        <value>Name</value>
+        <value>Title</value>
         <comment>companies_grid_column_title_name</comment>
     </data>
     <data name="companies_grid_column_title_description" xml:space="preserve">
@@ -102,7 +102,7 @@
         <comment>company_add_modal_title</comment>
     </data>
     <data name="company_create_name_required" xml:space="preserve">
-        <value>Company name is required</value>
+        <value>Company title is required</value>
     </data>
     <data name="company_add_modal_action_add" xml:space="preserve">
         <value>Add company</value>
@@ -117,7 +117,7 @@
         <comment>companies_grid_modal_text</comment>
     </data>
     <data name="company_add_modal_field_label_name" xml:space="preserve">
-        <value>Company name</value>
+        <value>Company title</value>
         <comment>company_add_modal_field_label_name</comment>
     </data>
     <data name="companies_grid_column_title_actions" xml:space="preserve">
@@ -141,7 +141,7 @@
         <comment>company_details_title</comment>
     </data>
     <data name="company_details_field_label_name" xml:space="preserve">
-        <value>Name</value>
+        <value>Title</value>
         <comment>company_details_field_label_name</comment>
     </data>
     <data name="company_details_field_label_created_at" xml:space="preserve">
@@ -161,7 +161,7 @@
         <comment>company_stocks_title</comment>
     </data>
     <data name="stocks_grid_field_name" xml:space="preserve">
-        <value>Name</value>
+        <value>Title</value>
         <comment>company_stocks_field_name</comment>
     </data>
     <data name="stocks_grid_field_symbol" xml:space="preserve">
@@ -209,7 +209,7 @@
         <comment>stock_details_field_label_symbol</comment>
     </data>
     <data name="stock_details_field_label_name" xml:space="preserve">
-        <value>Name</value>
+        <value>Title</value>
         <comment>stock_details_field_label_name</comment>
     </data>
     <data name="stock_details_field_label_created_at" xml:space="preserve">
@@ -241,7 +241,7 @@
         <comment>stock_add_modal_field_label_symbol</comment>
     </data>
     <data name="stock_add_modal_field_label_name" xml:space="preserve">
-        <value>Name</value>
+        <value>Title</value>
         <comment>stock_add_modal_field_label_name</comment>
     </data>
     <data name="stock_add_modal_field_label_price" xml:space="preserve">
@@ -259,5 +259,8 @@
     <data name="stock_add_modal_action_add" xml:space="preserve">
         <value>Add</value>
         <comment>stock_add_modal_action_add</comment>
+    </data>
+    <data name="company_title_is_required" xml:space="preserve">
+        <value>Company title is required</value>
     </data>
 </root>

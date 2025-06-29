@@ -305,6 +305,15 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string company_title_is_required {
+            get {
+                return ResourceManager.GetString("company_title_is_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string en_us {
             get {
                 return ResourceManager.GetString("en-us", resourceCulture);

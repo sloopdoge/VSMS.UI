@@ -15,6 +15,7 @@ public class StocksHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url($"{stockId}"));
             var content = await result.Content.ReadFromJsonAsync<StockViewModel>();
             return content;
@@ -30,6 +31,7 @@ public class StocksHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url());
             if (!result.IsSuccessStatusCode)
                 return null;
@@ -48,6 +50,7 @@ public class StocksHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.PostAsJsonAsync(Url(), model);
             var content = await result.Content.ReadFromJsonAsync<StockViewModel>();
             return content;
@@ -63,6 +66,7 @@ public class StocksHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.PutAsJsonAsync(Url(), model);
             var content = await result.Content.ReadFromJsonAsync<StockViewModel>();
             return content;
@@ -78,6 +82,7 @@ public class StocksHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.DeleteAsync(Url($"{stockId}"));
             var content = result.IsSuccessStatusCode && await result.Content.ReadFromJsonAsync<bool>();
             return content;
@@ -93,6 +98,7 @@ public class StocksHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url($"StocksPerformance/{stockId}"));
             var content = await result.Content.ReadFromJsonAsync<StockPerformanceViewModel>();
             return content;
@@ -108,6 +114,7 @@ public class StocksHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url($"StocksPerformance/Company/{companyId}"));
             var content = await result.Content.ReadFromJsonAsync<List<StockPerformanceViewModel>>();
             return content;
@@ -123,6 +130,7 @@ public class StocksHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url($"StocksPerformance"));
             var content = await result.Content.ReadFromJsonAsync<List<StockPerformanceViewModel>>();
             return content;

@@ -15,6 +15,7 @@ public class CompaniesHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url($"{companyId}"));
             var content = await result.Content.ReadFromJsonAsync<CompanyViewModel>();
             return content;
@@ -30,6 +31,7 @@ public class CompaniesHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url());
             var content = await result.Content.ReadFromJsonAsync<List<CompanyViewModel>>();
             return content;
@@ -45,6 +47,7 @@ public class CompaniesHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url($"{companyId}/users"));
             if (!result.IsSuccessStatusCode)
                 return null;
@@ -63,6 +66,7 @@ public class CompaniesHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.PostAsJsonAsync(Url(), model);
             var content = await result.Content.ReadFromJsonAsync<CompanyViewModel>();
             return content;
@@ -78,6 +82,7 @@ public class CompaniesHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.PutAsJsonAsync(Url(), model);
             var content = await result.Content.ReadFromJsonAsync<CompanyViewModel>();
             return content;
@@ -93,6 +98,7 @@ public class CompaniesHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.DeleteAsync(Url($"{companyId}"));
             var content = result.IsSuccessStatusCode;
             return content;
@@ -107,6 +113,7 @@ public class CompaniesHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.PostAsync(Url($"{companyId}/users/{userId}"), null);
             var content = result.IsSuccessStatusCode && await result.Content.ReadFromJsonAsync<bool>();
             return content;
@@ -122,6 +129,7 @@ public class CompaniesHttpService(
     {
         try
         {
+            await AddAuthorizationAsync();
             var result = await Client.DeleteAsync(Url($"{companyId}/users/{userId}"));
             var content = result.IsSuccessStatusCode && await result.Content.ReadFromJsonAsync<bool>();
             return content;
