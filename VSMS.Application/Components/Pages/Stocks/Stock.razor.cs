@@ -7,7 +7,7 @@ using VSMS.Infrastructure.Helpers;
 using VSMS.Infrastructure.Hubs;
 using VSMS.Infrastructure.Services.HttpServices;
 
-namespace VSMS.Application.Components.Pages.Stoks;
+namespace VSMS.Application.Components.Pages.Stocks;
 
 public partial class Stock : ComponentBase
 {

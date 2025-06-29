@@ -1,0 +1,10 @@
+﻿@page "/Stocks"
+@using VSMS.Application.Components.Shared.Grids
+
+<PageTitle>@Localizer["stocks_page_title"]</PageTitle>
+
+<MudContainer Fixed="true"
+              Class="stocks-container"
+              Gutters="true">
+    <StocksGrid DirectToStockPage="true"/>
+</MudContainer>
