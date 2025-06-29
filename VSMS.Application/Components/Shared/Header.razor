@@ -4,7 +4,7 @@
         <MudButton Size="Size.Large" 
                    Class="neon-button mr-16"
                    OnClick="@(() => OnNavigationClick(NavMenuItemsEnum.Home))">
-            <MudText>SIMUSTOCK</MudText>
+            <MudText>@ApplicationTitle</MudText>
         </MudButton>
         
         @if (IsAuthenticated)

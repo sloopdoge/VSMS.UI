@@ -5,6 +5,7 @@ using VSMS.Domain;
 using VSMS.Domain.Enums;
 using VSMS.Domain.Resources.Icons;
 using VSMS.Infrastructure.Helpers;
+using VSMS.Infrastructure.Settings;
 
 namespace VSMS.Application.Components.Shared;
 
@@ -14,6 +15,7 @@ public partial class Header : ComponentBase
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private WebPageHelper WebPageHelper { get; set; }
+    [Inject] private IApplicationSettings ApplicationSettings { get; set; }
 
     [Parameter] 
     public bool DarkThemeState 
@@ -45,11 +47,14 @@ public partial class Header : ComponentBase
             "uk-ua", CountryFlagsIcons.uk_ua
         }
     };
+    private string ApplicationTitle { get; set; } = "VSMS";
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
+            ApplicationTitle = ApplicationSettings.ApplicationTitle;
+            
             var authState = await AuthenticationStateTask;
             IsAuthenticated = authState.User.Identity?.IsAuthenticated ?? false;
         }
