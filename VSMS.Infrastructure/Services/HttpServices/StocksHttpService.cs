@@ -11,6 +11,11 @@ public class StocksHttpService(
     ILocalStorageService localStorage,
     IApplicationSettings applicationSettings) : BaseHttpService(localStorage, applicationSettings, "Stocks")
 {
+    /// <summary>
+    /// Retrieves a specific stock by its identifier from the API.
+    /// </summary>
+    /// <param name="stockId">The unique identifier of the stock.</param>
+    /// <returns>The stock view model if found; otherwise, <c>null</c>.</returns>
     public async Task<StockViewModel?> GetStockById(Guid stockId)
     {
         try
@@ -27,6 +32,10 @@ public class StocksHttpService(
         }
     }
     
+    /// <summary>
+    /// Retrieves the collection of all stocks.
+    /// </summary>
+    /// <returns>A list of stocks or <c>null</c> on failure.</returns>
     public async Task<List<StockViewModel>?> GetAllStocks()
     {
         try
@@ -46,6 +55,11 @@ public class StocksHttpService(
         }
     }
     
+    /// <summary>
+    /// Creates a new stock entry via the API.
+    /// </summary>
+    /// <param name="model">The stock details.</param>
+    /// <returns>The created stock model or <c>null</c> on failure.</returns>
     public async Task<StockViewModel?> CreateStock(StockViewModel model)
     {
         try
@@ -62,6 +76,11 @@ public class StocksHttpService(
         }
     }
     
+    /// <summary>
+    /// Updates an existing stock with new information.
+    /// </summary>
+    /// <param name="model">The updated stock information.</param>
+    /// <returns>The updated stock or <c>null</c> on failure.</returns>
     public async Task<StockViewModel?> UpdateStock(StockViewModel model)
     {
         try
@@ -78,6 +97,11 @@ public class StocksHttpService(
         }
     }
     
+    /// <summary>
+    /// Deletes the specified stock from the system.
+    /// </summary>
+    /// <param name="stockId">The identifier of the stock to delete.</param>
+    /// <returns><c>true</c> if deletion succeeds; otherwise, <c>false</c>.</returns>
     public async Task<bool> DeleteStock(Guid stockId)
     {
         try
@@ -94,6 +118,11 @@ public class StocksHttpService(
         }
     }
     
+    /// <summary>
+    /// Retrieves performance information for a specific stock.
+    /// </summary>
+    /// <param name="stockId">The identifier of the stock.</param>
+    /// <returns>The stock performance view model or <c>null</c> on failure.</returns>
     public async Task<StockPerformanceViewModel?> GetStocksPerformanceById(Guid stockId)
     {
         try
@@ -110,6 +139,11 @@ public class StocksHttpService(
         }
     }
 
+    /// <summary>
+    /// Retrieves performance statistics for all stocks of a particular company.
+    /// </summary>
+    /// <param name="companyId">The company identifier.</param>
+    /// <returns>List of stock performance models or <c>null</c> on failure.</returns>
     public async Task<List<StockPerformanceViewModel>?> GetStocksPerformanceByCompanyId(Guid companyId)
     {
         try
@@ -126,6 +160,10 @@ public class StocksHttpService(
         }
     }
 
+    /// <summary>
+    /// Retrieves performance information for all stocks.
+    /// </summary>
+    /// <returns>List of all stock performance models or <c>null</c> on failure.</returns>
     public async Task<List<StockPerformanceViewModel>?> GetAllStocksPerformance()
     {
         try

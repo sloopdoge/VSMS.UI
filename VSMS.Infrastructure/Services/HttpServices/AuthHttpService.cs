@@ -12,6 +12,11 @@ public class AuthHttpService(
     ILocalStorageService localStorage,
     IApplicationSettings applicationSettings) : BaseHttpService(localStorage, applicationSettings, "Auth")
 {
+    /// <summary>
+    /// Sends user login credentials to the API and returns a login result.
+    /// </summary>
+    /// <param name="model">The credentials entered by the user.</param>
+    /// <returns>The login result if the request succeeds; otherwise, <c>null</c>.</returns>
     public async Task<LoginResultModel?> Login(UserLoginViewModel model)
     {
         try
@@ -27,6 +32,11 @@ public class AuthHttpService(
         }
     }
     
+    /// <summary>
+    /// Registers a new user with the API using the provided registration model.
+    /// </summary>
+    /// <param name="model">The registration details for the new user.</param>
+    /// <returns>The registration result if the request succeeds; otherwise, <c>null</c>.</returns>
     public async Task<UserRegisterResultModel?> Register(UserRegisterViewModel model)
     {
         try
@@ -42,6 +52,10 @@ public class AuthHttpService(
         }
     }
     
+    /// <summary>
+    /// Validates the current authorization token against the API.
+    /// </summary>
+    /// <returns>The token validation result if the request succeeds; otherwise, <c>null</c>.</returns>
     public async Task<TokenValidationResultModel?> ValidateToken()
     {
         try
