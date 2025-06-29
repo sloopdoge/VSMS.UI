@@ -1,0 +1,15 @@
+.stocks-grid-symbol-filter-popover {
+    padding: 2px;
+    width: 15rem;
+}
+
+.stocks-grid-symbol-filter-popover .symbol-filter-list {
+    overflow-y: auto;
+    max-height: 24rem;
+}
+
+.stocks-container {
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 2rem;
+}

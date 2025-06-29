@@ -1,0 +1,69 @@
+﻿@attribute [AllowAnonymous]
+
+@page "/Login"
+
+<PageTitle>@Localizer["login_page_title"]</PageTitle>
+
+<div class="login-page">
+    <EditForm EditContext="@_editContext" OnValidSubmit="HandleLogin">
+        <DataAnnotationsValidator />
+        
+        <MudPaper Class="form">
+            <MudStack Justify="@Justify.Center">
+                <!-- Email -->
+                <MudTextField T="string"
+                              Label="@Localizer["login_page_form_field_label_email"]"
+                              @bind-Value="@LoginModel.Email"
+                              InputType="@InputType.Email"
+                              Variant="@Variant.Outlined"
+                              Margin="@Margin.Dense"
+                              MaxLines="1"
+                              Class="input-text"
+                              For="@(() => LoginModel.Email)"/>
+
+                <!-- Password -->
+                <MudTextField T="string"
+                              Label="@Localizer["login_page_form_field_label_password"]"
+                              @bind-Value="@LoginModel.Password"
+                              InputType="@InputType.Password"
+                              Variant="@Variant.Outlined"
+                              Margin="@Margin.Dense"
+                              MaxLines="1"
+                              Class="input-text"
+                              For="@(() => LoginModel.Password)"/>
+                
+                <!-- Remember me -->
+                <MudCheckBox T="bool"
+                             Label="@Localizer["login_page_form_field_remember_me"]"
+                             @bind-Value="@LoginModel.UseLongLivedToken"
+                             Class="input-checkbox"
+                             LabelPlacement="@Placement.Start"
+                             Color="Color.Tertiary"
+                             Dense="true"/>
+                
+                @if (_generalErrorMessage is not null)
+                {
+                    <MudText Typo="Typo.body2" Color="Color.Error" Class="general-error-message">
+                        @_generalErrorMessage
+                    </MudText>
+                }
+
+
+                <!-- Login button -->
+                <MudButton ButtonType="@ButtonType.Submit"
+                           Color="@Color.Tertiary"
+                           Variant="@Variant.Filled"
+                           Class="login-button">
+                    @Localizer["login_page_form_button_text_log_in"]
+                </MudButton>
+
+                <!-- Forgot password -->
+                <MudLink Href="/ForgotPassword"
+                         Class="forgot-pass"
+                         Color="@Color.Warning">
+                    @Localizer["login_page_form_label_forgot_password"]
+                </MudLink>
+            </MudStack>
+        </MudPaper>
+    </EditForm>
+</div>

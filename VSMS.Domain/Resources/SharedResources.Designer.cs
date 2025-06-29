@@ -62,6 +62,564 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string companies_grid_column_actions_tooltip_text_add {
+            get {
+                return ResourceManager.GetString("companies_grid_column_actions_tooltip_text_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_column_actions_tooltip_text_delete {
+            get {
+                return ResourceManager.GetString("companies_grid_column_actions_tooltip_text_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_column_actions_tooltip_text_edit {
+            get {
+                return ResourceManager.GetString("companies_grid_column_actions_tooltip_text_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_column_name_tooltip_text {
+            get {
+                return ResourceManager.GetString("companies_grid_column_name_tooltip_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_column_title_actions {
+            get {
+                return ResourceManager.GetString("companies_grid_column_title_actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_column_title_created_at {
+            get {
+                return ResourceManager.GetString("companies_grid_column_title_created_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_column_title_description {
+            get {
+                return ResourceManager.GetString("companies_grid_column_title_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_column_title_name {
+            get {
+                return ResourceManager.GetString("companies_grid_column_title_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_column_title_updated_at {
+            get {
+                return ResourceManager.GetString("companies_grid_column_title_updated_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_modal_text {
+            get {
+                return ResourceManager.GetString("companies_grid_modal_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_search_placeholder {
+            get {
+                return ResourceManager.GetString("companies_grid_search_placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_grid_title {
+            get {
+                return ResourceManager.GetString("companies_grid_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string companies_page_title {
+            get {
+                return ResourceManager.GetString("companies_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_add_modal_action_add {
+            get {
+                return ResourceManager.GetString("company_add_modal_action_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_add_modal_action_cancel {
+            get {
+                return ResourceManager.GetString("company_add_modal_action_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_add_modal_field_label_description {
+            get {
+                return ResourceManager.GetString("company_add_modal_field_label_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_add_modal_field_label_name {
+            get {
+                return ResourceManager.GetString("company_add_modal_field_label_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_add_modal_title {
+            get {
+                return ResourceManager.GetString("company_add_modal_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_create_name_required {
+            get {
+                return ResourceManager.GetString("company_create_name_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_details_button_text_save {
+            get {
+                return ResourceManager.GetString("company_details_button_text_save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_details_field_label_created_at {
+            get {
+                return ResourceManager.GetString("company_details_field_label_created_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_details_field_label_description {
+            get {
+                return ResourceManager.GetString("company_details_field_label_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_details_field_label_name {
+            get {
+                return ResourceManager.GetString("company_details_field_label_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_details_field_label_updated_at {
+            get {
+                return ResourceManager.GetString("company_details_field_label_updated_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_details_title {
+            get {
+                return ResourceManager.GetString("company_details_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_stocks_create_stock_button_text {
+            get {
+                return ResourceManager.GetString("company_stocks_create_stock_button_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_stocks_title {
+            get {
+                return ResourceManager.GetString("company_stocks_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string en_us {
+            get {
+                return ResourceManager.GetString("en-us", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string header_actions_culture_select_label {
+            get {
+                return ResourceManager.GetString("header_actions_culture_select_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string header_actions_logout_button_label {
+            get {
+                return ResourceManager.GetString("header_actions_logout_button_label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string header_navmenu_companies_title {
+            get {
+                return ResourceManager.GetString("header_navmenu_companies_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string header_navmenu_stocks_title {
+            get {
+                return ResourceManager.GetString("header_navmenu_stocks_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string index_page_title {
+            get {
+                return ResourceManager.GetString("index_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string login_page_form_button_text_log_in {
+            get {
+                return ResourceManager.GetString("login_page_form_button_text_log_in", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string login_page_form_field_label_email {
+            get {
+                return ResourceManager.GetString("login_page_form_field_label_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string login_page_form_field_label_password {
+            get {
+                return ResourceManager.GetString("login_page_form_field_label_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string login_page_form_field_remember_me {
+            get {
+                return ResourceManager.GetString("login_page_form_field_remember_me", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string login_page_form_label_forgot_password {
+            get {
+                return ResourceManager.GetString("login_page_form_label_forgot_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string login_page_title {
+            get {
+                return ResourceManager.GetString("login_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_add_modal_action_add {
+            get {
+                return ResourceManager.GetString("stock_add_modal_action_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_add_modal_action_cancel {
+            get {
+                return ResourceManager.GetString("stock_add_modal_action_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_add_modal_field_label_company_id {
+            get {
+                return ResourceManager.GetString("stock_add_modal_field_label_company_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_add_modal_field_label_name {
+            get {
+                return ResourceManager.GetString("stock_add_modal_field_label_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_add_modal_field_label_price {
+            get {
+                return ResourceManager.GetString("stock_add_modal_field_label_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_add_modal_field_label_symbol {
+            get {
+                return ResourceManager.GetString("stock_add_modal_field_label_symbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_add_modal_title {
+            get {
+                return ResourceManager.GetString("stock_add_modal_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_details_field_label_created_at {
+            get {
+                return ResourceManager.GetString("stock_details_field_label_created_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_details_field_label_name {
+            get {
+                return ResourceManager.GetString("stock_details_field_label_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_details_field_label_symbol {
+            get {
+                return ResourceManager.GetString("stock_details_field_label_symbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_details_timeserieschart_series_name {
+            get {
+                return ResourceManager.GetString("stock_details_timeserieschart_series_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_details_title {
+            get {
+                return ResourceManager.GetString("stock_details_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_field_label_updated_at {
+            get {
+                return ResourceManager.GetString("stock_field_label_updated_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_field_created_at {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_created_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_field_name {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_field_price {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_field_symbol {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_symbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_field_symbol_filter_clear {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_symbol_filter_clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_field_symbol_filter_filter {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_symbol_filter_filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_field_symbol_filter_select_all {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_symbol_filter_select_all", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_field_updated_at {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_updated_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_page_title {
+            get {
+                return ResourceManager.GetString("stocks_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string uk_ua {
+            get {
+                return ResourceManager.GetString("uk-ua", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string user_login_email_not_valid {
             get {
                 return ResourceManager.GetString("user_login_email_not_valid", resourceCulture);

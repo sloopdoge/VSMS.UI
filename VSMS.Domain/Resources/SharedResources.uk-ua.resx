@@ -11,4 +11,253 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="user_login_email_required" xml:space="preserve">
+        <value>Пошта обов'язкова</value>
+    </data>
+    <data name="user_login_password_required" xml:space="preserve">
+        <value>Пароль обов'язковий</value>
+    </data>
+    <data name="login_page_title" xml:space="preserve">
+        <value>Вхід</value>
+    </data>
+    <data name="login_page_form_field_label_email" xml:space="preserve">
+        <value>Пошта</value>
+        <comment>login_page_form_field_label_email</comment>
+    </data>
+    <data name="login_page_form_field_label_password" xml:space="preserve">
+        <value>Пароль</value>
+        <comment>login_page_form_field_label_password</comment>
+    </data>
+    <data name="login_page_form_label_forgot_password" xml:space="preserve">
+        <value>Забули пароль?</value>
+        <comment>login_page_form_label_forgot_password</comment>
+    </data>
+    <data name="login_page_form_button_text_log_in" xml:space="preserve">
+        <value>Увійти</value>
+        <comment>login_page_form_button_text_log_in</comment>
+    </data>
+    <data name="index_page_title" xml:space="preserve">
+        <value>Головна сторінка</value>
+    </data>
+    <data name="user_login_email_not_valid" xml:space="preserve">
+        <value>Формат пошти не коректний</value>
+    </data>
+    <data name="login_page_form_field_remember_me" xml:space="preserve">
+        <value>Запам'ятай мене</value>
+    </data>
+    <data name="header_actions_logout_button_label" xml:space="preserve">
+        <value>Вийти</value>
+    </data>
+    <data name="en-us" xml:space="preserve">
+        <value>Англійська</value>
+    </data>
+    <data name="uk-ua" xml:space="preserve">
+        <value>Українська</value>
+    </data>
+    <data name="header_actions_culture_select_label" xml:space="preserve">
+        <value>Виберіть мову</value>
+    </data>
+    <data name="companies_page_title" xml:space="preserve">
+        <value>Компанії</value>
+        <comment>companies_page_title</comment>
+    </data>
+    <data name="companies_grid_title" xml:space="preserve">
+        <value>Компанії</value>
+        <comment>companies_grid_title</comment>
+    </data>
+    <data name="companies_grid_search_placeholder" xml:space="preserve">
+        <value>Пошук за іменем...</value>
+        <comment>companies_grid_search_placeholder</comment>
+    </data>
+    <data name="companies_grid_column_title_name" xml:space="preserve">
+        <value>Назва</value>
+        <comment>companies_grid_column_title_name</comment>
+    </data>
+    <data name="companies_grid_column_title_description" xml:space="preserve">
+        <value>Опис</value>
+        <comment>companies_grid_column_title_description</comment>
+    </data>
+    <data name="companies_grid_column_title_updated_at" xml:space="preserve">
+        <value>Час оновлення</value>
+        <comment>companies_grid_column_title_updated_at</comment>
+    </data>
+    <data name="companies_grid_column_title_created_at" xml:space="preserve">
+        <value>Час створення</value>
+        <comment>companies_grid_column_title_created_at</comment>
+    </data>
+    <data name="header_navmenu_companies_title" xml:space="preserve">
+        <value>Компанії</value>
+        <comment>header_navmenu_companies_title</comment>
+    </data>
+    <data name="companies_grid_column_actions_tooltip_text_edit" xml:space="preserve">
+        <value>Редагувати</value>
+        <comment>companies_grid_column_actions_tooltip_text_edit</comment>
+    </data>
+    <data name="companies_grid_column_actions_tooltip_text_delete" xml:space="preserve">
+        <value>Видалити</value>
+        <comment>companies_grid_column_actions_tooltip_text_delete</comment>
+    </data>
+    <data name="company_add_modal_title" xml:space="preserve">
+        <value>Добавити компанію</value>
+        <comment>company_add_modal_title</comment>
+    </data>
+    <data name="company_create_name_required" xml:space="preserve">
+        <value>Назва компанії є обов'язковою</value>
+    </data>
+    <data name="company_add_modal_action_add" xml:space="preserve">
+        <value>Добавити компанію</value>
+        <comment>company_add_modal_action_create</comment>
+    </data>
+    <data name="companies_grid_column_actions_tooltip_text_add" xml:space="preserve">
+        <value>Добавити компанію</value>
+        <comment>companies_grid_column_actions_tooltip_text_add</comment>
+    </data>
+    <data name="companies_grid_modal_text" xml:space="preserve">
+        <value>Добавити компанію</value>
+        <comment>companies_grid_modal_text</comment>
+    </data>
+    <data name="company_add_modal_field_label_name" xml:space="preserve">
+        <value>Назва компанії</value>
+        <comment>company_add_modal_field_label_name</comment>
+    </data>
+    <data name="companies_grid_column_title_actions" xml:space="preserve">
+        <value>Дії</value>
+        <comment>companies_grid_column_title_actions</comment>
+    </data>
+    <data name="company_add_modal_field_label_description" xml:space="preserve">
+        <value>Детальна інформація</value>
+        <comment>company_add_modal_field_label_description</comment>
+    </data>
+    <data name="company_add_modal_action_cancel" xml:space="preserve">
+        <value>Відмінити</value>
+        <comment>company_add_modal_action_cancel</comment>
+    </data>
+    <data name="companies_grid_column_name_tooltip_text" xml:space="preserve">
+        <value>Відкрити сторінку компанії</value>
+        <comment>companies_grid_column_name_tooltip_text</comment>
+    </data>
+    <data name="company_details_title" xml:space="preserve">
+        <value>Деталі компанії</value>
+        <comment>company_details_title</comment>
+    </data>
+    <data name="company_details_field_label_name" xml:space="preserve">
+        <value>Назва</value>
+        <comment>company_details_field_label_name</comment>
+    </data>
+    <data name="company_details_field_label_created_at" xml:space="preserve">
+        <value>Дата створення</value>
+        <comment>company_details_field_label_created_at</comment>
+    </data>
+    <data name="company_details_field_label_description" xml:space="preserve">
+        <value>Детальна інформація</value>
+        <comment>company_details_field_label_description</comment>
+    </data>
+    <data name="company_details_field_label_updated_at" xml:space="preserve">
+        <value>Дата оновлення</value>
+        <comment>company_details_field_label_updated_at</comment>
+    </data>
+    <data name="company_stocks_title" xml:space="preserve">
+        <value>Акції компанії</value>
+        <comment>company_stocks_title</comment>
+    </data>
+    <data name="stocks_grid_field_name" xml:space="preserve">
+        <value>Назва</value>
+        <comment>company_stocks_field_name</comment>
+    </data>
+    <data name="stocks_grid_field_symbol" xml:space="preserve">
+        <value>Символ</value>
+        <comment>company_stocks_field_symbol</comment>
+    </data>
+    <data name="stocks_grid_field_price" xml:space="preserve">
+        <value>Ціна</value>
+        <comment>company_stocks_field_price</comment>
+    </data>
+    <data name="stocks_grid_field_created_at" xml:space="preserve">
+        <value>Дата створення</value>
+        <comment>company_stocks_field_created_at</comment>
+    </data>
+    <data name="stocks_grid_field_updated_at" xml:space="preserve">
+        <value>Дата оновлення</value>
+        <comment>company_stocks_field_updated_at</comment>
+    </data>
+    <data name="stocks_grid_field_symbol_filter_select_all" xml:space="preserve">
+        <value>Вибрати все</value>
+        <comment>company_stocks_field_symbol_filter_select_all</comment>
+    </data>
+    <data name="stocks_grid_field_symbol_filter_clear" xml:space="preserve">
+        <value>Очистити</value>
+        <comment>company_stocks_field_symbol_filter_clear</comment>
+    </data>
+    <data name="stocks_grid_field_symbol_filter_filter" xml:space="preserve">
+        <value>Фільтрувати</value>
+        <comment>company_stocks_field_symbol_filter_filter</comment>
+    </data>
+    <data name="stocks_page_title" xml:space="preserve">
+        <value>Акції</value>
+        <comment>stocks_page_title</comment>
+    </data>
+    <data name="header_navmenu_stocks_title" xml:space="preserve">
+        <value>Акції</value>
+        <comment>header_navmenu_stocks_title</comment>
+    </data>
+    <data name="stock_details_title" xml:space="preserve">
+        <value>Деталі акції</value>
+        <comment>stock_details_title</comment>
+    </data>
+    <data name="stock_details_field_label_symbol" xml:space="preserve">
+        <value>Символ</value>
+        <comment>stock_details_field_label_symbol</comment>
+    </data>
+    <data name="stock_details_field_label_name" xml:space="preserve">
+        <value>Назва</value>
+        <comment>stock_details_field_label_name</comment>
+    </data>
+    <data name="stock_details_field_label_created_at" xml:space="preserve">
+        <value>Дата створення</value>
+        <comment>stock_details_field_label_created_at</comment>
+    </data>
+    <data name="stock_field_label_updated_at" xml:space="preserve">
+        <value>Дата оновлення</value>
+        <comment>stock_field_label_updated_at</comment>
+    </data>
+    <data name="stock_details_timeserieschart_series_name" xml:space="preserve">
+        <value>Ціна</value>
+        <comment>stock_details_timeserieschart_series_name</comment>
+    </data>
+    <data name="company_details_button_text_save" xml:space="preserve">
+        <value>Зберегти зміни</value>
+        <comment>company_details_button_text_save</comment>
+    </data>
+    <data name="company_stocks_create_stock_button_text" xml:space="preserve">
+        <value>Додати Акцію</value>
+        <comment>company_stocks_create_stock_button_text</comment>
+    </data>
+    <data name="stock_add_modal_title" xml:space="preserve">
+        <value>Додати Акцію</value>
+        <comment>stock_add_modal_title</comment>
+    </data>
+    <data name="stock_add_modal_field_label_symbol" xml:space="preserve">
+        <value>Символ</value>
+        <comment>stock_add_modal_field_label_symbol</comment>
+    </data>
+    <data name="stock_add_modal_field_label_name" xml:space="preserve">
+        <value>Назва</value>
+        <comment>stock_add_modal_field_label_name</comment>
+    </data>
+    <data name="stock_add_modal_field_label_price" xml:space="preserve">
+        <value>Ціна</value>
+        <comment>stock_add_modal_field_label_price</comment>
+    </data>
+    <data name="stock_add_modal_field_label_company_id" xml:space="preserve">
+        <value>ID Компанії</value>
+        <comment>stock_add_modal_field_label_company_id</comment>
+    </data>
+    <data name="stock_add_modal_action_cancel" xml:space="preserve">
+        <value>Скасувати</value>
+        <comment>stock_add_modal_action_cancel</comment>
+    </data>
+    <data name="stock_add_modal_action_add" xml:space="preserve">
+        <value>Додати</value>
+        <comment>stock_add_modal_action_add</comment>
+    </data>
 </root>

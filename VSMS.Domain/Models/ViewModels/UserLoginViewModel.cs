@@ -10,11 +10,11 @@ public class UserLoginViewModel
     [EmailAddress(
         ErrorMessageResourceName = "user_login_email_not_valid",
         ErrorMessageResourceType = typeof(Resources.SharedResources))]
-    public required string Email { get; set; }
+    public string Email { get; set; }
     [Required(
         ErrorMessageResourceName = "user_login_password_required", 
         ErrorMessageResourceType = typeof(Resources.SharedResources))]
     [DataType(DataType.Password)]
-    public required string Password { get; set; }
+    public string Password { get; set; }
     public bool UseLongLivedToken { get; set; } = false;
 }

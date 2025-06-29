@@ -46,9 +46,9 @@ public class CustomAuthStateProvider(
     /// <param name="expires">Token expiration date and time (UTC).</param>
     /// <param name="userId">Unique user identifier (GUID).</param>
     /// <param name="userRoleName">User's role name.</param>
-    /// <param name="userFullName">User's full name.</param>
+    /// <param name="username">User's username.</param>
     /// <param name="userEmail">User's email address.</param>
-    public async Task NotifyUserAuthentication(string token, DateTime expires, Guid userId, string userRoleName, string userFullName, string userEmail)
+    public async Task NotifyUserAuthentication(string token, DateTime expires, Guid userId, string userRoleName, string username, string userEmail)
     {
         try
         {
@@ -59,7 +59,7 @@ public class CustomAuthStateProvider(
             await localStorage.SetItemAsync(CookieKeys.AuthTokenExpires, expires);
             await localStorage.SetItemAsync(CookieKeys.UserId, userId.ToString());
             await localStorage.SetItemAsync(CookieKeys.UserRoleName, userRoleName);
-            await localStorage.SetItemAsync(CookieKeys.UserFullName, userFullName);
+            await localStorage.SetItemAsync(CookieKeys.Username, username);
             await localStorage.SetItemAsync(CookieKeys.UserEmail, userEmail);
 
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
@@ -84,7 +84,7 @@ public class CustomAuthStateProvider(
             CookieKeys.AuthTokenExpires,
             CookieKeys.UserId,
             CookieKeys.UserRoleName,
-            CookieKeys.UserFullName,
+            CookieKeys.Username,
             CookieKeys.UserEmail
         ]);
 

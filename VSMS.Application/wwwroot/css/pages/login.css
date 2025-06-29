@@ -1,0 +1,38 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-page .form {
+    width: 25rem;
+    padding: 2rem;
+}
+
+.login-page .input-text {
+    width: 18rem;
+    align-self: center;
+}
+
+.login-page .input-text.validation-message {
+    width: 18rem;
+    align-self: center;
+}
+
+.login-page .input-checkbox {
+    align-self: center;
+}
+
+.login-page .login-button {
+    width: 14rem;
+    align-self: center;
+}
+
+.login-page .forgot-pass {
+    align-self: center;
+}
+
+.login-page .error-container {
+
+}

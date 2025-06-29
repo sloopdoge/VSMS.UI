@@ -11,17 +11,17 @@
 
 <MudLayout>
     <CascadingAuthenticationState>
-        @* <Header DarkThemeState="@DarkThemeState" *@
-        @*         UserCulture="@CurrentCulture" *@
-        @*         OnThemeStateChange="@(state => HandleThemeStateChange(state, true))" *@
-        @*         OnUserCultureChange="@(culture => HandleUserCultureChange(culture, true))"></Header> *@
+        <Header DarkThemeState="@DarkThemeState"
+                UserCulture="@CurrentCulture"
+                OnThemeStateChange="@(state => HandleThemeStateChange(state, true))"
+                OnUserCultureChange="@(culture => HandleUserCultureChange(culture, true))"></Header>
         <MudMainContent>
             <AuthorizeView>
                 <Authorized>
                     @Body
                 </Authorized>
                 <NotAuthorized>
-                    @* <RedirectToLogin/> *@
+                    <RedirectToLogin/>
                     @Body
                 </NotAuthorized>
             </AuthorizeView>

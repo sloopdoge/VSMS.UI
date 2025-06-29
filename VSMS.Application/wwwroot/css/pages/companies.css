@@ -1,0 +1,19 @@
+.companies-container {
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-top: 2rem;
+}
+
+.companies-container .toolbar-actions {
+    width: 34rem;
+}
+
+.companies-container .column-actions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.company-add-modal-container {
+    width: 28rem;
+}

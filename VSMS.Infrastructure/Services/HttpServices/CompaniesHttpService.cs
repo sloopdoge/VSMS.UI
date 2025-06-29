@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Blazored.LocalStorage;
 using Microsoft.Extensions.Logging;
-using VSMS.Domain.Models;
 using VSMS.Domain.Models.ViewModels;
 using VSMS.Infrastructure.Settings;
 
