@@ -68,7 +68,7 @@ public class Program
             
             builder.Services.AddLocalization(options =>
                 {
-                    options.ResourcesPath = "SharedResources";
+                    options.ResourcesPath = "Resources";
                 });
             builder.Services.AddMvc()
                 .AddViewLocalization()
