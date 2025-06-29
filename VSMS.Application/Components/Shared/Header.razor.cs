@@ -53,7 +53,7 @@ public partial class Header : ComponentBase
     {
         try
         {
-            ApplicationTitle = ApplicationSettings.ApplicationTitle;
+            ApplicationTitle = ApplicationSettings.ApplicationTitle.ToUpperInvariant();
             
             var authState = await AuthenticationStateTask;
             IsAuthenticated = authState.User.Identity?.IsAuthenticated ?? false;
