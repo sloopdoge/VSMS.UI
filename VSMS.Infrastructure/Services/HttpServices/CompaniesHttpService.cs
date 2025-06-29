@@ -11,6 +11,11 @@ public class CompaniesHttpService(
     ILocalStorageService localStorage,
     IApplicationSettings applicationSettings) : BaseHttpService(localStorage, applicationSettings, "Companies")
 {
+    /// <summary>
+    /// Retrieves a single company by its identifier.
+    /// </summary>
+    /// <param name="companyId">The unique identifier of the company.</param>
+    /// <returns>The company view model if found; otherwise, <c>null</c>.</returns>
     public async Task<CompanyViewModel?> GetCompanyById(Guid companyId)
     {
         try
@@ -27,6 +32,10 @@ public class CompaniesHttpService(
         }
     }
     
+    /// <summary>
+    /// Gets the collection of all available companies from the API.
+    /// </summary>
+    /// <returns>A list of companies or <c>null</c> if the request fails.</returns>
     public async Task<List<CompanyViewModel>?> GetAllCompanies()
     {
         try
@@ -43,6 +52,11 @@ public class CompaniesHttpService(
         }
     }
     
+    /// <summary>
+    /// Retrieves all users assigned to the specified company.
+    /// </summary>
+    /// <param name="companyId">The identifier of the company.</param>
+    /// <returns>List of user profiles or <c>null</c> if the request fails.</returns>
     public async Task<List<UserProfileViewModel>?> GetAllUsersInCompany(Guid companyId)
     {
         try
@@ -62,6 +76,11 @@ public class CompaniesHttpService(
         }
     }
     
+    /// <summary>
+    /// Creates a new company using the provided view model.
+    /// </summary>
+    /// <param name="model">The company details to create.</param>
+    /// <returns>The created company view model or <c>null</c> on failure.</returns>
     public async Task<CompanyViewModel?> CreateCompany(CompanyViewModel model)
     {
         try
@@ -78,6 +97,11 @@ public class CompaniesHttpService(
         }
     }
     
+    /// <summary>
+    /// Updates an existing company with the supplied information.
+    /// </summary>
+    /// <param name="model">The company data to update.</param>
+    /// <returns>The updated company view model or <c>null</c> on failure.</returns>
     public async Task<CompanyViewModel?> UpdateCompany(CompanyViewModel model)
     {
         try
@@ -94,6 +118,11 @@ public class CompaniesHttpService(
         }
     }
     
+    /// <summary>
+    /// Deletes a company by its identifier.
+    /// </summary>
+    /// <param name="companyId">The company identifier.</param>
+    /// <returns><c>true</c> if deletion succeeds; otherwise, <c>false</c>.</returns>
     public async Task<bool> DeleteCompanyById(Guid companyId)
     {
         try
@@ -109,6 +138,12 @@ public class CompaniesHttpService(
             return false;
         }
     }
+    /// <summary>
+    /// Assigns a user to the specified company.
+    /// </summary>
+    /// <param name="companyId">The target company identifier.</param>
+    /// <param name="userId">The identifier of the user to assign.</param>
+    /// <returns><c>true</c> if the assignment succeeds; otherwise, <c>false</c>.</returns>
     public async Task<bool> AssignUserToCompany(Guid companyId, Guid userId)
     {
         try
@@ -125,6 +160,12 @@ public class CompaniesHttpService(
         }
     }
     
+    /// <summary>
+    /// Removes the association between a user and a company.
+    /// </summary>
+    /// <param name="companyId">The company identifier.</param>
+    /// <param name="userId">The user identifier.</param>
+    /// <returns><c>true</c> if unassignment succeeds; otherwise, <c>false</c>.</returns>
     public async Task<bool> UnassignUserToCompany(Guid companyId, Guid userId)
     {
         try
