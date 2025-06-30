@@ -75,19 +75,20 @@ public partial class Stock : ComponentBase
                 {
                     StockHistory = stockHistoryRes;
                     
-                    _series = new List<TimeSeriesChartSeries>
-                    {
+                    _series =
+                    [
                         new()
                         {
                             Index = 0,
                             Name = Localizer["stock_details_timeserieschart_series_name"],
-                            Data = StockHistory.Select(x => new TimeSeriesChartSeries.TimeValue(x.UpdatedAt, (double)x.Price)).ToList(),
+                            Data = StockHistory.Select(x =>
+                                new TimeSeriesChartSeries.TimeValue(x.UpdatedAt, (double)x.Price)).ToList(),
                             IsVisible = true,
                             LineDisplayType = LineDisplayType.Line,
                             DataMarkerTooltipTitleFormat = "{{X_VALUE}}",
                             DataMarkerTooltipSubtitleFormat = "{{Y_VALUE}}"
                         }
-                    };
+                    ];
                     
                     StateHasChanged();
                 }
