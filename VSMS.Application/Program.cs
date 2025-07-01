@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
 using Serilog;
+using Serilog.Events;
 using Serilog.Sinks.Grafana.Loki;
 using VSMS.Application.Components;
 using VSMS.Application.Identity;
@@ -28,13 +29,16 @@ public class Program
         {
             var lokiUri = builder.Configuration.GetValue<string>("LokiSettings:Url");
             var appName = builder.Configuration.GetValue<string>("LokiSettings:AppName");
-            
+            var serviceName = builder.Configuration.GetValue<string>("LokiSettings:ServiceName");
+
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration)
-                .WriteTo.GrafanaLoki(lokiUri, labels: new[]
-                {
-                    new LokiLabel{ Key = "app", Value = appName}
-                }, propertiesAsLabels: new[] { "app" })
+                .Enrich.FromLogContext()
+                .Enrich.WithProperty("app", appName!)
+                .Enrich.WithProperty("service", serviceName!)
+                .WriteTo.GrafanaLoki(
+                    lokiUri!,
+                    restrictedToMinimumLevel: LogEventLevel.Information)
                 .CreateLogger();
         }
 
