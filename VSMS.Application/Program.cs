@@ -34,10 +34,21 @@ public class Program
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration)
                 .Enrich.FromLogContext()
-                .Enrich.WithProperty("app", appName!)
-                .Enrich.WithProperty("service", serviceName!)
                 .WriteTo.GrafanaLoki(
                     lokiUri!,
+                    labels:
+                    [
+                        new LokiLabel
+                        {
+                            Key = "app",
+                            Value = appName!
+                        },
+                        new LokiLabel
+                        {
+                            Key = "service",
+                            Value = serviceName!
+                        }
+                    ],
                     restrictedToMinimumLevel: LogEventLevel.Information)
                 .CreateLogger();
         }
