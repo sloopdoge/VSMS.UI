@@ -42,7 +42,7 @@ public class BaseHub(
             HubConnection.HandshakeTimeout = TimeSpan.FromSeconds(30);
             
             await HubConnection.StartAsync();
-            logger.LogInformation($"Connection to {_hubUrl} with id: {HubConnection.ConnectionId} started successfully.");
+            logger.LogDebug($"Connection to {_hubUrl} with id: {HubConnection.ConnectionId} started successfully.");
             return true;
         }
         catch (Exception ex)
@@ -57,7 +57,7 @@ public class BaseHub(
         if (HubConnection is { State: HubConnectionState.Connected })
         {
             await HubConnection.StopAsync();
-            logger.LogInformation($"Connection to {_hubUrl} with id: {HubConnection.ConnectionId} stopped.");
+            logger.LogDebug($"Connection to {_hubUrl} with id: {HubConnection.ConnectionId} stopped.");
         }
     }
 
@@ -69,7 +69,7 @@ public class BaseHub(
             {
                 await Task.Delay(5000);
                 await HubConnection?.StartAsync();
-                logger.LogInformation($"Reconnected to {_hubUrl} successfully.");
+                logger.LogDebug($"Reconnected to {_hubUrl} successfully.");
             }
             catch (Exception ex)
             {

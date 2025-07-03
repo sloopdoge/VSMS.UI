@@ -171,6 +171,9 @@ public class StocksHttpService(
             await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url($"StocksPerformance"));
             var content = await result.Content.ReadFromJsonAsync<List<StockPerformanceViewModel>>();
+            
+            content?.ForEach(stock => stock.SetAdditionalInfo());
+            
             return content;
         }
         catch (Exception e)
