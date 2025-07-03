@@ -40,8 +40,9 @@
         <MudTimeSeriesChart ChartSeries="@_series"
                             ChartOptions="@_options"
                             Width="100%"
+                            Height="27rem"
                             AxisChartOptions="@_axisChartOptions"
-                            TimeLabelSpacing="@TimeSpan.FromHours(6)"
+                            TimeLabelSpacing="@SeriesSpacing"
                             TimeLabelSpacingRounding="true"
                             TimeLabelSpacingRoundingPadSeries="true"
                             DataMarkerTooltipTimeLabelFormat="yyyy MMM dd HH:mm:ss" />

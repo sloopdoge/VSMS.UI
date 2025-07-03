@@ -3,6 +3,7 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using VSMS.Domain;
 using VSMS.Domain.Models.ViewModels;
+using VSMS.Infrastructure.Extensions;
 using VSMS.Infrastructure.Helpers;
 using VSMS.Infrastructure.Hubs;
 using VSMS.Infrastructure.Services.HttpServices;
@@ -24,6 +25,7 @@ public partial class Stock : ComponentBase
     private bool IsLoading { get; set; } = true;
     private DateTime StartDate { get; set; } = DateTime.UtcNow.AddDays(-1);
     private DateTime EndDate { get; set; } = DateTime.UtcNow;
+    private TimeSpan SeriesSpacing { get; set; }
     
     private List<TimeSeriesChartSeries> _series = new();
     private readonly ChartOptions _options = new()
@@ -33,7 +35,7 @@ public partial class Stock : ComponentBase
         MaxNumYAxisTicks = 10,
         YAxisRequireZeroPoint = false,
         XAxisLines = false,
-        LineStrokeWidth = 1,
+        LineStrokeWidth = 3,
     };
 
     private readonly AxisChartOptions _axisChartOptions = new()
@@ -41,7 +43,8 @@ public partial class Stock : ComponentBase
         MatchBoundsToSize = true,
         StackedBarWidthRatio = 1,
     };
-    
+
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -82,13 +85,17 @@ public partial class Stock : ComponentBase
                             Index = 0,
                             Name = Localizer["stock_details_timeserieschart_series_name"],
                             Data = StockHistory.Select(x =>
-                                new TimeSeriesChartSeries.TimeValue(x.UpdatedAt, (double)x.Price)).ToList(),
+                                new TimeSeriesChartSeries.TimeValue(
+                                    x.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone), 
+                                    (double)x.Price)).ToList(),
                             IsVisible = true,
                             LineDisplayType = LineDisplayType.Line,
                             DataMarkerTooltipTitleFormat = "{{X_VALUE}}",
                             DataMarkerTooltipSubtitleFormat = "{{Y_VALUE}}"
                         }
                     ];
+
+                    SetChartSeriesParameters();
                     
                     StateHasChanged();
                 }
@@ -105,6 +112,29 @@ public partial class Stock : ComponentBase
         finally
         {
             IsLoading = false;
+        }
+    }
+
+    private void SetChartSeriesParameters()
+    {
+        try
+        {
+            var minDate = StockHistory.Min(x => x.UpdatedAt);
+            var maxDate = StockHistory.Max(x => x.UpdatedAt);
+            var minPrice = StockHistory.Min(x => x.Price);
+            var maxPrice = StockHistory.Max(x => x.Price);
+            
+            SeriesSpacing = TimeSpan.FromMilliseconds((maxDate - minDate).Add(TimeSpan.FromMinutes(30)).TotalMilliseconds);
+
+            var yTicks = (int)(maxPrice - minPrice) / 5;
+            
+            _options.YAxisTicks = yTicks <= 0 
+                ? 1 
+                : yTicks;
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
         }
     }
 
