@@ -13,25 +13,31 @@
             <MudText Typo="Typo.h4" GutterBottom="true">@Localizer["stock_details_title"]</MudText>
     
             <MudGrid>
-                <MudItem xs="12">
+                <MudItem xs="3">
                     <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@Localizer["stock_details_field_label_symbol"]</MudText>
                     <MudText Typo="Typo.body1">@StockModel.Symbol</MudText>
                 </MudItem>
                 
-                <MudItem xs="12">
+                <MudItem xs="3" sm="3">
                     <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@Localizer["stock_details_field_label_name"]</MudText>
                     <MudText Typo="Typo.body1">@StockModel.Title</MudText>
                 </MudItem>
 
-                <MudItem xs="6" sm="3">
-                    <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@Localizer["stock_details_field_label_created_at"]</MudText>
-                    <MudText Typo="Typo.body1">@StockModel.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")</MudText>
-                </MudItem>
-
-                <MudItem xs="6" sm="3">
-                    <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@Localizer["stock_field_label_updated_at"]</MudText>
-                    <MudText Typo="Typo.body1">@StockModel.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")</MudText>
-                </MudItem>
+                @if (AdditionalInfoRoles.Any(role => string.Equals(role, UserRole, StringComparison.OrdinalIgnoreCase)))
+                {
+                    <MudItem xs="6">
+                        <MudGrid Justify="@Justify.FlexStart">
+                            <MudItem xs="12" sm="6">
+                                <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@Localizer["stock_details_field_label_created_at"]</MudText>
+                                <MudText Typo="Typo.body1">@StockModel.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")</MudText>
+                            </MudItem>
+                            <MudItem xs="12" sm="6">
+                                <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@Localizer["stock_field_label_updated_at"]</MudText>
+                                <MudText Typo="Typo.body1">@StockModel.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")</MudText>
+                            </MudItem>
+                        </MudGrid>
+                    </MudItem>
+                }
             </MudGrid>
         }
     </MudPaper>

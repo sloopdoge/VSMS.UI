@@ -103,7 +103,7 @@ public class CustomAuthStateProvider(
         if (user.Identity is { IsAuthenticated: true })
         {
             var roleClaim = user.FindFirst(ClaimTypes.Role);
-            if (roleClaim != null && string.IsNullOrEmpty(roleClaim.Value))
+            if (roleClaim is not null)
                 return roleClaim.Value;
         }
 

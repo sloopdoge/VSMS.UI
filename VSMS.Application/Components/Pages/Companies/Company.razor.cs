@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
+using VSMS.Application.Identity;
 using VSMS.Domain;
 using VSMS.Domain.Models.ViewModels;
 using VSMS.Infrastructure.Helpers;
 using VSMS.Infrastructure.Services.HttpServices;
+using static VSMS.Domain.Constants.RoleNames;
 
 namespace VSMS.Application.Components.Pages.Companies;
 
@@ -15,15 +18,18 @@ public partial class Company : ComponentBase
     [Inject] private CompaniesHttpService CompaniesHttpService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private TimeZoneHelper TimeZoneHelper { get; set; }
+    [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     
     [Parameter] public Guid CompanyId { get; set; }
     
     private CompanyViewModel CompanyModel { get; set; } = new();
     private bool IsLoading { get; set; } = true;
     private bool IsEditMode { get; set; } = false;
+    private string UserRole { get; set; } = User;
     
     private EditContext _editContext;
     private ValidationMessageStore _errorMessageStore;
+    private List<string> AdditionalInfoRoles { get; set; } = [Admin, CompanyAdmin];
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -56,6 +62,8 @@ public partial class Company : ComponentBase
             {
                 throw new("company_not_found");
             }
+
+            UserRole = await ((CustomAuthStateProvider)AuthenticationStateProvider).GetUserRole();
             
             IsEditMode = NavigationManager.Uri.EndsWith("/Edit", StringComparison.OrdinalIgnoreCase);
             if (IsEditMode)

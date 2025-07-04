@@ -1,5 +1,6 @@
 ﻿@page "/Company/{CompanyId:guid}"
 @page "/Company/{CompanyId:guid}/Edit"
+@using VSMS.Domain.Constants
 
 <PageTitle>@CompanyModel.Title</PageTitle>
 
@@ -21,7 +22,7 @@
                     <DataAnnotationsValidator />
                     
                     <MudGrid Justify="@Justify.FlexStart">
-                        <MudItem xs="12" sm="6">
+                        <MudItem xs="6">
                             <MudTextField T="string" 
                                           @bind-Value="@CompanyModel.Title" 
                                           Label="@Localizer["company_details_field_label_name"]"
@@ -33,29 +34,32 @@
                                           For="@(() => CompanyModel.Title)"/>
                         </MudItem>
 
-                        <MudItem xs="6">
-                            <MudGrid Justify="@Justify.FlexStart">
-                                <MudItem xs="12" sm="6">
-                                    <MudText Typo="Typo.subtitle1"
-                                             Color="Color.Secondary">
-                                        @Localizer["company_details_field_label_created_at"]
-                                    </MudText>
-                                    <MudText Typo="Typo.body1">
-                                        @CompanyModel.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
-                                    </MudText>
-                                </MudItem>
-                                <MudItem xs="12" sm="6">
-                                    <MudText Typo="Typo.subtitle1"
-                                             Color="Color.Secondary">
-                                        @Localizer["company_details_field_label_updated_at"]
-                                    </MudText>
-                                    <MudText Typo="Typo.body1">
-                                        @CompanyModel.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
-                                    </MudText>
-                                </MudItem>
-                            </MudGrid>
-                        </MudItem>
-                        
+                        @if (AdditionalInfoRoles.Any(role => string.Equals(role, UserRole, StringComparison.OrdinalIgnoreCase)))
+                        {
+                            <MudItem xs="6">
+                                <MudGrid Justify="@Justify.FlexStart">
+                                    <MudItem xs="6">
+                                        <MudText Typo="Typo.subtitle1"
+                                                 Color="Color.Secondary">
+                                            @Localizer["company_details_field_label_created_at"]
+                                        </MudText>
+                                        <MudText Typo="Typo.body1">
+                                            @CompanyModel.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
+                                        </MudText>
+                                    </MudItem>
+                                    <MudItem xs="6">
+                                        <MudText Typo="Typo.subtitle1"
+                                                 Color="Color.Secondary">
+                                            @Localizer["company_details_field_label_updated_at"]
+                                        </MudText>
+                                        <MudText Typo="Typo.body1">
+                                            @CompanyModel.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
+                                        </MudText>
+                                    </MudItem>
+                                </MudGrid>
+                            </MudItem>
+                        }
+
                         <MudItem xs="12">
                             <MudGrid Justify="@Justify.FlexEnd">
                                 <MudButton ButtonType="@ButtonType.Submit" 
@@ -72,34 +76,36 @@
             else
             {
                 <MudGrid Justify="@Justify.FlexStart">
-                    <MudItem xs="12" sm="6">
+                    <MudItem xs="3">
                         <MudText Typo="Typo.subtitle1"
                                  Color="Color.Secondary">@Localizer["company_details_field_label_name"]</MudText>
                         <MudText Typo="Typo.body1">@CompanyModel.Title</MudText>
                     </MudItem>
-
-                    <MudItem xs="6">
-                        <MudGrid Justify="@Justify.FlexStart">
-                            <MudItem xs="12" sm="6">
-                                <MudText Typo="Typo.subtitle1"
-                                         Color="Color.Secondary">
-                                    @Localizer["company_details_field_label_created_at"]
-                                </MudText>
-                                <MudText Typo="Typo.body1">
-                                    @CompanyModel.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
-                                </MudText>
-                            </MudItem>
-                            <MudItem xs="12" sm="6">
-                                <MudText Typo="Typo.subtitle1"
-                                         Color="Color.Secondary">
-                                    @Localizer["company_details_field_label_updated_at"]
-                                </MudText>
-                                <MudText Typo="Typo.body1">
-                                    @CompanyModel.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
-                                </MudText>
-                            </MudItem>
-                        </MudGrid>
-                    </MudItem>
+                    @if (AdditionalInfoRoles.Any(role => string.Equals(role, UserRole, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        <MudItem xs="3">
+                            <MudGrid Justify="@Justify.FlexStart">
+                                <MudItem xs="6">
+                                    <MudText Typo="Typo.subtitle1"
+                                             Color="Color.Secondary">
+                                        @Localizer["company_details_field_label_created_at"]
+                                    </MudText>
+                                    <MudText Typo="Typo.body1">
+                                        @CompanyModel.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
+                                    </MudText>
+                                </MudItem>
+                                <MudItem xs="6">
+                                    <MudText Typo="Typo.subtitle1"
+                                             Color="Color.Secondary">
+                                        @Localizer["company_details_field_label_updated_at"]
+                                    </MudText>
+                                    <MudText Typo="Typo.body1">
+                                        @CompanyModel.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
+                                    </MudText>
+                                </MudItem>
+                            </MudGrid>
+                        </MudItem>
+                    }
                 </MudGrid>
             }
         }

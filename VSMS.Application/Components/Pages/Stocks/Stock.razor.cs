@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using VSMS.Application.Identity;
 using VSMS.Domain;
 using VSMS.Domain.Models.ViewModels;
 using VSMS.Infrastructure.Extensions;
 using VSMS.Infrastructure.Helpers;
 using VSMS.Infrastructure.Hubs;
 using VSMS.Infrastructure.Services.HttpServices;
+using static VSMS.Domain.Constants.RoleNames;
 
 namespace VSMS.Application.Components.Pages.Stocks;
 
@@ -17,6 +20,7 @@ public partial class Stock : ComponentBase
     [Inject] private StocksHttpService StocksHttpService { get; set; }
     [Inject] private StocksHub StocksHub { get; set; }
     [Inject] private TimeZoneHelper TimeZoneHelper { get; set; }
+    [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     
     [Parameter] public Guid StockId { get; set; }
 
@@ -26,6 +30,7 @@ public partial class Stock : ComponentBase
     private DateTime StartDate { get; set; } = DateTime.UtcNow.AddDays(-1);
     private DateTime EndDate { get; set; } = DateTime.UtcNow;
     private TimeSpan SeriesSpacing { get; set; }
+    private string UserRole { get; set; } = User;
     
     private List<TimeSeriesChartSeries> _series = new();
     private readonly ChartOptions _options = new()
@@ -37,13 +42,12 @@ public partial class Stock : ComponentBase
         XAxisLines = false,
         LineStrokeWidth = 3,
     };
-
     private readonly AxisChartOptions _axisChartOptions = new()
     {
         MatchBoundsToSize = true,
         StackedBarWidthRatio = 1,
     };
-
+    private List<string> AdditionalInfoRoles { get; set; } = [Admin, CompanyAdmin];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -73,6 +77,8 @@ public partial class Stock : ComponentBase
 
                 RegisterHubHandlers();
             }
+            
+            UserRole = await ((CustomAuthStateProvider)AuthenticationStateProvider).GetUserRole();
             
             var stockRes = await StocksHttpService.GetStockById(StockId);
             if (stockRes is not null)
