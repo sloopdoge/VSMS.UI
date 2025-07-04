@@ -143,7 +143,6 @@ public partial class Stock : ComponentBase
                 StockHistory.Add(updated);
             }
             
-            StockHistory.AddRange(updatedStocks);
             _series.FirstOrDefault().Data = StockHistory.Select(x =>
                 new TimeSeriesChartSeries.TimeValue(
                     x.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone),
