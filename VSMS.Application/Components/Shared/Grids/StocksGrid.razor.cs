@@ -59,8 +59,9 @@ public partial class StocksGrid : ComponentBase
             
             if (!StocksHub.IsConnected)
                 await StocksHub.InitializeHub();
-            
-            StocksHub.RegisterHandler<List<Guid>>("OnStocksPriceChanged", HandleStocksPriceChange);
+
+            StocksHub.RegisterHandler<List<StockViewModel>>("OnStocksPriceChanged",
+                (stocks) => _ = OnStocksPriceChanged(stocks));
         }
         catch (Exception e)
         {
@@ -68,13 +69,15 @@ public partial class StocksGrid : ComponentBase
         }
     }
     
-    private void HandleStocksPriceChange(List<Guid> stocks)
+    private async Task OnStocksPriceChanged(List<StockViewModel> updatedStocks)
     {
         try
         {
-            // if (Stocks.Any(stock => stocks.Contains(stock.Id)))
-            //     _ = RefreshStocks();
-            // StateHasChanged();
+            if (Stocks.Any(s => updatedStocks.Select(us => us.Id).Contains(s.Id)))
+            {
+                await RefreshStocks();
+                StateHasChanged();
+            }
         }
         catch (Exception e)
         {

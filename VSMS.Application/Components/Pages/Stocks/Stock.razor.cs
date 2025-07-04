@@ -66,7 +66,13 @@ public partial class Stock : ComponentBase
         try
         {
             if (!StocksHub.IsConnected)
-                await StocksHub.InitializeHub();
+            {
+                var hubInitialized = await StocksHub.InitializeHub();
+                if (!hubInitialized)
+                    throw new Exception($"{nameof(StocksHub)} not initialized");
+
+                RegisterHubHandlers();
+            }
             
             var stockRes = await StocksHttpService.GetStockById(StockId);
             if (stockRes is not null)
@@ -80,7 +86,7 @@ public partial class Stock : ComponentBase
                     
                     _series =
                     [
-                        new()
+                        new TimeSeriesChartSeries
                         {
                             Index = 0,
                             Name = Localizer["stock_details_timeserieschart_series_name"],
@@ -115,6 +121,36 @@ public partial class Stock : ComponentBase
         }
     }
 
+    private async Task OnStocksPriceChanged(List<StockViewModel> updatedStocks)
+    {
+        try
+        {
+            if (StockHistory.Count == 0)
+                return;
+
+            var targetId = StockHistory.First().Id;
+
+            foreach (var updated in updatedStocks
+                         .Where(updated => updated.Id == targetId && StockHistory
+                             .All(h => h.UpdatedAt != updated.UpdatedAt)))
+            {
+                StockHistory.Add(updated);
+            }
+            
+            StockHistory.AddRange(updatedStocks);
+            _series.FirstOrDefault().Data = StockHistory.Select(x =>
+                new TimeSeriesChartSeries.TimeValue(
+                    x.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone),
+                    (double)x.Price)).ToList();
+            
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+        }
+    }
+
     private void SetChartSeriesParameters()
     {
         try
@@ -138,8 +174,9 @@ public partial class Stock : ComponentBase
         }
     }
 
-    private async Task RefreshStockHistory()
+    private void RegisterHubHandlers()
     {
-        
+        StocksHub.RegisterHandler<List<StockViewModel>>($"OnStocksPriceChanged",
+            async (stocks) => _ = OnStocksPriceChanged(stocks));
     }
 }
