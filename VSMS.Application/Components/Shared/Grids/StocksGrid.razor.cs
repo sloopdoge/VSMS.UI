@@ -60,15 +60,20 @@ public partial class StocksGrid : ComponentBase
             if (!StocksHub.IsConnected)
                 await StocksHub.InitializeHub();
 
-            StocksHub.RegisterHandler<List<StockViewModel>>("OnStocksPriceChanged",
-                (stocks) => _ = OnStocksPriceChanged(stocks));
+            RegisterHubHandlers();
         }
         catch (Exception e)
         {
             Logger.LogError(e, e.Message);
         }
     }
-    
+
+    private void RegisterHubHandlers()
+    {
+        StocksHub.RegisterHandler<List<StockViewModel>>($"OnStocksPriceChanged",
+            async (stocks) => _ = OnStocksPriceChanged(stocks));
+    }
+
     private async Task OnStocksPriceChanged(List<StockViewModel> updatedStocks)
     {
         try

@@ -1,0 +1,119 @@
+﻿<MudDataGrid T="UserProfileViewModel" 
+             Items="@Users" 
+             Hover="true" 
+             Dense="true"
+             Filterable="true"
+             FilterMode="@DataGridFilterMode.ColumnFilterRow"
+             Loading="@UsersLoading">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"
+                 Class="d-flex justify-start">
+            @Localizer["users_title"]
+        </MudText>
+        
+        @if (ShowCreateUserButton)
+        {
+            <MudSpacer />
+            
+            <MudStack Justify="Justify.SpaceBetween" Row="true">
+                <MudTooltip Text="@Localizer["users_create_button_text"]"
+                            Placement="@Placement.Bottom" Class="pr-3">
+                    <MudIconButton Icon="@Icons.Material.Rounded.AddCircle"
+                                   Size="@Size.Small"
+                                   Variant="@Variant.Outlined"
+                                   Color="@Color.Secondary"
+                                   OnClick="@OnCreateUserClick" />
+                </MudTooltip>
+            </MudStack>
+        }
+    </ToolBarContent>
+    <Columns>
+        <TemplateColumn T="UserProfileViewModel" 
+                        Title="@Localizer["users_grid_field_username"]" 
+                        Sortable="true" 
+                        SortBy="@(x => x.Username)"
+                        Filterable="false">
+            <CellTemplate>
+                @if (DirectToUserPage)
+                {
+                    <MudLink Href="@($"/Users/{context.Item.Id}")" Underline="Underline.Always">
+                        @context.Item.Username
+                    </MudLink>
+                }
+                else
+                {
+                    <MudText>
+                        @context.Item.Username
+                    </MudText>
+                }
+            </CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn T="UserProfileViewModel" 
+                        Title="@Localizer["users_grid_field_fullname"]" 
+                        Sortable="true" 
+                        SortBy="@(x => x.FirstName)"
+                        Filterable="false">
+            <CellTemplate>
+                <MudText>
+                    @context.Item.FirstName @context.Item.LastName
+                </MudText>
+            </CellTemplate>
+        </TemplateColumn>
+        <PropertyColumn Property="x => x.Email"
+                        Title="@Localizer["users_grid_field_email"]"
+                        Sortable="true"
+                        Filterable="false">
+        </PropertyColumn>
+        <PropertyColumn Property="x => x.PhoneNumber" 
+                        Title="@Localizer["stocks_grid_field_phone_number"]" 
+                        Sortable="true" 
+                        Filterable="false"/>
+        <PropertyColumn Property="x => x.Role"
+                        Title="@Localizer["stocks_grid_field_role"]"
+                        Sortable="true"
+                        Filterable="false">
+            <FilterTemplate>
+                <MudIconButton OnClick="@OpenUsersRolesFilter" 
+                               Icon="@Icons.Material.Rounded.FilterAlt" 
+                               Size="@Size.Small" />
+                <MudOverlay Visible="@_symbolFilterOpened" 
+                            OnClick="@(() => _symbolFilterOpened = false)" />
+                <MudPopover Open="@_symbolFilterOpened" 
+                            AnchorOrigin="Origin.BottomCenter" 
+                            TransformOrigin="Origin.TopCenter"
+                            Class="users-grid-symbol-filter-popover">
+                    <MudStack Spacing="0">
+                        <MudCheckBox T="bool" 
+                                     Label="@Localizer["users_grid_field_symbol_filter_select_all"]" 
+                                     Size="@Size.Small" 
+                                     Value="@_symbolFilterSelectedAll" 
+                                     ValueChanged="@SelectAllFilterUsersRoles" />
+                        <MudStack Spacing="0" 
+                                  Class="symbol-filter-list">
+                            @foreach (var item in _availableUserRolesForFilter)
+                            {
+                                <MudCheckBox T="bool" 
+                                             Label="@($"{item}")" 
+                                             Size="@Size.Small" 
+                                             Value="@(SelectedUsers.Any(su => string.Equals(su.Role, item, StringComparison.OrdinalIgnoreCase)))"
+                                             ValueChanged="@((value) => SelectedFilterUsersRoleChanged(value, item))" />
+                            }
+                        </MudStack>
+                        <MudStack Row="true">
+                            <MudButton OnClick="@(() => ClearStockSymbolFilter(context))">
+                                @Localizer["stocks_grid_field_symbol_filter_clear"]
+                            </MudButton>
+                            <MudButton Color="@Color.Primary"
+                                       OnClick="@(() => ApplyStockSymbolFilter(context))">
+                                @Localizer["stocks_grid_field_symbol_filter_filter"]
+                            </MudButton>
+                        </MudStack>
+                    </MudStack>
+                </MudPopover>
+            </FilterTemplate>
+        </PropertyColumn>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="StockPerformanceViewModel" />
+    </PagerContent>
+</MudDataGrid>

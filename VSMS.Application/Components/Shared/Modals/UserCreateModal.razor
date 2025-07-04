@@ -1,0 +1,61 @@
+﻿<EditForm EditContext="@_editContext" 
+          OnValidSubmit="HandleCompanyCreate">
+    <MudDialog Class="user_create_modal_container" 
+               Gutters="true"
+               ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3">
+        <TitleContent>
+            <MudText Color="@Color.Primary" 
+                     GutterBottom="true" 
+                     Typo="@Typo.h4">
+                @Localizer["user_create_modal_title"]
+            </MudText>
+        </TitleContent>
+        <DialogContent>
+            <DataAnnotationsValidator/>
+
+            <MudTextField @bind-Value="@CreateModel.Username" 
+                          For="@(() => CreateModel.Username)"
+                          InputMode="@InputMode.text" 
+                          InputType="@InputType.Text" 
+                          Label="@Localizer["user_create_modal_field_username_name"]" 
+                          Margin="@Margin.Dense" 
+                          T="string" 
+                          Variant="@Variant.Outlined" />
+            
+            <MudTextField @bind-Value="@CreateModel.Email" 
+                          For="@(() => CreateModel.Email)"
+                          InputMode="@InputMode.email" 
+                          InputType="@InputType.Email" 
+                          Label="@Localizer["user_create_modal_field_email_name"]" 
+                          Margin="@Margin.Dense" 
+                          T="string" 
+                          Variant="@Variant.Outlined" />
+            
+            <MudSelect @bind-Value="@CreateModel.RoleName"
+                       Variant="Variant.Outlined"
+                       Label="@Localizer["user_create_modal_field_rolename_name"]"
+                       Margin="Margin.Dense"
+                       FitContent="true"
+                       HelperText="@Localizer["user_create_modal_field_rolename_helper_text"]"
+                       Modal="true">
+                @foreach (var roleName in AvailableRoles)
+                {
+                    <MudSelectItem Value="roleName">@roleName</MudSelectItem>
+                }
+            </MudSelect>
+        </DialogContent>
+        <DialogActions>
+            <MudButton ButtonType="@ButtonType.Button"
+                       Color="@Color.Warning"
+                       Variant="@Variant.Filled"
+                       OnClick="@(MudDialog.Cancel)">
+                @Localizer["user_create_modal_action_cancel"]
+            </MudButton>
+            <MudButton ButtonType="@ButtonType.Submit"
+                       Color="@Color.Tertiary"
+                       Variant="@Variant.Filled">
+                @Localizer["user_create_modal_action_add"]
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>
