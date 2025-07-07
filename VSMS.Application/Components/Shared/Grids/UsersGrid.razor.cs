@@ -16,7 +16,7 @@ public partial class UsersGrid : ComponentBase
     [Inject] private ILogger<StocksGrid> Logger { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private CompaniesHttpService CompaniesHttpService { get; set; }
-    [Inject] private UserHttpService UsersHttpService { get; set; }
+    [Inject] private UsersHttpService UsersHttpService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private TimeZoneHelper TimeZoneHelper { get; set; }
     [Inject] private IDialogService DialogService { get; set; }
@@ -28,6 +28,7 @@ public partial class UsersGrid : ComponentBase
     private HashSet<UserProfileViewModel> Users { get; set; } = [];
     private HashSet<UserProfileViewModel> SelectedUsers { get; set; } = [];
     private HashSet<UserProfileViewModel> FilteredUsers { get; set; } = [];
+    private List<string> SelectedFilterUserRoles { get; set; } = [];
     private bool UsersLoading { get; set; } = true;
 
     private FilterDefinition<UserProfileViewModel> _usersFilterDefinition;
@@ -111,8 +112,11 @@ public partial class UsersGrid : ComponentBase
 
     private void SelectedFilterUsersRoleChanged(bool value, string item)
     {
+        
         if (value)
         {
+            SelectedFilterUserRoles.Add(item);
+            
             var rangeToAdd = Users
                 .Where(u => string.Equals(u.Role, item, StringComparison.OrdinalIgnoreCase));
             
@@ -120,6 +124,8 @@ public partial class UsersGrid : ComponentBase
         }
         else
         {
+            SelectedFilterUserRoles.Remove(item);
+            
             var rangeToRemove = Users
                 .Where(u => string.Equals(u.Role, item, StringComparison.OrdinalIgnoreCase));
             
@@ -148,7 +154,11 @@ public partial class UsersGrid : ComponentBase
     {
         try
         {
-            var parameters = new DialogParameters<UserCreateModal>();
+            var parameters = new DialogParameters<UserCreateModal>()
+            {
+                { x => x.CompanyId, CompanyId }
+            };
+            
             
             var options = new DialogOptions
             {

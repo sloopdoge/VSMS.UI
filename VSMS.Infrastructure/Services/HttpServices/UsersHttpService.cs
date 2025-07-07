@@ -6,7 +6,7 @@ using VSMS.Infrastructure.Settings;
 
 namespace VSMS.Infrastructure.Services.HttpServices;
 
-public class UserHttpService(
+public class UsersHttpService(
     ILogger<CompaniesHttpService> logger,
     ILocalStorageService localStorage,
     IApplicationSettings applicationSettings) : BaseHttpService(localStorage, applicationSettings, "Users")

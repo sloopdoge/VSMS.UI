@@ -79,7 +79,7 @@
                                              ValueChanged="@((value) => SelectedFilterStockSymbolChanged(value, item))" />
                             }
                         </MudStack>
-                        <MudStack Row="true">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                             <MudButton OnClick="@(() => ClearStockSymbolFilter(context))">
                                 @Localizer["stocks_grid_field_symbol_filter_clear"]
                             </MudButton>

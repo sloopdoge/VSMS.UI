@@ -1,0 +1,17 @@
+.users-grid-symbol-filter-popover {
+    padding: 2px;
+    width: 15rem;
+}
+
+.users-grid-symbol-filter-popover .symbol-filter-list {
+    overflow-y: auto;
+    max-height: 24rem;
+}
+
+.user_create_modal_container {
+    width: 28rem;
+}
+
+.user-create-modal-content {
+    height: 11rem;
+}

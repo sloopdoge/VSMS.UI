@@ -16,7 +16,10 @@ public partial class UserCreateModal : ComponentBase
     
     [Inject] private ILogger<UserCreateModal> Logger { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
-    [Inject] private UserHttpService UserHttpService { get; set; }
+    [Inject] private UsersHttpService UsersHttpService { get; set; }
+    [Inject] private CompaniesHttpService CompaniesHttpService { get; set; }
+    
+    [Parameter] public Guid CompanyId { get; set; } = Guid.Empty;
     
     private UserCreateViewModel CreateModel { get; set; } = new();
     private EditContext _editContext;
@@ -35,15 +38,24 @@ public partial class UserCreateModal : ComponentBase
         }
     }
     
-    private async Task HandleCompanyCreate()
+    private async Task HandleUserCreate()
     {
         try
         {
-            var res = await UserHttpService.CreateUser(CreateModel);
-            if (res is not null)
-                MudDialog.Close(DialogResult.Ok(res));
+            var createRes = await UsersHttpService.CreateUser(CreateModel);
+            if (createRes is not null)
+            {
+                if (CompanyId != Guid.Empty)
+                {
+                    var companyAssignRes = await CompaniesHttpService.AssignUserToCompany(CompanyId, createRes.Id);
+                    if (!companyAssignRes)
+                        throw new Exception($"User {CreateModel.Email} was not assigned to company");
+                }
+                MudDialog.Close(DialogResult.Ok(createRes));
+            }
             else
-                Logger.LogError($"User {CreateModel.Email} not added");
+                throw new Exception($"User {CreateModel.Email} not added");
+
         }
         catch (Exception e)
         {

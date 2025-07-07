@@ -1,8 +1,9 @@
 ﻿<EditForm EditContext="@_editContext" 
-          OnValidSubmit="HandleCompanyCreate">
+          OnValidSubmit="HandleUserCreate">
     <MudDialog Class="user_create_modal_container" 
                Gutters="true"
-               ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3">
+               ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3" 
+               ContentClass="user-create-modal-content">
         <TitleContent>
             <MudText Color="@Color.Primary" 
                      GutterBottom="true" 
@@ -20,7 +21,8 @@
                           Label="@Localizer["user_create_modal_field_username_name"]" 
                           Margin="@Margin.Dense" 
                           T="string" 
-                          Variant="@Variant.Outlined" />
+                          Variant="@Variant.Outlined" 
+                          Class="mb-3"/>
             
             <MudTextField @bind-Value="@CreateModel.Email" 
                           For="@(() => CreateModel.Email)"
@@ -29,14 +31,14 @@
                           Label="@Localizer["user_create_modal_field_email_name"]" 
                           Margin="@Margin.Dense" 
                           T="string" 
-                          Variant="@Variant.Outlined" />
+                          Variant="@Variant.Outlined" 
+                          Class="mb-3"/>
             
             <MudSelect @bind-Value="@CreateModel.RoleName"
                        Variant="Variant.Outlined"
                        Label="@Localizer["user_create_modal_field_rolename_name"]"
                        Margin="Margin.Dense"
-                       FitContent="true"
-                       HelperText="@Localizer["user_create_modal_field_rolename_helper_text"]"
+                       FullWidth="true"
                        Modal="true">
                 @foreach (var roleName in AvailableRoles)
                 {

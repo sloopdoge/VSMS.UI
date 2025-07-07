@@ -35,7 +35,7 @@ public partial class StockCreateModal : ComponentBase
         }
     }
 
-    private async Task HandleAddStock()
+    private async Task HandleCreateStock()
     {
         try
         {

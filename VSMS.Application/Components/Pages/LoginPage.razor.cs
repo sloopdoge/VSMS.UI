@@ -10,9 +10,9 @@ using VSMS.Infrastructure.Services.HttpServices;
 
 namespace VSMS.Application.Components.Pages;
 
-public partial class Login : ComponentBase
+public partial class LoginPage : ComponentBase
 {
-    [Inject] private ILogger<Login> Logger { get; set; }
+    [Inject] private ILogger<LoginPage> Logger { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private ILocalStorageService LocalStorage { get; set; }

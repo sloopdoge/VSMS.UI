@@ -1,8 +1,9 @@
 ﻿<EditForm EditContext="@_editContext"
-          OnValidSubmit="HandleAddStock">
-    <MudDialog Class="company-add-modal-container"
+          OnValidSubmit="HandleCreateStock">
+    <MudDialog Class="stock-create-modal-container"
                Gutters="true"
-               ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3">
+               ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3"
+               ContentClass="stock-create-modal-content">
         <TitleContent>
             <MudText Color="@Color.Primary"
                      GutterBottom="true"
@@ -20,7 +21,8 @@
                           Label="@Localizer["stock_add_modal_field_label_symbol"]"
                           Margin="@Margin.Dense"
                           T="string"
-                          Variant="@Variant.Outlined" />
+                          Variant="@Variant.Outlined" 
+                          Class="mb-3"/>
 
             <MudTextField @bind-Value="@CreateModel.Title"
                           For="@(() => CreateModel.Title)"
@@ -29,7 +31,8 @@
                           Label="@Localizer["stock_add_modal_field_label_name"]"
                           Margin="@Margin.Dense"
                           T="string"
-                          Variant="@Variant.Outlined" />
+                          Variant="@Variant.Outlined" 
+                          Class="mb-3"/>
 
             <MudNumericField @bind-Value="@CreateModel.Price"
                              For="@(() => CreateModel.Price)"

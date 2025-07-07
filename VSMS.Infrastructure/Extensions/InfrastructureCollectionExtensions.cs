@@ -30,6 +30,7 @@ public static class InfrastructureCollectionExtensions
         services.AddTransient<AuthHttpService>();
         services.AddTransient<CompaniesHttpService>();
         services.AddTransient<StocksHttpService>();
+        services.AddTransient<UsersHttpService>();
         
         return services;
     }

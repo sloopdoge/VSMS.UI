@@ -65,47 +65,47 @@
                         Filterable="false">
         </PropertyColumn>
         <PropertyColumn Property="x => x.PhoneNumber" 
-                        Title="@Localizer["stocks_grid_field_phone_number"]" 
+                        Title="@Localizer["users_grid_field_phone_number"]" 
                         Sortable="true" 
                         Filterable="false"/>
         <PropertyColumn Property="x => x.Role"
-                        Title="@Localizer["stocks_grid_field_role"]"
+                        Title="@Localizer["users_grid_field_role"]"
                         Sortable="true"
-                        Filterable="false">
+                        Filterable="true">
             <FilterTemplate>
-                <MudIconButton OnClick="@OpenUsersRolesFilter" 
-                               Icon="@Icons.Material.Rounded.FilterAlt" 
+                <MudIconButton OnClick="@OpenUsersRolesFilter"
+                               Icon="@Icons.Material.Rounded.FilterAlt"
                                Size="@Size.Small" />
-                <MudOverlay Visible="@_symbolFilterOpened" 
+                <MudOverlay Visible="@_symbolFilterOpened"
                             OnClick="@(() => _symbolFilterOpened = false)" />
-                <MudPopover Open="@_symbolFilterOpened" 
+                <MudPopover Open="@_symbolFilterOpened"
                             AnchorOrigin="Origin.BottomCenter" 
                             TransformOrigin="Origin.TopCenter"
                             Class="users-grid-symbol-filter-popover">
                     <MudStack Spacing="0">
-                        <MudCheckBox T="bool" 
+                        <MudCheckBox T="bool"
                                      Label="@Localizer["users_grid_field_symbol_filter_select_all"]" 
-                                     Size="@Size.Small" 
+                                     Size="@Size.Small"
                                      Value="@_symbolFilterSelectedAll" 
                                      ValueChanged="@SelectAllFilterUsersRoles" />
-                        <MudStack Spacing="0" 
+                        <MudStack Spacing="0"
                                   Class="symbol-filter-list">
                             @foreach (var item in _availableUserRolesForFilter)
                             {
                                 <MudCheckBox T="bool" 
                                              Label="@($"{item}")" 
                                              Size="@Size.Small" 
-                                             Value="@(SelectedUsers.Any(su => string.Equals(su.Role, item, StringComparison.OrdinalIgnoreCase)))"
+                                             Value="@(SelectedFilterUserRoles.Contains(item))"
                                              ValueChanged="@((value) => SelectedFilterUsersRoleChanged(value, item))" />
                             }
                         </MudStack>
-                        <MudStack Row="true">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                             <MudButton OnClick="@(() => ClearStockSymbolFilter(context))">
-                                @Localizer["stocks_grid_field_symbol_filter_clear"]
+                                @Localizer["users_grid_field_symbol_filter_clear"]
                             </MudButton>
                             <MudButton Color="@Color.Primary"
                                        OnClick="@(() => ApplyStockSymbolFilter(context))">
-                                @Localizer["stocks_grid_field_symbol_filter_filter"]
+                                @Localizer["users_grid_field_symbol_filter_filter"]
                             </MudButton>
                         </MudStack>
                     </MudStack>
@@ -114,6 +114,6 @@
         </PropertyColumn>
     </Columns>
     <PagerContent>
-        <MudDataGridPager T="StockPerformanceViewModel" />
+        <MudDataGridPager T="UserProfileViewModel" />
     </PagerContent>
 </MudDataGrid>

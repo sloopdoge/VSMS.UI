@@ -7,9 +7,9 @@ using VSMS.Infrastructure.Services.HttpServices;
 
 namespace VSMS.Application.Components.Pages.Stocks;
 
-public partial class Stocks : ComponentBase
+public partial class StocksPage : ComponentBase
 {
-    [Inject] private ILogger<Stocks> Logger { get; set; }
+    [Inject] private ILogger<StocksPage> Logger { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private StocksHttpService StocksHttpService { get; set; }
     [Inject] private StocksHub StocksHub { get; set; }

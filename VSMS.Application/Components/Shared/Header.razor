@@ -29,6 +29,16 @@
                        OnClick="@(() => OnNavigationClick(NavMenuItemsEnum.Stocks))">
                 @Localizer["header_navmenu_stocks_title"]
             </MudButton>
+            
+            <MudButton Size="@Size.Medium"
+                       Variant="@Variant.Outlined"
+                       ButtonType="@ButtonType.Button"
+                       StartIcon="@Icons.Material.Rounded.RequestPage"
+                       Color="@Color.Info"
+                       IconColor="@Color.Info"
+                       OnClick="@(() => OnNavigationClick(NavMenuItemsEnum.Users))">
+                @Localizer["header_navmenu_users_title"]
+            </MudButton>
         }
     </MudStack>
     

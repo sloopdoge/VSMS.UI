@@ -13,9 +13,9 @@ using static VSMS.Domain.Constants.RoleNames;
 
 namespace VSMS.Application.Components.Pages.Stocks;
 
-public partial class Stock : ComponentBase
+public partial class StockPage : ComponentBase
 {
-    [Inject] private ILogger<Stock> Logger { get; set; }
+    [Inject] private ILogger<StockPage> Logger { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private StocksHttpService StocksHttpService { get; set; }
     [Inject] private StocksHub StocksHub { get; set; }
@@ -131,24 +131,27 @@ public partial class Stock : ComponentBase
     {
         try
         {
-            if (StockHistory.Count == 0)
-                return;
-
-            var targetId = StockHistory.First().Id;
-
-            foreach (var updated in updatedStocks
-                         .Where(updated => updated.Id == targetId && StockHistory
-                             .All(h => h.UpdatedAt != updated.UpdatedAt)))
+            await InvokeAsync(async () =>
             {
-                StockHistory.Add(updated);
-            }
-            
-            _series.FirstOrDefault().Data = StockHistory.Select(x =>
-                new TimeSeriesChartSeries.TimeValue(
-                    x.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone),
-                    (double)x.Price)).ToList();
-            
-            await InvokeAsync(StateHasChanged);
+                if (StockHistory.Count == 0)
+                    return;
+
+                var targetId = StockHistory.First().Id;
+
+                foreach (var updated in updatedStocks
+                             .Where(updated => updated.Id == targetId && StockHistory
+                                 .All(h => h.UpdatedAt != updated.UpdatedAt)))
+                {
+                    StockHistory.Add(updated);
+                }
+                
+                _series.FirstOrDefault().Data = StockHistory.Select(x =>
+                    new TimeSeriesChartSeries.TimeValue(
+                        x.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone),
+                        (double)x.Price)).ToList();
+                
+                StateHasChanged();
+            });
         }
         catch (Exception e)
         {

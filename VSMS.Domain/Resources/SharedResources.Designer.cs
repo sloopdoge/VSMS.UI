@@ -305,6 +305,24 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string company_tabs_label_stocks {
+            get {
+                return ResourceManager.GetString("company_tabs_label_stocks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_tabs_label_users {
+            get {
+                return ResourceManager.GetString("company_tabs_label_users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string company_title_is_required {
             get {
                 return ResourceManager.GetString("company_title_is_required", resourceCulture);
@@ -353,6 +371,15 @@ namespace VSMS.Domain.Resources {
         internal static string header_navmenu_stocks_title {
             get {
                 return ResourceManager.GetString("header_navmenu_stocks_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string header_navmenu_users_title {
+            get {
+                return ResourceManager.GetString("header_navmenu_users_title", resourceCulture);
             }
         }
         
@@ -557,6 +584,15 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string stocks_grid_field_phone_number {
+            get {
+                return ResourceManager.GetString("stocks_grid_field_phone_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string stocks_grid_field_price {
             get {
                 return ResourceManager.GetString("stocks_grid_field_price", resourceCulture);
@@ -629,6 +665,69 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string user_create_modal_action_add {
+            get {
+                return ResourceManager.GetString("user_create_modal_action_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_create_modal_action_cancel {
+            get {
+                return ResourceManager.GetString("user_create_modal_action_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_create_modal_field_email_name {
+            get {
+                return ResourceManager.GetString("user_create_modal_field_email_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_create_modal_field_rolename_helper_text {
+            get {
+                return ResourceManager.GetString("user_create_modal_field_rolename_helper_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_create_modal_field_rolename_name {
+            get {
+                return ResourceManager.GetString("user_create_modal_field_rolename_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_create_modal_field_username_name {
+            get {
+                return ResourceManager.GetString("user_create_modal_field_username_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_create_modal_title {
+            get {
+                return ResourceManager.GetString("user_create_modal_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string user_login_email_not_valid {
             get {
                 return ResourceManager.GetString("user_login_email_not_valid", resourceCulture);
@@ -650,6 +749,105 @@ namespace VSMS.Domain.Resources {
         internal static string user_login_password_required {
             get {
                 return ResourceManager.GetString("user_login_password_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_create_button_text {
+            get {
+                return ResourceManager.GetString("users_create_button_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_field_email {
+            get {
+                return ResourceManager.GetString("users_grid_field_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_field_fullname {
+            get {
+                return ResourceManager.GetString("users_grid_field_fullname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_field_phone_number {
+            get {
+                return ResourceManager.GetString("users_grid_field_phone_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_field_role {
+            get {
+                return ResourceManager.GetString("users_grid_field_role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_field_symbol_filter_clear {
+            get {
+                return ResourceManager.GetString("users_grid_field_symbol_filter_clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_field_symbol_filter_filter {
+            get {
+                return ResourceManager.GetString("users_grid_field_symbol_filter_filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_field_symbol_filter_select_all {
+            get {
+                return ResourceManager.GetString("users_grid_field_symbol_filter_select_all", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_field_username {
+            get {
+                return ResourceManager.GetString("users_grid_field_username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_page_title {
+            get {
+                return ResourceManager.GetString("users_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_title {
+            get {
+                return ResourceManager.GetString("users_title", resourceCulture);
             }
         }
     }

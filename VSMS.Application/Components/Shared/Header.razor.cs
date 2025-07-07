@@ -93,6 +93,9 @@ public partial class Header : ComponentBase
             case NavMenuItemsEnum.Stocks:
                 NavigationManager.NavigateTo("/Stocks");
                 break;
+            case NavMenuItemsEnum.Users:
+                NavigationManager.NavigateTo("/Users");
+                break;
         }
     }
 }

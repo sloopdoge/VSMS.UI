@@ -78,11 +78,14 @@ public partial class StocksGrid : ComponentBase
     {
         try
         {
-            if (Stocks.Any(s => updatedStocks.Select(us => us.Id).Contains(s.Id)))
+            await InvokeAsync(async () =>
             {
-                await RefreshStocks();
-                StateHasChanged();
-            }
+                    if (Stocks.Any(s => updatedStocks.Select(us => us.Id).Contains(s.Id)))
+                    {
+                        await RefreshStocks();
+                        StateHasChanged();
+                    }
+            });
         }
         catch (Exception e)
         {

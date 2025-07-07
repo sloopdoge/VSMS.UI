@@ -4,5 +4,6 @@ public enum NavMenuItemsEnum
 {
     Home,
     Companies,
-    Stocks
+    Stocks,
+    Users
 }

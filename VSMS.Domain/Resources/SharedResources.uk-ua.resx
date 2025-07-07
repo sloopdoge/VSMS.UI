@@ -263,4 +263,67 @@
     <data name="company_title_is_required" xml:space="preserve">
         <value>Назва компанії є обов'язковою</value>
     </data>
+    <data name="header_navmenu_users_title" xml:space="preserve">
+        <value>Користувачі</value>
+    </data>
+    <data name="company_tabs_label_stocks" xml:space="preserve">
+        <value>Акції компанії</value>
+    </data>
+    <data name="company_tabs_label_users" xml:space="preserve">
+        <value>Користувачі компанії</value>
+    </data>
+    <data name="users_title" xml:space="preserve">
+        <value>Користувачі</value>
+    </data>
+    <data name="users_page_title" xml:space="preserve">
+        <value>Користувачі</value>
+    </data>
+    <data name="users_create_button_text" xml:space="preserve">
+        <value>Створити користувача</value>
+    </data>
+    <data name="users_grid_field_username" xml:space="preserve">
+        <value>Ім'я користувача</value>
+    </data>
+    <data name="users_grid_field_fullname" xml:space="preserve">
+        <value>Повне ім'я</value>
+    </data>
+    <data name="users_grid_field_email" xml:space="preserve">
+        <value>Пошта</value>
+    </data>
+    <data name="users_grid_field_phone_number" xml:space="preserve">
+        <value>номер телефону</value>
+    </data>
+    <data name="users_grid_field_role" xml:space="preserve">
+        <value>Роль</value>
+    </data>
+    <data name="users_grid_field_symbol_filter_clear" xml:space="preserve">
+        <value>Очистити</value>
+    </data>
+    <data name="users_grid_field_symbol_filter_filter" xml:space="preserve">
+        <value>Фльтр по ролях</value>
+    </data>
+    <data name="users_grid_field_symbol_filter_select_all" xml:space="preserve">
+        <value>Вибрати всі</value>
+    </data>
+    <data name="user_create_modal_action_add" xml:space="preserve">
+        <value>Створити</value>
+    </data>
+    <data name="user_create_modal_action_cancel" xml:space="preserve">
+        <value>Відмінити</value>
+    </data>
+    <data name="user_create_modal_field_email_name" xml:space="preserve">
+        <value>Пошта</value>
+    </data>
+    <data name="user_create_modal_field_rolename_helper_text" xml:space="preserve">
+        <value>Роль користувача</value>
+    </data>
+    <data name="user_create_modal_field_rolename_name" xml:space="preserve">
+        <value>Роль</value>
+    </data>
+    <data name="user_create_modal_field_username_name" xml:space="preserve">
+        <value>Ім'я користувача</value>
+    </data>
+    <data name="user_create_modal_title" xml:space="preserve">
+        <value>Створити користувача</value>
+    </data>
 </root>
