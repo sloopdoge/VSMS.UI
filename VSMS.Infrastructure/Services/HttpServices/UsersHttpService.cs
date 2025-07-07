@@ -75,19 +75,19 @@ public class UsersHttpService(
         }
     }
     
-    public async Task<UserProfileViewModel?> DeleteUser(Guid userId)
+    public async Task<bool> DeleteUser(Guid userId)
     {
         try
         {
             await AddAuthorizationAsync();
             var result = await Client.DeleteAsync(Url($"{userId}"));
-            var content = await result.Content.ReadFromJsonAsync<UserProfileViewModel>();
+            var content = await result.Content.ReadFromJsonAsync<bool>();
             return content;
         }
         catch (Exception e)
         {
             logger.LogError(e, e.Message);
-            return null;
+            return false;
         }
     }
 }

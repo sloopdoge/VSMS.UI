@@ -29,9 +29,11 @@ public partial class UsersGrid : ComponentBase
     private HashSet<UserProfileViewModel> SelectedUsers { get; set; } = [];
     private HashSet<UserProfileViewModel> FilteredUsers { get; set; } = [];
     private List<string> SelectedFilterUserRoles { get; set; } = [];
-    private bool UsersLoading { get; set; } = true;
+    private bool IsLoading { get; set; } = true;
+    
 
     private FilterDefinition<UserProfileViewModel> _usersFilterDefinition;
+    private MudDataGrid<UserProfileViewModel> _dataGrid;
     private bool _symbolFilterOpened = false;
     private bool _symbolFilterSelectedAll = false;
     private List<string> _availableUserRolesForFilter = [RoleNames.User, RoleNames.CompanyManager, RoleNames.CompanyAdmin];
@@ -55,7 +57,7 @@ public partial class UsersGrid : ComponentBase
     {
         try
         {
-            UsersLoading = true;
+            IsLoading = true;
             await RefreshUsers();
         }
         catch (Exception e)
@@ -68,7 +70,7 @@ public partial class UsersGrid : ComponentBase
     {
         try
         {
-            UsersLoading = true;
+            IsLoading = true;
 
             var users = CompanyId != Guid.Empty
                 ? await CompaniesHttpService.GetAllUsersInCompany(CompanyId)
@@ -87,7 +89,7 @@ public partial class UsersGrid : ComponentBase
         }
         finally
         {
-            UsersLoading = false;
+            IsLoading = false;
         }
     }
     
@@ -179,6 +181,64 @@ public partial class UsersGrid : ComponentBase
         catch (Exception e)
         {
             Logger.LogError(e, e.Message);
+        }
+    }
+
+    private void OnEditClick(Guid userId)
+    {
+        NavigationManager.NavigateTo($"/User/{userId}/Edit");
+    }
+
+    private async Task OnDeleteClick(Guid userId)
+    {
+        try
+        {
+            var res = await UsersHttpService.DeleteUser(userId);
+            if (res)
+                await _dataGrid.ReloadServerData();
+            else
+                Logger.LogError($"Failed to delete user {userId}");
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+        }
+    }
+    
+    private async Task<GridData<UserProfileViewModel>> RefreshGrid(GridState<UserProfileViewModel> state)
+    {
+        IsLoading = true;
+        try
+        {
+            var data = CompanyId == Guid.Empty
+                ? await UsersHttpService.GetAllUserProfiles()
+                : await CompaniesHttpService.GetAllUsersInCompany(CompanyId);
+            if (data is null)
+            {
+                return new()
+                {
+                    TotalItems = 0,
+                    Items = []
+                };
+            }
+            
+            var totalItems = data.Count();
+
+            var pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
+            return new()
+            {
+                TotalItems = totalItems,
+                Items = pagedData,
+            };
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+            return new();
+        }
+        finally
+        {
+            IsLoading = false;
         }
     }
 }

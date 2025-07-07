@@ -584,15 +584,6 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string stocks_grid_field_phone_number {
-            get {
-                return ResourceManager.GetString("stocks_grid_field_phone_number", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
         internal static string stocks_grid_field_price {
             get {
                 return ResourceManager.GetString("stocks_grid_field_price", resourceCulture);
@@ -749,6 +740,87 @@ namespace VSMS.Domain.Resources {
         internal static string user_login_password_required {
             get {
                 return ResourceManager.GetString("user_login_password_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_button_text_save {
+            get {
+                return ResourceManager.GetString("user_profile_button_text_save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_details_title {
+            get {
+                return ResourceManager.GetString("user_profile_details_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_field_label_email {
+            get {
+                return ResourceManager.GetString("user_profile_field_label_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_field_label_first_name {
+            get {
+                return ResourceManager.GetString("user_profile_field_label_first_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_field_label_last_name {
+            get {
+                return ResourceManager.GetString("user_profile_field_label_last_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_field_label_phonenumber {
+            get {
+                return ResourceManager.GetString("user_profile_field_label_phonenumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_field_label_username {
+            get {
+                return ResourceManager.GetString("user_profile_field_label_username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_field_rolename_name {
+            get {
+                return ResourceManager.GetString("user_profile_field_rolename_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_profile_modal_field_rolename_name {
+            get {
+                return ResourceManager.GetString("user_profile_modal_field_rolename_name", resourceCulture);
             }
         }
         

@@ -25,7 +25,7 @@ public partial class Company : ComponentBase
     private CompanyViewModel CompanyModel { get; set; } = new();
     private bool IsLoading { get; set; } = true;
     private bool IsEditMode { get; set; } = false;
-    private string UserRole { get; set; } = User;
+    private string ViewUserRole { get; set; } = User;
     
     private EditContext _editContext;
     private ValidationMessageStore _errorMessageStore;
@@ -63,7 +63,7 @@ public partial class Company : ComponentBase
                 throw new("company_not_found");
             }
 
-            UserRole = await ((CustomAuthStateProvider)AuthenticationStateProvider).GetUserRole();
+            ViewUserRole = await ((CustomAuthStateProvider)AuthenticationStateProvider).GetUserRole();
             
             IsEditMode = NavigationManager.Uri.EndsWith("/Edit", StringComparison.OrdinalIgnoreCase);
             if (IsEditMode)

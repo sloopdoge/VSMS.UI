@@ -23,12 +23,13 @@ public partial class UserCreateModal : ComponentBase
     
     private UserCreateViewModel CreateModel { get; set; } = new();
     private EditContext _editContext;
-    private List<string> AvailableRoles { get; set; } = [User, CompanyManager, CompanyAdmin];
+    private List<string> AvailableRoles { get; set; } = [CompanyManager, CompanyAdmin];
     
     protected override void OnInitialized()
     {
         try
         {
+            CreateModel.RoleName = CompanyManager;
             _editContext = new(CreateModel);
         }
         catch (Exception e)

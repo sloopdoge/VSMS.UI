@@ -297,9 +297,6 @@
     <data name="users_grid_field_email" xml:space="preserve">
         <value />
     </data>
-    <data name="stocks_grid_field_phone_number" xml:space="preserve">
-        <value />
-    </data>
     <data name="users_grid_field_phone_number" xml:space="preserve">
         <value />
     </data>
@@ -334,6 +331,33 @@
         <value />
     </data>
     <data name="user_create_modal_action_add" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_details_title" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_field_label_username" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_field_label_first_name" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_field_label_last_name" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_field_label_email" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_field_label_phonenumber" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_modal_field_rolename_name" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_button_text_save" xml:space="preserve">
+        <value />
+    </data>
+    <data name="user_profile_field_rolename_name" xml:space="preserve">
         <value />
     </data>
 </root>

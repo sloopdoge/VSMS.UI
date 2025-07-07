@@ -1,1 +1,160 @@
 ﻿@page "/User/{UserId:guid}"
+@page "/User/{UserId:guid}/Edit"
+
+<MudContainer Gutters="true" MaxWidth="@MaxWidth.ExtraExtraLarge">
+    <MudPaper Class="pa-6 mt-5" Square="false">
+        @if (IsLoading)
+        {
+            <MudStack AlignItems="@AlignItems.Center" Justify="@Justify.Center" Class="pa-6">
+                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+            </MudStack>
+        }
+        else
+        {
+            <MudText Typo="Typo.h4" GutterBottom="true">@Localizer["user_profile_details_title"]</MudText>
+    
+            @if (IsEditMode)
+            {
+                <EditForm EditContext="@_editContext" OnValidSubmit="@HandleUserEdit">
+                    <DataAnnotationsValidator />
+                    
+                    <MudGrid Justify="@Justify.FlexStart">
+                        <MudItem xs="12" sm="6">
+                            <MudTextField T="string" 
+                                          @bind-Value="@UserProfile.Username" 
+                                          Label="@Localizer["user_profile_field_label_username"]"
+                                          InputType="@InputType.Text"
+                                          Variant="@Variant.Outlined"
+                                          Margin="@Margin.Dense"
+                                          MaxLines="1"
+                                          Class="input-text"
+                                          For="@(() => UserProfile.Username)"/>
+                        </MudItem>
+                        
+                        <MudItem xs="12" sm="6">
+                            <MudGrid Justify="@Justify.SpaceBetween">
+                                <MudItem xs="6" sm="3">
+                                    <MudTextField T="string"
+                                                  @bind-Value="@UserProfile.FirstName"
+                                                  Label="@Localizer["user_profile_field_label_first_name"]"
+                                                  InputType="@InputType.Text"
+                                                  Variant="@Variant.Outlined"
+                                                  Margin="@Margin.Dense"
+                                                  MaxLines="1"
+                                                  Class="input-text"
+                                                  For="@(() => UserProfile.FirstName)"/>
+                                </MudItem>
+                                <MudItem xs="6" sm="3">
+                                    <MudTextField T="string"
+                                                  @bind-Value="@UserProfile.LastName"
+                                                  Label="@Localizer["user_profile_field_label_last_name"]"
+                                                  InputType="@InputType.Text"
+                                                  Variant="@Variant.Outlined"
+                                                  Margin="@Margin.Dense"
+                                                  MaxLines="1"
+                                                  Class="input-text"
+                                                  For="@(() => UserProfile.LastName)"/>
+                                </MudItem>
+                            </MudGrid>
+                        </MudItem>
+                        
+                        <MudItem xs="6" sm="3">
+                            <MudTextField T="string" 
+                                          @bind-Value="@UserProfile.Email" 
+                                          Label="@Localizer["user_profile_field_label_email"]"
+                                          InputType="@InputType.Email"
+                                          Variant="@Variant.Outlined"
+                                          Margin="@Margin.Dense"
+                                          MaxLines="1"
+                                          Class="input-text"
+                                          For="@(() => UserProfile.Email)"/>
+                        </MudItem>
+                        
+                        <MudItem xs="6" sm="3">
+                            <MudTextField T="string" 
+                                          @bind-Value="@UserProfile.PhoneNumber" 
+                                          Label="@Localizer["user_profile_field_label_phonenumber"]"
+                                          InputType="@InputType.Telephone"
+                                          Variant="@Variant.Outlined"
+                                          Margin="@Margin.Dense"
+                                          MaxLines="1"
+                                          Class="input-text"
+                                          For="@(() => UserProfile.PhoneNumber)"/>
+                        </MudItem>
+                        
+                        @if (AdditionalInfoRoles.Any(role => string.Equals(role, ViewUserRole, StringComparison.OrdinalIgnoreCase)))
+                        {
+                            <MudItem xs="3">
+                                <MudSelect @bind-Value="@UserProfile.Role"
+                                           Variant="Variant.Outlined"
+                                           Label="@Localizer["user_profile_modal_field_rolename_name"]"
+                                           Margin="Margin.Dense"
+                                           FullWidth="true"
+                                           Modal="true">
+                                    @foreach (var roleName in AvailableRoles)
+                                    {
+                                        <MudSelectItem Value="roleName">@roleName</MudSelectItem>
+                                    }
+                                </MudSelect>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                    
+                    <MudItem xs="12">
+                        <MudGrid Justify="@Justify.FlexEnd">
+                            <MudButton ButtonType="@ButtonType.Submit" 
+                                       Color="@Color.Tertiary" 
+                                       Variant="@Variant.Filled" 
+                                       Class="login-button">
+                                @Localizer["user_profile_button_text_save"]
+                            </MudButton>
+                        </MudGrid>
+                    </MudItem>
+                </EditForm>
+            }
+            else
+            {
+                <MudGrid Justify="@Justify.FlexStart">
+                    <MudItem xs="12" sm="6">
+                        <MudText Typo="Typo.subtitle1"
+                                 Color="Color.Secondary">@Localizer["user_profile_field_label_username"]</MudText>
+                        <MudText Typo="Typo.body1">@UserProfile.Username</MudText>
+                    </MudItem>
+                    
+                    <MudItem xs="12" sm="6">
+                        <MudGrid Justify="@Justify.FlexStart">
+                            <MudItem xs="6" sm="3">
+                                <MudText Typo="Typo.subtitle1"
+                                         Color="Color.Secondary">@Localizer["user_profile_field_label_first_name"]</MudText>
+                                <MudText Typo="Typo.body1">@UserProfile.FirstName</MudText>
+                            </MudItem>
+                            <MudItem xs="6" sm="3">
+                                <MudText Typo="Typo.subtitle1"
+                                         Color="Color.Secondary">@Localizer["user_profile_field_label_last_name"]</MudText>
+                                <MudText Typo="Typo.body1">@UserProfile.LastName</MudText>
+                            </MudItem>
+                        </MudGrid>
+                    </MudItem>
+                    
+                    <MudItem xs="6" sm="3">
+                        <MudText Typo="Typo.subtitle1"
+                                 Color="Color.Secondary">@Localizer["user_profile_field_label_email"]</MudText>
+                        <MudText Typo="Typo.body1">@UserProfile.Email</MudText>
+                    </MudItem>
+                    
+                    <MudItem xs="6" sm="3">
+                        <MudText Typo="Typo.subtitle1"
+                                 Color="Color.Secondary">@Localizer["user_profile_field_label_phonenumber"]</MudText>
+                        <MudText Typo="Typo.body1">@UserProfile.PhoneNumber</MudText>
+                    </MudItem>
+                    
+                    <MudItem xs="3">
+                        <MudText Typo="Typo.subtitle1"
+                                 Color="Color.Secondary">@Localizer["user_profile_field_rolename_name"]</MudText>
+                        <MudText Typo="Typo.body1">@UserProfile.Role</MudText>
+                    </MudItem>
+                </MudGrid>
+            }
+        }
+    </MudPaper>
+</MudContainer>

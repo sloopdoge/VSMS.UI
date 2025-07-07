@@ -30,7 +30,7 @@ public partial class StockPage : ComponentBase
     private DateTime StartDate { get; set; } = DateTime.UtcNow.AddDays(-1);
     private DateTime EndDate { get; set; } = DateTime.UtcNow;
     private TimeSpan SeriesSpacing { get; set; }
-    private string UserRole { get; set; } = User;
+    private string ViewUserRole { get; set; } = User;
     
     private List<TimeSeriesChartSeries> _series = new();
     private readonly ChartOptions _options = new()
@@ -78,7 +78,7 @@ public partial class StockPage : ComponentBase
                 RegisterHubHandlers();
             }
             
-            UserRole = await ((CustomAuthStateProvider)AuthenticationStateProvider).GetUserRole();
+            ViewUserRole = await ((CustomAuthStateProvider)AuthenticationStateProvider).GetUserRole();
             
             var stockRes = await StocksHttpService.GetStockById(StockId);
             if (stockRes is not null)

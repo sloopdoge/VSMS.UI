@@ -33,7 +33,7 @@
                                           For="@(() => CompanyModel.Title)"/>
                         </MudItem>
 
-                        @if (AdditionalInfoRoles.Any(role => string.Equals(role, UserRole, StringComparison.OrdinalIgnoreCase)))
+                        @if (AdditionalInfoRoles.Any(role => string.Equals(role, ViewUserRole, StringComparison.OrdinalIgnoreCase)))
                         {
                             <MudItem xs="6">
                                 <MudGrid Justify="@Justify.FlexStart">
@@ -91,7 +91,7 @@
         <MudTabPanel Text="@Localizer["company_tabs_label_stocks"]">
             <StocksGrid CompanyId="@CompanyId" DirectToStockPage="true" ShowCreateStockButton="@IsEditMode"/>
         </MudTabPanel>
-        @if (AdditionalInfoRoles.Any(role => string.Equals(role, UserRole, StringComparison.OrdinalIgnoreCase)))
+        @if (AdditionalInfoRoles.Any(role => string.Equals(role, ViewUserRole, StringComparison.OrdinalIgnoreCase)))
         {
             <MudTabPanel Text="@Localizer["company_tabs_label_users"]">
                 <UsersGrid CompanyId="@CompanyId" DirectToUserPage="true" ShowCreateUserButton="@IsEditMode"/>

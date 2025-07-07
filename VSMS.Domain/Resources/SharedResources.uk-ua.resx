@@ -326,4 +326,31 @@
     <data name="user_create_modal_title" xml:space="preserve">
         <value>Створити користувача</value>
     </data>
+    <data name="user_profile_button_text_save" xml:space="preserve">
+        <value>Зберегти зміни</value>
+    </data>
+    <data name="user_profile_details_title" xml:space="preserve">
+        <value>Профль користувача</value>
+    </data>
+    <data name="user_profile_field_label_email" xml:space="preserve">
+        <value>Пошта</value>
+    </data>
+    <data name="user_profile_field_label_first_name" xml:space="preserve">
+        <value>Ім'я</value>
+    </data>
+    <data name="user_profile_field_label_last_name" xml:space="preserve">
+        <value>Прізвище</value>
+    </data>
+    <data name="user_profile_field_label_phonenumber" xml:space="preserve">
+        <value>Номер телефону</value>
+    </data>
+    <data name="user_profile_field_label_username" xml:space="preserve">
+        <value>Ім'я користувача</value>
+    </data>
+    <data name="user_profile_modal_field_rolename_name" xml:space="preserve">
+        <value>Роль</value>
+    </data>
+    <data name="user_profile_field_rolename_name" xml:space="preserve">
+        <value>Роль</value>
+    </data>
 </root>

@@ -23,7 +23,7 @@
                     <MudText Typo="Typo.body1">@StockModel.Title</MudText>
                 </MudItem>
 
-                @if (AdditionalInfoRoles.Any(role => string.Equals(role, UserRole, StringComparison.OrdinalIgnoreCase)))
+                @if (AdditionalInfoRoles.Any(role => string.Equals(role, ViewUserRole, StringComparison.OrdinalIgnoreCase)))
                 {
                     <MudItem xs="6">
                         <MudGrid Justify="@Justify.FlexStart">

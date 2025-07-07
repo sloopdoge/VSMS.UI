@@ -1,10 +1,11 @@
 ﻿<MudDataGrid T="UserProfileViewModel" 
-             Items="@Users" 
+             @ref="@_dataGrid"
+             ServerData="@RefreshGrid"
              Hover="true" 
              Dense="true"
              Filterable="true"
              FilterMode="@DataGridFilterMode.ColumnFilterRow"
-             Loading="@UsersLoading">
+             Loading="@IsLoading">
     <ToolBarContent>
         <MudText Typo="Typo.h6"
                  Class="d-flex justify-start">
@@ -36,7 +37,7 @@
             <CellTemplate>
                 @if (DirectToUserPage)
                 {
-                    <MudLink Href="@($"/Users/{context.Item.Id}")" Underline="Underline.Always">
+                    <MudLink Href="@($"/User/{context.Item.Id}")" Underline="Underline.Always">
                         @context.Item.Username
                     </MudLink>
                 }
@@ -112,6 +113,30 @@
                 </MudPopover>
             </FilterTemplate>
         </PropertyColumn>
+        <TemplateColumn StickyRight="true" 
+                        Title="@Localizer["users_grid_column_title_actions"]" 
+                        CellClass="column-actions" >
+            <CellTemplate>
+                <MudStack Row="true">
+                    <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_edit"]" 
+                                Placement="@Placement.Bottom">
+                        <MudIconButton Icon="@Icons.Material.Rounded.Edit" 
+                                       Size="@Size.Small"
+                                       Variant="@Variant.Outlined"
+                                       Color="@Color.Info"
+                                       OnClick="@(() => OnEditClick(context.Item.Id))"/>
+                    </MudTooltip>
+                    <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_delete"]"
+                                Placement="@Placement.Bottom">
+                        <MudIconButton Icon="@Icons.Material.Rounded.Delete"
+                                       Size="@Size.Small" 
+                                       Variant="@Variant.Outlined"
+                                       Color="@Color.Warning"
+                                       OnClick="@(() => OnDeleteClick(context.Item.Id))"/>
+                    </MudTooltip>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
     </Columns>
     <PagerContent>
         <MudDataGridPager T="UserProfileViewModel" />
