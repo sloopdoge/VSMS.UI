@@ -365,4 +365,10 @@
     <data name="users_grid_column_title_actions" xml:space="preserve">
         <value>Дії</value>
     </data>
+    <data name="users_grid_column_actions_tooltip_text_delete" xml:space="preserve">
+        <value>Видалити користувача</value>
+    </data>
+    <data name="users_grid_column_actions_tooltip_text_edit" xml:space="preserve">
+        <value>Змінити користувача</value>
+    </data>
 </root>

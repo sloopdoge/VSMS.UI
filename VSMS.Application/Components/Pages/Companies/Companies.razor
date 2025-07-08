@@ -54,8 +54,7 @@
             <PropertyColumn Property="x => x.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone)" 
                             Title="@Localizer["companies_grid_column_title_created_at"]" />
             <TemplateColumn StickyRight="true" 
-                            Title="@Localizer["companies_grid_column_title_actions"]" 
-                            CellClass="column-actions" >
+                            Title="@Localizer["companies_grid_column_title_actions"]" >
                 <CellTemplate>
                     <MudStack Row="true">
                         <MudTooltip Text="@Localizer["companies_grid_column_actions_tooltip_text_edit"]" 

@@ -365,4 +365,10 @@
     <data name="users_grid_column_title_actions" xml:space="preserve">
         <value>Actions</value>
     </data>
+    <data name="users_grid_column_actions_tooltip_text_delete" xml:space="preserve">
+        <value>Delete user</value>
+    </data>
+    <data name="users_grid_column_actions_tooltip_text_edit" xml:space="preserve">
+        <value>Edit user</value>
+    </data>
 </root>

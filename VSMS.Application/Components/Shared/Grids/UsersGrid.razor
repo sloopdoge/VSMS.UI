@@ -5,7 +5,8 @@
              Dense="true"
              Filterable="true"
              FilterMode="@DataGridFilterMode.ColumnFilterRow"
-             Loading="@IsLoading">
+             Loading="@IsLoading"
+             Class="users-grid">
     <ToolBarContent>
         <MudText Typo="Typo.h6"
                  Class="d-flex justify-start">
@@ -82,7 +83,7 @@
                 <MudPopover Open="@_symbolFilterOpened"
                             AnchorOrigin="Origin.BottomCenter" 
                             TransformOrigin="Origin.TopCenter"
-                            Class="users-grid-symbol-filter-popover">
+                            Class="symbol-filter-popover">
                     <MudStack Spacing="0">
                         <MudCheckBox T="bool"
                                      Label="@Localizer["users_grid_field_symbol_filter_select_all"]" 
@@ -113,14 +114,13 @@
                 </MudPopover>
             </FilterTemplate>
         </PropertyColumn>
-        <TemplateColumn StickyRight="true" 
-                        Title="@Localizer["users_grid_column_title_actions"]" 
-                        CellClass="column-actions" >
+        <TemplateColumn StickyRight="true"
+                        Title="@Localizer["users_grid_column_title_actions"]">
             <CellTemplate>
                 <MudStack Row="true">
-                    <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_edit"]" 
+                    <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_edit"]"
                                 Placement="@Placement.Bottom">
-                        <MudIconButton Icon="@Icons.Material.Rounded.Edit" 
+                        <MudIconButton Icon="@Icons.Material.Rounded.Edit"
                                        Size="@Size.Small"
                                        Variant="@Variant.Outlined"
                                        Color="@Color.Info"
@@ -129,7 +129,7 @@
                     <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_delete"]"
                                 Placement="@Placement.Bottom">
                         <MudIconButton Icon="@Icons.Material.Rounded.Delete"
-                                       Size="@Size.Small" 
+                                       Size="@Size.Small"
                                        Variant="@Variant.Outlined"
                                        Color="@Color.Warning"
                                        OnClick="@(() => OnDeleteClick(context.Item.Id))"/>

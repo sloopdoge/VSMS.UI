@@ -1,13 +1,3 @@
-.users-grid-symbol-filter-popover {
-    padding: 2px;
-    width: 15rem;
-}
-
-.users-grid-symbol-filter-popover .symbol-filter-list {
-    overflow-y: auto;
-    max-height: 24rem;
-}
-
 .user_create_modal_container {
     width: 28rem;
 }
@@ -19,4 +9,24 @@
 .user-page-info-container {
     padding: 4px;
     margin: 4px;
+}
+
+.users-grid {
+    
+}
+
+.users-grid .column-actions {
+    display: flex;
+    justify-content: end;
+    width: 8rem;
+}
+
+.users-grid .symbol-filter-popover {
+    padding: 2px;
+    width: 15rem;
+}
+
+.users-grid .symbol-filter-popover .symbol-filter-list {
+    overflow-y: auto;
+    max-height: 24rem;
 }

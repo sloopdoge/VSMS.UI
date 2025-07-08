@@ -863,6 +863,24 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string users_grid_column_actions_tooltip_text_delete {
+            get {
+                return ResourceManager.GetString("users_grid_column_actions_tooltip_text_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_column_actions_tooltip_text_edit {
+            get {
+                return ResourceManager.GetString("users_grid_column_actions_tooltip_text_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string users_grid_column_title_actions {
             get {
                 return ResourceManager.GetString("users_grid_column_title_actions", resourceCulture);
