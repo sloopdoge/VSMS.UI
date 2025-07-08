@@ -15,3 +15,8 @@
 .user-create-modal-content {
     height: 11rem;
 }
+
+.user-page-info-container {
+    padding: 4px;
+    margin: 4px;
+}

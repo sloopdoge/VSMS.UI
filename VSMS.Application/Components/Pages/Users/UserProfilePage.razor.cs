@@ -51,6 +51,13 @@ public partial class UserProfilePage : ComponentBase
     {
         try
         {
+            if (UserId == Guid.Empty)
+            {
+                Logger.LogWarning("Invalid UserId in route");
+                NavigationManager.NavigateTo("/Users");
+                return;
+            }
+            
             ViewUserRole = await ((CustomAuthStateProvider)AuthenticationStateProvider).GetUserRole();
 
             var userProfile = await UsersHttpService.GetUserProfileById(UserId);
@@ -90,6 +97,9 @@ public partial class UserProfilePage : ComponentBase
     {
         try
         {
+            if (!_editContext.IsModified())
+                return;
+            
             var editRes = await UsersHttpService.UpdateUser(UserProfile);
             if (editRes is null)
                 throw new Exception($"User {UserProfile.Email} was not updated");
@@ -101,5 +111,10 @@ public partial class UserProfilePage : ComponentBase
         {
             Logger.LogError(e, e.Message);
         }
+    }
+
+    private void OnCancelClick()
+    {
+        NavigationManager.NavigateTo($"/User/{UserId}");
     }
 }

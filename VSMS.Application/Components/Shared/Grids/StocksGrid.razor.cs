@@ -29,9 +29,10 @@ public partial class StocksGrid : ComponentBase
     private HashSet<StockPerformanceViewModel> Stocks { get; set; } = [];
     private HashSet<StockPerformanceViewModel> SelectedStocks { get; set; } = [];
     private HashSet<StockPerformanceViewModel> FilteredStocks { get; set; } = [];
-    private bool StocksLoading { get; set; } = true;
+    private bool IsLoading { get; set; } = true;
 
     private FilterDefinition<StockPerformanceViewModel> _stocksFilterDefinition;
+    private MudDataGrid<StockPerformanceViewModel> _dataGrid;
     private bool _symbolFilterOpened = false;
     private bool _symbolFilterSelectedAll = false;
     
@@ -54,9 +55,6 @@ public partial class StocksGrid : ComponentBase
     {
         try
         {
-            StocksLoading = true;
-            await RefreshStocks();
-            
             if (!StocksHub.IsConnected)
                 await StocksHub.InitializeHub();
 
@@ -65,6 +63,43 @@ public partial class StocksGrid : ComponentBase
         catch (Exception e)
         {
             Logger.LogError(e, e.Message);
+        }
+    }
+
+    private async Task<GridData<StockPerformanceViewModel>> RefreshGrid(GridState<StockPerformanceViewModel> state)
+    {
+        IsLoading = true;
+        try
+        {
+            var data = CompanyId != Guid.Empty 
+                ? await StocksHttpService.GetStocksPerformanceByCompanyId(CompanyId)
+                : await StocksHttpService.GetAllStocksPerformance();
+            if (data is null)
+            {
+                return new()
+                {
+                    TotalItems = 0,
+                    Items = []
+                };
+            }
+            
+            var totalItems = data.Count();
+
+            var pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
+            return new()
+            {
+                TotalItems = totalItems,
+                Items = pagedData,
+            };
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+            return new();
+        }
+        finally
+        {
+            IsLoading = false;
         }
     }
 
@@ -82,7 +117,7 @@ public partial class StocksGrid : ComponentBase
             {
                     if (Stocks.Any(s => updatedStocks.Select(us => us.Id).Contains(s.Id)))
                     {
-                        await RefreshStocks();
+                        await _dataGrid.ReloadServerData();
                         StateHasChanged();
                     }
             });
@@ -90,33 +125,6 @@ public partial class StocksGrid : ComponentBase
         catch (Exception e)
         {
             Logger.LogError(e, e.Message);
-        }
-    }
-
-    private async Task RefreshStocks()
-    {
-        try
-        {
-            StocksLoading = true;
-
-            var stocks = CompanyId != Guid.Empty 
-                ? await StocksHttpService.GetStocksPerformanceByCompanyId(CompanyId)
-                : await StocksHttpService.GetAllStocksPerformance();
-            if (stocks is not null)
-            {
-                Stocks = stocks.ToHashSet();
-
-                SelectedStocks = Stocks.ToHashSet();
-                FilteredStocks = Stocks.ToHashSet();
-            }
-        }
-        catch (Exception e)
-        {
-            Logger.LogError(e, e.Message);
-        }
-        finally
-        {
-            StocksLoading = false;
         }
     }
 
@@ -187,7 +195,7 @@ public partial class StocksGrid : ComponentBase
             var dialogReference = await DialogService.ShowAsync<StockCreateModal>(@Localizer["company_stocks_title"], parameters, options);
             var dialogResult = await dialogReference.Result;
             if (dialogResult is { Canceled: false })
-                await RefreshStocks();
+                await _dataGrid.ReloadServerData();
         }
         catch (Exception e)
         {

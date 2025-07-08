@@ -1,28 +1,39 @@
 ﻿<MudDataGrid T="StockPerformanceViewModel" 
-             Items="@Stocks" 
+             @ref="@_dataGrid"
+             ServerData="@RefreshGrid"
              Hover="true" 
              Dense="true"
              Filterable="true"
              FilterMode="@DataGridFilterMode.ColumnFilterRow"
-             Loading="@StocksLoading">
+             Loading="@IsLoading">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"
-                 Class="d-flex justify-start">
-            @Localizer["company_stocks_title"]
-        </MudText>
-        
+        @if (CompanyId == Guid.Empty)
+        {
+            <MudText Typo="Typo.h6"
+                     Class="d-flex justify-start">
+                @Localizer["stocks_grid_title"]
+            </MudText>
+        }
+        else
+        {
+            <MudText Typo="Typo.h6"
+                     Class="d-flex justify-start">
+                @Localizer["stocks_grid_title_company"]
+            </MudText>
+        }
+
         @if (ShowCreateStockButton)
         {
-            <MudSpacer />
-            
+            <MudSpacer/>
+
             <MudStack Justify="Justify.SpaceBetween" Row="true">
-                <MudTooltip Text="@Localizer["company_stocks_create_stock_button_text"]"
+                <MudTooltip Text="@Localizer["stocks_grid_create_stock_button_text"]"
                             Placement="@Placement.Bottom" Class="pr-3">
                     <MudIconButton Icon="@Icons.Material.Rounded.AddCircle"
                                    Size="@Size.Small"
                                    Variant="@Variant.Outlined"
                                    Color="@Color.Secondary"
-                                   OnClick="@OnCreateStockClick" />
+                                   OnClick="@OnCreateStockClick"/>
                 </MudTooltip>
             </MudStack>
         }

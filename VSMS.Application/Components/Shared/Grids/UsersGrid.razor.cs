@@ -53,39 +53,36 @@ public partial class UsersGrid : ComponentBase
         }
     }
 
-    protected override async Task OnInitializedAsync()
+    private async Task<GridData<UserProfileViewModel>> RefreshGrid(GridState<UserProfileViewModel> state)
     {
+        IsLoading = true;
         try
         {
-            IsLoading = true;
-            await RefreshUsers();
-        }
-        catch (Exception e)
-        {
-            Logger.LogError(e, e.Message);
-        }
-    }
-
-    private async Task RefreshUsers()
-    {
-        try
-        {
-            IsLoading = true;
-
-            var users = CompanyId != Guid.Empty
-                ? await CompaniesHttpService.GetAllUsersInCompany(CompanyId)
-                : await UsersHttpService.GetAllUserProfiles();
-            if (users is not null)
+            var data = CompanyId == Guid.Empty
+                ? await UsersHttpService.GetAllUserProfiles()
+                : await CompaniesHttpService.GetAllUsersInCompany(CompanyId);
+            if (data is null)
             {
-                Users = users.ToHashSet();
-
-                SelectedUsers = Users.ToHashSet();
-                FilteredUsers = Users.ToHashSet();
+                return new()
+                {
+                    TotalItems = 0,
+                    Items = []
+                };
             }
+            
+            var totalItems = data.Count();
+
+            var pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
+            return new()
+            {
+                TotalItems = totalItems,
+                Items = pagedData,
+            };
         }
         catch (Exception e)
         {
             Logger.LogError(e, e.Message);
+            return new();
         }
         finally
         {
@@ -176,7 +173,7 @@ public partial class UsersGrid : ComponentBase
             var dialogReference = await DialogService.ShowAsync<UserCreateModal>(@Localizer["users_title"], parameters, options);
             var dialogResult = await dialogReference.Result;
             if (dialogResult is { Canceled: false })
-                await RefreshUsers();
+                await _dataGrid.ReloadServerData();
         }
         catch (Exception e)
         {
@@ -202,43 +199,6 @@ public partial class UsersGrid : ComponentBase
         catch (Exception e)
         {
             Logger.LogError(e, e.Message);
-        }
-    }
-    
-    private async Task<GridData<UserProfileViewModel>> RefreshGrid(GridState<UserProfileViewModel> state)
-    {
-        IsLoading = true;
-        try
-        {
-            var data = CompanyId == Guid.Empty
-                ? await UsersHttpService.GetAllUserProfiles()
-                : await CompaniesHttpService.GetAllUsersInCompany(CompanyId);
-            if (data is null)
-            {
-                return new()
-                {
-                    TotalItems = 0,
-                    Items = []
-                };
-            }
-            
-            var totalItems = data.Count();
-
-            var pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
-            return new()
-            {
-                TotalItems = totalItems,
-                Items = pagedData,
-            };
-        }
-        catch (Exception e)
-        {
-            Logger.LogError(e, e.Message);
-            return new();
-        }
-        finally
-        {
-            IsLoading = false;
         }
     }
 }

@@ -353,4 +353,16 @@
     <data name="user_profile_field_rolename_name" xml:space="preserve">
         <value>Role</value>
     </data>
+    <data name="user_profile_button_text_cancel" xml:space="preserve">
+        <value>Cancel changes</value>
+    </data>
+    <data name="stocks_grid_title" xml:space="preserve">
+        <value>Stocks</value>
+    </data>
+    <data name="stocks_grid_title_company" xml:space="preserve">
+        <value>Company stocks</value>
+    </data>
+    <data name="users_grid_column_title_actions" xml:space="preserve">
+        <value>Actions</value>
+    </data>
 </root>

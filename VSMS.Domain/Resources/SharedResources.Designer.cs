@@ -638,6 +638,24 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string stocks_grid_title {
+            get {
+                return ResourceManager.GetString("stocks_grid_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_title_company {
+            get {
+                return ResourceManager.GetString("stocks_grid_title_company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string stocks_page_title {
             get {
                 return ResourceManager.GetString("stocks_page_title", resourceCulture);
@@ -746,6 +764,15 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string user_profile_button_text_cancel {
+            get {
+                return ResourceManager.GetString("user_profile_button_text_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string user_profile_button_text_save {
             get {
                 return ResourceManager.GetString("user_profile_button_text_save", resourceCulture);
@@ -830,6 +857,15 @@ namespace VSMS.Domain.Resources {
         internal static string users_create_button_text {
             get {
                 return ResourceManager.GetString("users_create_button_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string users_grid_column_title_actions {
+            get {
+                return ResourceManager.GetString("users_grid_column_title_actions", resourceCulture);
             }
         }
         
