@@ -18,14 +18,15 @@ public class Program
         
         #region Serilog Logger
         
-        #if DEBUG
+        if (builder.Environment.IsDevelopment())
+        {
+            Log.Logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(builder.Configuration)
+                    .CreateLogger();
+        }
         
-        Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(builder.Configuration)
-                .CreateLogger();
-        
-        #else
-        
+        if (builder.Environment.IsProduction())
+        {
             var lokiUri = builder.Configuration.GetValue<string>("LokiSettings:Url");
             var appName = builder.Configuration.GetValue<string>("LokiSettings:AppName");
             var serviceName = builder.Configuration.GetValue<string>("LokiSettings:ServiceName");
@@ -50,8 +51,7 @@ public class Program
                     ],
                     restrictedToMinimumLevel: LogEventLevel.Information)
                 .CreateLogger();
-        
-        #endif
+        }
 
         builder.Logging.ClearProviders();
         builder.Host.UseSerilog();
