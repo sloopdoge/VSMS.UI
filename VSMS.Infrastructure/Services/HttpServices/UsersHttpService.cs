@@ -81,8 +81,7 @@ public class UsersHttpService(
         {
             await AddAuthorizationAsync();
             var result = await Client.DeleteAsync(Url($"{userId}"));
-            var content = await result.Content.ReadFromJsonAsync<bool>();
-            return content;
+            return result.IsSuccessStatusCode;
         }
         catch (Exception e)
         {
