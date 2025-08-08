@@ -1,14 +1,14 @@
 ﻿<EditForm EditContext="@_editContext" 
           OnValidSubmit="HandleUserCreate">
-    <MudDialog Class="user_create_modal_container" 
+    <MudDialog Class="user-view-modal-container" 
                Gutters="true"
                ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3" 
-               ContentClass="user-create-modal-content">
+               ContentClass="user-view-modal-content">
         <TitleContent>
             <MudText Color="@Color.Primary" 
                      GutterBottom="true" 
                      Typo="@Typo.h4">
-                @Localizer["user_create_modal_title"]
+                @Localizer["user_view_modal_title_create"]
             </MudText>
         </TitleContent>
         <DialogContent>
@@ -18,7 +18,7 @@
                           For="@(() => CreateModel.Username)"
                           InputMode="@InputMode.text" 
                           InputType="@InputType.Text" 
-                          Label="@Localizer["user_create_modal_field_username_name"]" 
+                          Label="@Localizer["user_view_modal_field_username_name"]" 
                           Margin="@Margin.Dense" 
                           T="string" 
                           Variant="@Variant.Outlined" 
@@ -28,7 +28,7 @@
                           For="@(() => CreateModel.Email)"
                           InputMode="@InputMode.email" 
                           InputType="@InputType.Email" 
-                          Label="@Localizer["user_create_modal_field_email_name"]" 
+                          Label="@Localizer["user_view_modal_field_email_name"]" 
                           Margin="@Margin.Dense" 
                           T="string" 
                           Variant="@Variant.Outlined" 
@@ -36,7 +36,7 @@
             
             <MudSelect @bind-Value="@CreateModel.RoleName"
                        Variant="Variant.Outlined"
-                       Label="@Localizer["user_create_modal_field_rolename_name"]"
+                       Label="@Localizer["user_view_modal_field_rolename_name"]"
                        Margin="Margin.Dense"
                        FullWidth="true"
                        Modal="true">
@@ -51,12 +51,12 @@
                        Color="@Color.Warning"
                        Variant="@Variant.Filled"
                        OnClick="@(MudDialog.Cancel)">
-                @Localizer["user_create_modal_action_cancel"]
+                @Localizer["user_view_modal_action_button_cancel"]
             </MudButton>
             <MudButton ButtonType="@ButtonType.Submit"
                        Color="@Color.Tertiary"
                        Variant="@Variant.Filled">
-                @Localizer["user_create_modal_action_add"]
+                @Localizer["user_view_modal_action_button_create"]
             </MudButton>
         </DialogActions>
     </MudDialog>

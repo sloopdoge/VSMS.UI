@@ -97,16 +97,8 @@
         <value>Delete</value>
         <comment>companies_grid_column_actions_tooltip_text_delete</comment>
     </data>
-    <data name="company_add_modal_title" xml:space="preserve">
-        <value>Add company</value>
-        <comment>company_add_modal_title</comment>
-    </data>
     <data name="company_create_name_required" xml:space="preserve">
         <value>Company title is required</value>
-    </data>
-    <data name="company_add_modal_action_add" xml:space="preserve">
-        <value>Add company</value>
-        <comment>company_add_modal_action_create</comment>
     </data>
     <data name="companies_grid_column_actions_tooltip_text_add" xml:space="preserve">
         <value>Add company</value>
@@ -116,21 +108,9 @@
         <value>Add company</value>
         <comment>companies_grid_modal_text</comment>
     </data>
-    <data name="company_add_modal_field_label_name" xml:space="preserve">
-        <value>Company title</value>
-        <comment>company_add_modal_field_label_name</comment>
-    </data>
     <data name="companies_grid_column_title_actions" xml:space="preserve">
         <value>Actions</value>
         <comment>companies_grid_column_title_actions</comment>
-    </data>
-    <data name="company_add_modal_field_label_description" xml:space="preserve">
-        <value>Description</value>
-        <comment>company_add_modal_field_label_description</comment>
-    </data>
-    <data name="company_add_modal_action_cancel" xml:space="preserve">
-        <value>Cancel</value>
-        <comment>company_add_modal_action_cancel</comment>
     </data>
     <data name="companies_grid_column_name_tooltip_text" xml:space="preserve">
         <value>Open company page</value>
@@ -305,27 +285,6 @@
     <data name="users_grid_field_symbol_filter_select_all" xml:space="preserve">
         <value>Select all</value>
     </data>
-    <data name="user_create_modal_action_add" xml:space="preserve">
-        <value>Create</value>
-    </data>
-    <data name="user_create_modal_action_cancel" xml:space="preserve">
-        <value>Cancel</value>
-    </data>
-    <data name="user_create_modal_field_email_name" xml:space="preserve">
-        <value>Email</value>
-    </data>
-    <data name="user_create_modal_field_rolename_helper_text" xml:space="preserve">
-        <value>User role</value>
-    </data>
-    <data name="user_create_modal_field_rolename_name" xml:space="preserve">
-        <value>Role</value>
-    </data>
-    <data name="user_create_modal_field_username_name" xml:space="preserve">
-        <value>Username</value>
-    </data>
-    <data name="user_create_modal_title" xml:space="preserve">
-        <value>Create user</value>
-    </data>
     <data name="user_profile_button_text_save" xml:space="preserve">
         <value>Save changes</value>
     </data>
@@ -370,5 +329,68 @@
     </data>
     <data name="users_grid_column_actions_tooltip_text_edit" xml:space="preserve">
         <value>Edit user</value>
+    </data>
+    <data name="stock_view_modal_action_button_close" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="stock_view_modal_action_button_title_cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="stock_view_modal_action_button_title_create" xml:space="preserve">
+        <value>Create</value>
+    </data>
+    <data name="stock_view_modal_action_button_title_edit" xml:space="preserve">
+        <value>Edit</value>
+    </data>
+    <data name="stock_view_modal_field_label_name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="stock_view_modal_field_label_price" xml:space="preserve">
+        <value>Price</value>
+    </data>
+    <data name="stock_view_modal_field_label_symbol" xml:space="preserve">
+        <value>Symbol</value>
+    </data>
+    <data name="stock_view_modal_title_create" xml:space="preserve">
+        <value>Create stock</value>
+    </data>
+    <data name="stock_view_modal_title_default" xml:space="preserve">
+        <value>View stock</value>
+    </data>
+    <data name="stock_view_modal_title_edit" xml:space="preserve">
+        <value>Edit stock</value>
+    </data>
+    <data name="stocks_grid_create_stock_button_text" xml:space="preserve">
+        <value>Create stock</value>
+    </data>
+    <data name="company_view_modal_action_button_cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="company_view_modal_action_button_create" xml:space="preserve">
+        <value>Create</value>
+    </data>
+    <data name="company_view_modal_field_label_name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="company_view_modal_title_create" xml:space="preserve">
+        <value>Create company</value>
+    </data>
+    <data name="user_view_modal_action_button_cancel" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="user_view_modal_action_button_create" xml:space="preserve">
+        <value>Create</value>
+    </data>
+    <data name="user_view_modal_field_email_name" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="user_view_modal_field_rolename_name" xml:space="preserve">
+        <value>Rolename</value>
+    </data>
+    <data name="user_view_modal_field_username_name" xml:space="preserve">
+        <value>Username</value>
+    </data>
+    <data name="user_view_modal_title_create" xml:space="preserve">
+        <value>Create user</value>
     </data>
 </root>

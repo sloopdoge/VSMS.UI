@@ -1,0 +1,121 @@
+﻿@switch (ModalMode)
+{
+    case ModalModeEnum.Edit:
+    case ModalModeEnum.Create:
+        <EditForm EditContext="@_editContext"
+                  OnValidSubmit="HandleSubmit">
+            <MudDialog Class="stock-view-modal-container"
+                       Gutters="true"
+                       ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3"
+                       ContentClass="stock-view-modal-content">
+                <TitleContent>
+                    <MudText Color="@Color.Primary"
+                             GutterBottom="true"
+                             Typo="@Typo.h4">
+                        @(ModalMode is ModalModeEnum.Create 
+                            ? Localizer["stock_view_modal_title_create"] 
+                            : Localizer["stock_view_modal_title_edit"])
+                    </MudText>
+                </TitleContent>
+                <DialogContent>
+                    <DataAnnotationsValidator />
+
+                    <MudTextField @bind-Value="@Model.Symbol"
+                                  For="@(() => Model.Symbol)"
+                                  InputMode="@InputMode.text"
+                                  InputType="@InputType.Text"
+                                  Label="@Localizer["stock_view_modal_field_label_symbol"]"
+                                  Margin="@Margin.Dense"
+                                  T="string"
+                                  Variant="@Variant.Outlined" 
+                                  Class="mb-3"/>
+
+                    <MudTextField @bind-Value="@Model.Title"
+                                  For="@(() => Model.Title)"
+                                  InputMode="@InputMode.text"
+                                  InputType="@InputType.Text"
+                                  Label="@Localizer["stock_view_modal_field_label_name"]"
+                                  Margin="@Margin.Dense"
+                                  T="string"
+                                  Variant="@Variant.Outlined" 
+                                  Class="mb-3"/>
+                    
+                    <MudNumericField @bind-Value="@Model.Price"
+                                     For="@(() => Model.Price)"
+                                     Label="@Localizer["stock_view_modal_field_label_price"]"
+                                     Margin="@Margin.Dense"
+                                     Variant="@Variant.Outlined" 
+                                     HideSpinButtons="true" 
+                                     ReadOnly="true"/>
+                </DialogContent>
+                <DialogActions>
+                    <MudButton ButtonType="@ButtonType.Button"
+                               Color="@Color.Warning"
+                               Variant="@Variant.Filled"
+                               OnClick="@(() => MudDialog.Cancel())">
+                        @Localizer["stock_view_modal_action_button_title_cancel"]
+                    </MudButton>
+                    <MudButton ButtonType="@ButtonType.Submit"
+                               Color="@Color.Tertiary"
+                               Variant="@Variant.Filled">
+                        @(ModalMode is ModalModeEnum.Create 
+                            ? Localizer["stock_view_modal_action_button_title_create"] 
+                            : Localizer["stock_view_modal_action_button_title_edit"])
+                    </MudButton>
+                </DialogActions>
+            </MudDialog>
+        </EditForm>
+        break;
+    default:
+        <MudDialog Class="stock-view-modal-container"
+                       Gutters="true"
+                       ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3"
+                       ContentClass="stock-view-modal-content">
+                <TitleContent>
+                    <MudText Color="@Color.Primary"
+                             GutterBottom="true"
+                             Typo="@Typo.h4">
+                        @Localizer["stock_view_modal_title_default"]
+                    </MudText>
+                </TitleContent>
+                <DialogContent>
+                    <DataAnnotationsValidator />
+
+                    <MudTextField @bind-Value="@Model.Symbol"
+                                  For="@(() => Model.Symbol)"
+                                  InputMode="@InputMode.text"
+                                  InputType="@InputType.Text"
+                                  Label="@Localizer["stock_view_modal_field_label_symbol"]"
+                                  Margin="@Margin.Dense"
+                                  T="string"
+                                  Variant="@Variant.Outlined" 
+                                  Class="mb-3"/>
+
+                    <MudTextField @bind-Value="@Model.Title"
+                                  For="@(() => Model.Title)"
+                                  InputMode="@InputMode.text"
+                                  InputType="@InputType.Text"
+                                  Label="@Localizer["stock_view_modal_field_label_name"]"
+                                  Margin="@Margin.Dense"
+                                  T="string"
+                                  Variant="@Variant.Outlined" 
+                                  Class="mb-3"/>
+
+                    <MudNumericField @bind-Value="@Model.Price"
+                                     For="@(() => Model.Price)"
+                                     Label="@Localizer["stock_view_modal_field_label_price"]"
+                                     Margin="@Margin.Dense"
+                                     Variant="@Variant.Outlined" 
+                                     HideSpinButtons="true"/>
+                </DialogContent>
+                <DialogActions>
+                    <MudButton ButtonType="@ButtonType.Button"
+                               Color="@Color.Warning"
+                               Variant="@Variant.Filled"
+                               OnClick="@(() => MudDialog.Close())">
+                        @Localizer["stock_view_modal_action_button_close"]
+                    </MudButton>
+                </DialogActions>
+            </MudDialog>
+        break;
+}

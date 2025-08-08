@@ -8,31 +8,18 @@ using VSMS.Infrastructure.Services.HttpServices;
 
 namespace VSMS.Application.Components.Shared.Modals;
 
-public partial class CompanyCreateModal : ComponentBase
+public partial class CompanyViewModal : ComponentBase
 {
     [CascadingParameter]
     private IMudDialogInstance MudDialog { get; set; }
     
-    [Inject] private ILogger<CompanyCreateModal> Logger { get; set; }
+    [Inject] private ILogger<CompanyViewModal> Logger { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private CompaniesHttpService CompaniesHttpService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     
     private CompanyViewModel CreateModel { get; set; } = new();
-    private EditContext _editContext;
-
-    protected override void OnInitialized()
-    {
-        try
-        {
-            _editContext = new(CreateModel);
-        }
-        catch (Exception e)
-        {
-            Logger.LogError(e, e.Message);
-            MudDialog.Cancel();
-        }
-    }
+    private EditContext _editContext = new(new CompanyViewModel());
 
     private async Task HandleCompanyCreate()
     {

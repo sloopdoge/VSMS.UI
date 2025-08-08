@@ -4,6 +4,7 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using VSMS.Application.Components.Shared.Modals;
 using VSMS.Domain;
+using VSMS.Domain.Enums;
 using VSMS.Domain.Models.ViewModels;
 using VSMS.Infrastructure.Helpers;
 using VSMS.Infrastructure.Hubs;
@@ -84,6 +85,31 @@ public partial class StocksGrid : ComponentBase
             }
             
             var totalItems = data.Count();
+            
+            var sortDefinition = state.SortDefinitions.FirstOrDefault();
+            if (sortDefinition != null)
+            {
+                switch (sortDefinition.SortBy)
+                {
+                    case nameof(StockPerformanceViewModel.Title):
+                        data = data.OrderByDirection(
+                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
+                            o => o.Title).ToList();
+                        break;
+                    
+                    case nameof(StockPerformanceViewModel.Symbol):
+                        data = data.OrderByDirection(
+                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
+                            o => o.Symbol).ToList();
+                        break;
+                    
+                    case nameof(StockPerformanceViewModel.Price):
+                        data = data.OrderByDirection(
+                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
+                            o => o.Price).ToList();
+                        break;
+                }
+            }
 
             var pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
             return new()
@@ -172,13 +198,14 @@ public partial class StocksGrid : ComponentBase
         _symbolFilterOpened = false;
     }
 
-    private async Task OnCreateStockClick(MouseEventArgs arg)
+    private async Task OpenCreateStockModal()
     {
         try
         {
-            var parameters = new DialogParameters<StockCreateModal>
+            var parameters = new DialogParameters<StockViewModal>
             {
                 { x => x.CompanyId, CompanyId },
+                { x => x.ModalMode, ModalModeEnum.Create }
             };
             
             var options = new DialogOptions
@@ -192,10 +219,59 @@ public partial class StocksGrid : ComponentBase
                 MaxWidth = MaxWidth.Large,
             };
             
-            var dialogReference = await DialogService.ShowAsync<StockCreateModal>(@Localizer["company_stocks_title"], parameters, options);
+            var dialogReference = await DialogService.ShowAsync<StockViewModal>(@Localizer["company_stocks_title"], parameters, options);
             var dialogResult = await dialogReference.Result;
             if (dialogResult is { Canceled: false })
                 await _dataGrid.ReloadServerData();
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+        }
+    }
+    
+    private async Task OnEditClick(Guid stockId)
+    {
+        try
+        {
+            var parameters = new DialogParameters<StockViewModal>
+            {
+                { x => x.CompanyId, CompanyId },
+                { x => x.StockId, stockId},
+                { x => x.ModalMode, ModalModeEnum.Edit}
+            };
+            
+            var options = new DialogOptions
+            {
+                Position = DialogPosition.Center,
+                CloseOnEscapeKey = true,
+                NoHeader = false,
+                CloseButton = true,
+                FullScreen = false,
+                FullWidth = false,
+                MaxWidth = MaxWidth.Large,
+            };
+            
+            var dialogReference = await DialogService.ShowAsync<StockViewModal>(@Localizer["company_stocks_title"], parameters, options);
+            var dialogResult = await dialogReference.Result;
+            if (dialogResult is { Canceled: false })
+                await _dataGrid.ReloadServerData();
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+        }
+    }
+
+    private async Task OnDeleteClick(Guid stockId)
+    {
+        try
+        {
+            var res = await StocksHttpService.DeleteStock(stockId);
+            if (res)
+                await _dataGrid.ReloadServerData();
+            else
+                Logger.LogError($"Failed to delete stock {stockId}");
         }
         catch (Exception e)
         {

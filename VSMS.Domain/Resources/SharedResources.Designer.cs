@@ -179,51 +179,6 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string company_add_modal_action_add {
-            get {
-                return ResourceManager.GetString("company_add_modal_action_add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string company_add_modal_action_cancel {
-            get {
-                return ResourceManager.GetString("company_add_modal_action_cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string company_add_modal_field_label_description {
-            get {
-                return ResourceManager.GetString("company_add_modal_field_label_description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string company_add_modal_field_label_name {
-            get {
-                return ResourceManager.GetString("company_add_modal_field_label_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string company_add_modal_title {
-            get {
-                return ResourceManager.GetString("company_add_modal_title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
         internal static string company_create_name_required {
             get {
                 return ResourceManager.GetString("company_create_name_required", resourceCulture);
@@ -326,6 +281,42 @@ namespace VSMS.Domain.Resources {
         internal static string company_title_is_required {
             get {
                 return ResourceManager.GetString("company_title_is_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_view_modal_action_button_cancel {
+            get {
+                return ResourceManager.GetString("company_view_modal_action_button_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_view_modal_action_button_create {
+            get {
+                return ResourceManager.GetString("company_view_modal_action_button_create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_view_modal_field_label_name {
+            get {
+                return ResourceManager.GetString("company_view_modal_field_label_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string company_view_modal_title_create {
+            get {
+                return ResourceManager.GetString("company_view_modal_title_create", resourceCulture);
             }
         }
         
@@ -449,69 +440,6 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string stock_add_modal_action_add {
-            get {
-                return ResourceManager.GetString("stock_add_modal_action_add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string stock_add_modal_action_cancel {
-            get {
-                return ResourceManager.GetString("stock_add_modal_action_cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string stock_add_modal_field_label_company_id {
-            get {
-                return ResourceManager.GetString("stock_add_modal_field_label_company_id", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string stock_add_modal_field_label_name {
-            get {
-                return ResourceManager.GetString("stock_add_modal_field_label_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string stock_add_modal_field_label_price {
-            get {
-                return ResourceManager.GetString("stock_add_modal_field_label_price", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string stock_add_modal_field_label_symbol {
-            get {
-                return ResourceManager.GetString("stock_add_modal_field_label_symbol", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string stock_add_modal_title {
-            get {
-                return ResourceManager.GetString("stock_add_modal_title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
         internal static string stock_details_field_label_created_at {
             get {
                 return ResourceManager.GetString("stock_details_field_label_created_at", resourceCulture);
@@ -560,6 +488,105 @@ namespace VSMS.Domain.Resources {
         internal static string stock_field_label_updated_at {
             get {
                 return ResourceManager.GetString("stock_field_label_updated_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_action_button_close {
+            get {
+                return ResourceManager.GetString("stock_view_modal_action_button_close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_action_button_title_cancel {
+            get {
+                return ResourceManager.GetString("stock_view_modal_action_button_title_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_action_button_title_create {
+            get {
+                return ResourceManager.GetString("stock_view_modal_action_button_title_create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_action_button_title_edit {
+            get {
+                return ResourceManager.GetString("stock_view_modal_action_button_title_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_field_label_name {
+            get {
+                return ResourceManager.GetString("stock_view_modal_field_label_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_field_label_price {
+            get {
+                return ResourceManager.GetString("stock_view_modal_field_label_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_field_label_symbol {
+            get {
+                return ResourceManager.GetString("stock_view_modal_field_label_symbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_title_create {
+            get {
+                return ResourceManager.GetString("stock_view_modal_title_create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_title_default {
+            get {
+                return ResourceManager.GetString("stock_view_modal_title_default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_view_modal_title_edit {
+            get {
+                return ResourceManager.GetString("stock_view_modal_title_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_create_stock_button_text {
+            get {
+                return ResourceManager.GetString("stocks_grid_create_stock_button_text", resourceCulture);
             }
         }
         
@@ -668,69 +695,6 @@ namespace VSMS.Domain.Resources {
         internal static string uk_ua {
             get {
                 return ResourceManager.GetString("uk-ua", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string user_create_modal_action_add {
-            get {
-                return ResourceManager.GetString("user_create_modal_action_add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string user_create_modal_action_cancel {
-            get {
-                return ResourceManager.GetString("user_create_modal_action_cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string user_create_modal_field_email_name {
-            get {
-                return ResourceManager.GetString("user_create_modal_field_email_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string user_create_modal_field_rolename_helper_text {
-            get {
-                return ResourceManager.GetString("user_create_modal_field_rolename_helper_text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string user_create_modal_field_rolename_name {
-            get {
-                return ResourceManager.GetString("user_create_modal_field_rolename_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string user_create_modal_field_username_name {
-            get {
-                return ResourceManager.GetString("user_create_modal_field_username_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string user_create_modal_title {
-            get {
-                return ResourceManager.GetString("user_create_modal_title", resourceCulture);
             }
         }
         
@@ -848,6 +812,60 @@ namespace VSMS.Domain.Resources {
         internal static string user_profile_modal_field_rolename_name {
             get {
                 return ResourceManager.GetString("user_profile_modal_field_rolename_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_view_modal_action_button_cancel {
+            get {
+                return ResourceManager.GetString("user_view_modal_action_button_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_view_modal_action_button_create {
+            get {
+                return ResourceManager.GetString("user_view_modal_action_button_create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_view_modal_field_email_name {
+            get {
+                return ResourceManager.GetString("user_view_modal_field_email_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_view_modal_field_rolename_name {
+            get {
+                return ResourceManager.GetString("user_view_modal_field_rolename_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_view_modal_field_username_name {
+            get {
+                return ResourceManager.GetString("user_view_modal_field_username_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_view_modal_title_create {
+            get {
+                return ResourceManager.GetString("user_view_modal_title_create", resourceCulture);
             }
         }
         

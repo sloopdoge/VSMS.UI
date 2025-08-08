@@ -9,12 +9,12 @@ using static VSMS.Domain.Constants.RoleNames;
 
 namespace VSMS.Application.Components.Shared.Modals;
 
-public partial class UserCreateModal : ComponentBase
+public partial class UserViewModal : ComponentBase
 {
     [CascadingParameter]
     private IMudDialogInstance MudDialog { get; set; }
     
-    [Inject] private ILogger<UserCreateModal> Logger { get; set; }
+    [Inject] private ILogger<UserViewModal> Logger { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private UsersHttpService UsersHttpService { get; set; }
     [Inject] private CompaniesHttpService CompaniesHttpService { get; set; }
@@ -22,7 +22,7 @@ public partial class UserCreateModal : ComponentBase
     [Parameter] public Guid CompanyId { get; set; } = Guid.Empty;
     
     private UserCreateViewModel CreateModel { get; set; } = new();
-    private EditContext _editContext;
+    private EditContext _editContext = new(new UserCreateViewModel());
     private List<string> AvailableRoles { get; set; } = [CompanyManager, CompanyAdmin];
     
     protected override void OnInitialized()

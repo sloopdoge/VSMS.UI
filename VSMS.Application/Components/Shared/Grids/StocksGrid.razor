@@ -5,7 +5,8 @@
              Dense="true"
              Filterable="true"
              FilterMode="@DataGridFilterMode.ColumnFilterRow"
-             Loading="@IsLoading">
+             Loading="@IsLoading"
+             SortMode="@SortMode.Single">
     <ToolBarContent>
         @if (CompanyId == Guid.Empty)
         {
@@ -33,16 +34,14 @@
                                    Size="@Size.Small"
                                    Variant="@Variant.Outlined"
                                    Color="@Color.Secondary"
-                                   OnClick="@OnCreateStockClick"/>
+                                   OnClick="@OpenCreateStockModal"/>
                 </MudTooltip>
             </MudStack>
         }
     </ToolBarContent>
     <Columns>
         <TemplateColumn T="StockPerformanceViewModel" 
-                        Title="@Localizer["stocks_grid_field_name"]" 
-                        Sortable="true" 
-                        SortBy="@(x => x.Title)"
+                        Title="@Localizer["stocks_grid_field_name"]"
                         Filterable="false">
             <CellTemplate>
                 @if (DirectToStockPage)
@@ -61,7 +60,6 @@
         </TemplateColumn>
         <PropertyColumn Property="x => x.Symbol"
                         Title="@Localizer["stocks_grid_field_symbol"]"
-                        Sortable="true" 
                         Filterable="true">
             <FilterTemplate>
                 <MudIconButton OnClick="@OpenStockSymbolFilter" 
@@ -105,40 +103,55 @@
         </PropertyColumn>
         <TemplateColumn T="StockPerformanceViewModel"
                         Title="@Localizer["stocks_grid_field_price"]"
-                        Filterable="false"
-                        Sortable="true"
-                        SortBy="@(x => x.Price)">
-            <CellTemplate>
-                @if (context.Item is { PreviousPrice: not null, HasIncreased: not null , PriceChange: not null})
+                        Filterable="false">
+            <CellTemplate Context="itemContext">
+                @if (itemContext.Item is { PreviousPrice: not null, HasIncreased: not null , PriceChange: not null})
                 {
-                    var color = context.Item.HasIncreased.Value 
+                    var color = itemContext.Item.HasIncreased.Value 
                         ? Color.Success 
                         : Color.Error;
-                    var icon = context.Item.HasIncreased.Value 
+                    var icon = itemContext.Item.HasIncreased.Value 
                         ? Icons.Material.Rounded.TrendingUp 
                         : Icons.Material.Rounded.TrendingDown;
                     <MudStack Row="true" AlignItems="@AlignItems.Center">
-                        <MudText>@context.Item.Price.ToString("G29")</MudText>
+                        <MudText>@itemContext.Item.Price.ToString("G29")</MudText>
                         <MudText Color="@color" Typo="@Typo.overline" Class="ml-1">
-                            @context.Item.PriceChange.Value.ToString("G29")
+                            @itemContext.Item.PriceChange.Value.ToString("G29")
                             <MudIcon Icon="@icon" Color="@color" Size="Size.Small" />
                         </MudText>
                     </MudStack>
                 }
                 else
                 {
-                    <MudText>@context.Item.Price</MudText>
+                    <MudText>@itemContext.Item.Price</MudText>
                 }
             </CellTemplate>
         </TemplateColumn>
-        <PropertyColumn Property="x => x.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone)" 
-                        Title="@Localizer["stocks_grid_field_created_at"]" 
-                        Sortable="true" 
-                        Filterable="false"/>
-        <PropertyColumn Property="x => x.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone)" 
-                        Title="@Localizer["stocks_grid_field_updated_at"]" 
-                        Sortable="true" 
-                        Filterable="false"/>
+        <AuthorizeView Roles="@($"{RoleNames.Admin},{RoleNames.CompanyAdmin}")">
+            <TemplateColumn StickyRight="true"
+                            Title="@Localizer["users_grid_column_title_actions"]">
+                <CellTemplate Context="itemContext">
+                    <MudStack Row="true">
+                        <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_edit"]"
+                                    Placement="@Placement.Bottom">
+                            <MudIconButton Icon="@Icons.Material.Rounded.Edit"
+                                           Size="@Size.Small"
+                                           Variant="@Variant.Outlined"
+                                           Color="@Color.Info"
+                                           OnClick="@(() => OnEditClick(itemContext.Item.Id))"/>
+                        </MudTooltip>
+                        <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_delete"]"
+                                    Placement="@Placement.Bottom">
+                            <MudIconButton Icon="@Icons.Material.Rounded.Delete"
+                                           Size="@Size.Small"
+                                           Variant="@Variant.Outlined"
+                                           Color="@Color.Warning"
+                                           OnClick="@(() => OnDeleteClick(itemContext.Item.Id))"/>
+                        </MudTooltip>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </AuthorizeView>
     </Columns>
     <PagerContent>
         <MudDataGridPager T="StockPerformanceViewModel" />

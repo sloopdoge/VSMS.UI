@@ -14,10 +14,10 @@
     margin-top: 2rem;
 }
 
-.stock-create-modal-container {
+.stock-view-modal-container {
     width: 24rem;
 }
 
-.stock-create-modal-content {
-    height: 11rem;
+.stock-view-modal-content {
+    height: 12rem;
 }

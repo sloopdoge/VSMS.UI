@@ -64,15 +64,18 @@
         <PropertyColumn Property="x => x.Email"
                         Title="@Localizer["users_grid_field_email"]"
                         Sortable="true"
+                        SortBy="@(x => x.Email)"
                         Filterable="false">
         </PropertyColumn>
         <PropertyColumn Property="x => x.PhoneNumber" 
                         Title="@Localizer["users_grid_field_phone_number"]" 
                         Sortable="true" 
+                        SortBy="@(x => x.PhoneNumber)"
                         Filterable="false"/>
         <PropertyColumn Property="x => x.Role"
                         Title="@Localizer["users_grid_field_role"]"
                         Sortable="true"
+                        SortBy="@(x => x.Role)"
                         Filterable="true">
             <FilterTemplate>
                 <MudIconButton OnClick="@OpenUsersRolesFilter"
@@ -114,29 +117,31 @@
                 </MudPopover>
             </FilterTemplate>
         </PropertyColumn>
-        <TemplateColumn StickyRight="true"
-                        Title="@Localizer["users_grid_column_title_actions"]">
-            <CellTemplate>
-                <MudStack Row="true">
-                    <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_edit"]"
-                                Placement="@Placement.Bottom">
-                        <MudIconButton Icon="@Icons.Material.Rounded.Edit"
-                                       Size="@Size.Small"
-                                       Variant="@Variant.Outlined"
-                                       Color="@Color.Info"
-                                       OnClick="@(() => OnEditClick(context.Item.Id))"/>
-                    </MudTooltip>
-                    <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_delete"]"
-                                Placement="@Placement.Bottom">
-                        <MudIconButton Icon="@Icons.Material.Rounded.Delete"
-                                       Size="@Size.Small"
-                                       Variant="@Variant.Outlined"
-                                       Color="@Color.Warning"
-                                       OnClick="@(() => OnDeleteClick(context.Item.Id))"/>
-                    </MudTooltip>
-                </MudStack>
-            </CellTemplate>
-        </TemplateColumn>
+        <AuthorizeView Roles="@($"{RoleNames.Admin},{RoleNames.CompanyAdmin}")">
+            <TemplateColumn StickyRight="true"
+                            Title="@Localizer["users_grid_column_title_actions"]">
+                <CellTemplate Context="itemContext">
+                    <MudStack Row="true">
+                        <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_edit"]"
+                                    Placement="@Placement.Bottom">
+                            <MudIconButton Icon="@Icons.Material.Rounded.Edit"
+                                           Size="@Size.Small"
+                                           Variant="@Variant.Outlined"
+                                           Color="@Color.Info"
+                                           OnClick="@(() => OnEditClick(itemContext.Item.Id))"/>
+                        </MudTooltip>
+                        <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_delete"]"
+                                    Placement="@Placement.Bottom">
+                            <MudIconButton Icon="@Icons.Material.Rounded.Delete"
+                                           Size="@Size.Small"
+                                           Variant="@Variant.Outlined"
+                                           Color="@Color.Warning"
+                                           OnClick="@(() => OnDeleteClick(itemContext.Item.Id))"/>
+                        </MudTooltip>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </AuthorizeView>
     </Columns>
     <PagerContent>
         <MudDataGridPager T="UserProfileViewModel" />

@@ -142,7 +142,7 @@ public partial class Companies : ComponentBase
                 MaxWidth = MaxWidth.Large,
             };
             
-            var dialogReference = await DialogService.ShowAsync<CompanyCreateModal>(@Localizer["companies_grid_modal_text"], options);
+            var dialogReference = await DialogService.ShowAsync<CompanyViewModal>(@Localizer["companies_grid_modal_text"], options);
             var dialogResult = await dialogReference.Result;
             if (dialogResult is { Canceled: false })
                 await _dataGrid.ReloadServerData();

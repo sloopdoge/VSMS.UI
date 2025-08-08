@@ -153,7 +153,7 @@ public partial class UsersGrid : ComponentBase
     {
         try
         {
-            var parameters = new DialogParameters<UserCreateModal>()
+            var parameters = new DialogParameters<UserViewModal>()
             {
                 { x => x.CompanyId, CompanyId }
             };
@@ -170,7 +170,7 @@ public partial class UsersGrid : ComponentBase
                 MaxWidth = MaxWidth.Large,
             };
             
-            var dialogReference = await DialogService.ShowAsync<UserCreateModal>(@Localizer["users_title"], parameters, options);
+            var dialogReference = await DialogService.ShowAsync<UserViewModal>(@Localizer["users_title"], parameters, options);
             var dialogResult = await dialogReference.Result;
             if (dialogResult is { Canceled: false })
                 await _dataGrid.ReloadServerData();

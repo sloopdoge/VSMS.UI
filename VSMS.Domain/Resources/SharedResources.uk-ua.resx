@@ -97,16 +97,8 @@
         <value>Видалити</value>
         <comment>companies_grid_column_actions_tooltip_text_delete</comment>
     </data>
-    <data name="company_add_modal_title" xml:space="preserve">
-        <value>Добавити компанію</value>
-        <comment>company_add_modal_title</comment>
-    </data>
     <data name="company_create_name_required" xml:space="preserve">
         <value>Назва компанії є обов'язковою</value>
-    </data>
-    <data name="company_add_modal_action_add" xml:space="preserve">
-        <value>Добавити компанію</value>
-        <comment>company_add_modal_action_create</comment>
     </data>
     <data name="companies_grid_column_actions_tooltip_text_add" xml:space="preserve">
         <value>Добавити компанію</value>
@@ -116,21 +108,9 @@
         <value>Добавити компанію</value>
         <comment>companies_grid_modal_text</comment>
     </data>
-    <data name="company_add_modal_field_label_name" xml:space="preserve">
-        <value>Назва компанії</value>
-        <comment>company_add_modal_field_label_name</comment>
-    </data>
     <data name="companies_grid_column_title_actions" xml:space="preserve">
         <value>Дії</value>
         <comment>companies_grid_column_title_actions</comment>
-    </data>
-    <data name="company_add_modal_field_label_description" xml:space="preserve">
-        <value>Детальна інформація</value>
-        <comment>company_add_modal_field_label_description</comment>
-    </data>
-    <data name="company_add_modal_action_cancel" xml:space="preserve">
-        <value>Відмінити</value>
-        <comment>company_add_modal_action_cancel</comment>
     </data>
     <data name="companies_grid_column_name_tooltip_text" xml:space="preserve">
         <value>Відкрити сторінку компанії</value>
@@ -305,27 +285,6 @@
     <data name="users_grid_field_symbol_filter_select_all" xml:space="preserve">
         <value>Вибрати всі</value>
     </data>
-    <data name="user_create_modal_action_add" xml:space="preserve">
-        <value>Створити</value>
-    </data>
-    <data name="user_create_modal_action_cancel" xml:space="preserve">
-        <value>Відмінити</value>
-    </data>
-    <data name="user_create_modal_field_email_name" xml:space="preserve">
-        <value>Пошта</value>
-    </data>
-    <data name="user_create_modal_field_rolename_helper_text" xml:space="preserve">
-        <value>Роль користувача</value>
-    </data>
-    <data name="user_create_modal_field_rolename_name" xml:space="preserve">
-        <value>Роль</value>
-    </data>
-    <data name="user_create_modal_field_username_name" xml:space="preserve">
-        <value>Ім'я користувача</value>
-    </data>
-    <data name="user_create_modal_title" xml:space="preserve">
-        <value>Створити користувача</value>
-    </data>
     <data name="user_profile_button_text_save" xml:space="preserve">
         <value>Зберегти зміни</value>
     </data>
@@ -370,5 +329,68 @@
     </data>
     <data name="users_grid_column_actions_tooltip_text_edit" xml:space="preserve">
         <value>Змінити користувача</value>
+    </data>
+    <data name="stock_view_modal_action_button_close" xml:space="preserve">
+        <value>Закрити</value>
+    </data>
+    <data name="stock_view_modal_action_button_title_cancel" xml:space="preserve">
+        <value>Відмінити</value>
+    </data>
+    <data name="stock_view_modal_action_button_title_create" xml:space="preserve">
+        <value>Створити</value>
+    </data>
+    <data name="stock_view_modal_action_button_title_edit" xml:space="preserve">
+        <value>Редагувати</value>
+    </data>
+    <data name="stock_view_modal_field_label_name" xml:space="preserve">
+        <value>Назва</value>
+    </data>
+    <data name="stock_view_modal_field_label_price" xml:space="preserve">
+        <value>Ціна</value>
+    </data>
+    <data name="stock_view_modal_field_label_symbol" xml:space="preserve">
+        <value>Символ</value>
+    </data>
+    <data name="stock_view_modal_title_create" xml:space="preserve">
+        <value>Створити акцію</value>
+    </data>
+    <data name="stock_view_modal_title_default" xml:space="preserve">
+        <value>Перегляд акції</value>
+    </data>
+    <data name="stock_view_modal_title_edit" xml:space="preserve">
+        <value>Редагувати акцію</value>
+    </data>
+    <data name="stocks_grid_create_stock_button_text" xml:space="preserve">
+        <value>Створити акцію</value>
+    </data>
+    <data name="company_view_modal_action_button_cancel" xml:space="preserve">
+        <value>Відмінити</value>
+    </data>
+    <data name="company_view_modal_action_button_create" xml:space="preserve">
+        <value>Створити</value>
+    </data>
+    <data name="company_view_modal_field_label_name" xml:space="preserve">
+        <value>Назва</value>
+    </data>
+    <data name="company_view_modal_title_create" xml:space="preserve">
+        <value>Створити компанію</value>
+    </data>
+    <data name="user_view_modal_action_button_cancel" xml:space="preserve">
+        <value>Відмінити</value>
+    </data>
+    <data name="user_view_modal_action_button_create" xml:space="preserve">
+        <value>Створити</value>
+    </data>
+    <data name="user_view_modal_field_email_name" xml:space="preserve">
+        <value>Пошта</value>
+    </data>
+    <data name="user_view_modal_field_rolename_name" xml:space="preserve">
+        <value>Роль</value>
+    </data>
+    <data name="user_view_modal_field_username_name" xml:space="preserve">
+        <value>Ім'я користувача</value>
+    </data>
+    <data name="user_view_modal_title_create" xml:space="preserve">
+        <value>Створити користувача</value>
     </data>
 </root>
