@@ -188,6 +188,15 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string company_delete_confirmation_message {
+            get {
+                return ResourceManager.GetString("company_delete_confirmation_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string company_details_button_text_save {
             get {
                 return ResourceManager.GetString("company_details_button_text_save", resourceCulture);
@@ -323,6 +332,33 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string confirmation_modal_action_button_confirm {
+            get {
+                return ResourceManager.GetString("confirmation_modal_action_button_confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string confirmation_modal_action_button_decline {
+            get {
+                return ResourceManager.GetString("confirmation_modal_action_button_decline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string confirmation_modal_title {
+            get {
+                return ResourceManager.GetString("confirmation_modal_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string en_us {
             get {
                 return ResourceManager.GetString("en-us", resourceCulture);
@@ -434,6 +470,15 @@ namespace VSMS.Domain.Resources {
         internal static string login_page_title {
             get {
                 return ResourceManager.GetString("login_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stock_delete_confirmation_message {
+            get {
+                return ResourceManager.GetString("stock_delete_confirmation_message", resourceCulture);
             }
         }
         
@@ -695,6 +740,15 @@ namespace VSMS.Domain.Resources {
         internal static string uk_ua {
             get {
                 return ResourceManager.GetString("uk-ua", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string user_delete_confirmation_message {
+            get {
+                return ResourceManager.GetString("user_delete_confirmation_message", resourceCulture);
             }
         }
         

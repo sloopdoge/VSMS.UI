@@ -21,13 +21,21 @@ public partial class CompanyViewModal : ComponentBase
     private CompanyViewModel CreateModel { get; set; } = new();
     private EditContext _editContext = new(new CompanyViewModel());
 
+    protected override void OnInitialized()
+    {
+        _editContext = new EditContext(CreateModel);
+    }
+    
     private async Task HandleCompanyCreate()
     {
         try
         {
             var res = await CompaniesHttpService.CreateCompany(CreateModel);
             if (res is not null)
+            {
+                await Task.Yield();
                 MudDialog.Close(DialogResult.Ok(res));
+            }
             else
                 Logger.LogError($"Company {CreateModel.Title} not added");
         }

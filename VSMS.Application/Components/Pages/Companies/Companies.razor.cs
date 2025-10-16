@@ -115,6 +115,9 @@ public partial class Companies : ComponentBase
     {
         try
         {
+            var isConfirmed = await ShowConfirmModal();
+            if (!isConfirmed) return;
+            
             var res = await CompaniesHttpService.DeleteCompanyById(companyId);
             if (res)
                 await _dataGrid.ReloadServerData();
@@ -156,5 +159,39 @@ public partial class Companies : ComponentBase
     private void OnRowClick(Guid itemId)
     {
         NavigationManager.NavigateTo($"/Company/{itemId}");
+    }
+    
+    private async Task<bool> ShowConfirmModal()
+    {
+        try
+        {
+            var parameters = new DialogParameters<ConfirmationModal>
+            {
+                { x => x.Message, $"company_delete_confirmation_message" },
+            };
+            
+            var options = new DialogOptions
+            {
+                Position = DialogPosition.Center,
+                CloseOnEscapeKey = true,
+                NoHeader = false,
+                CloseButton = true,
+                FullScreen = false,
+                FullWidth = false,
+                MaxWidth = MaxWidth.Large,
+            };
+            
+            var dialogReference = await DialogService.ShowAsync<ConfirmationModal>("", parameters, options);
+            var dialogResult = await dialogReference.Result;
+            if (dialogResult is { Canceled: true })
+                return false;
+            
+            return dialogResult?.Data is bool;
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+            return false;
+        }
     }
 }

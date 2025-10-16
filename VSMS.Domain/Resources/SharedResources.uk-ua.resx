@@ -393,4 +393,22 @@
     <data name="user_view_modal_title_create" xml:space="preserve">
         <value>Створити користувача</value>
     </data>
+    <data name="stock_delete_confirmation_message" xml:space="preserve">
+        <value>Ви впевненні, що хочете видати цю акцію?</value>
+    </data>
+    <data name="user_delete_confirmation_message" xml:space="preserve">
+        <value>Ви впевненні, що хочете видати цього користувача?</value>
+    </data>
+    <data name="company_delete_confirmation_message" xml:space="preserve">
+        <value>Ви впевненні, що хочете видати цю косманію?</value>
+    </data>
+    <data name="confirmation_modal_title" xml:space="preserve">
+        <value>Підтвердження</value>
+    </data>
+    <data name="confirmation_modal_action_button_confirm" xml:space="preserve">
+        <value>Так</value>
+    </data>
+    <data name="confirmation_modal_action_button_decline" xml:space="preserve">
+        <value>Ні</value>
+    </data>
 </root>

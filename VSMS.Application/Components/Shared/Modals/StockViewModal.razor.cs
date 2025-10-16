@@ -75,9 +75,12 @@ public partial class StockViewModal : ComponentBase
                     resultedModel = await StocksHttpService.CreateStock(Model);
                     break;
             }
-            
+
             if (resultedModel is not null)
+            {
+                await Task.Yield();
                 MudDialog.Close(DialogResult.Ok(resultedModel));
+            }
             else
             {
                 var errorLog = $"Stock {Model.Symbol}";

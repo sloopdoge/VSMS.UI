@@ -1,27 +1,31 @@
-﻿<EditForm EditContext="@_editContext" 
-          OnValidSubmit="HandleCompanyCreate">
-    <MudDialog Class="company-view-modal-container" 
+﻿<EditForm EditContext="@_editContext"
+          OnValidSubmit="@HandleCompanyCreate">
+    
+    <MudDialog Class="company-view-modal-container"
                Gutters="true"
                ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3">
+        
         <TitleContent>
-            <MudText Color="@Color.Primary" 
-                     GutterBottom="true" 
+            <MudText Color="@Color.Primary"
+                     GutterBottom="true"
                      Typo="@Typo.h4">
                 @Localizer["company_view_modal_title_create"]
             </MudText>
         </TitleContent>
+        
         <DialogContent>
             <DataAnnotationsValidator/>
 
-            <MudTextField @bind-Value="@CreateModel.Title" 
+            <MudTextField @bind-Value="@CreateModel.Title"
                           For="@(() => CreateModel.Title)"
-                          InputMode="@InputMode.text" 
-                          InputType="@InputType.Text" 
-                          Label="@Localizer["company_view_modal_field_label_name"]" 
-                          Margin="@Margin.Dense" 
-                          T="string" 
-                          Variant="@Variant.Outlined" />
+                          InputMode="@InputMode.text"
+                          InputType="@InputType.Text"
+                          Label="@Localizer["company_view_modal_field_label_name"]"
+                          Margin="@Margin.Dense"
+                          T="string"
+                          Variant="@Variant.Outlined"/>
         </DialogContent>
+        
         <DialogActions>
             <MudButton ButtonType="@ButtonType.Button"
                        Color="@Color.Warning"
@@ -29,11 +33,13 @@
                        OnClick="@(MudDialog.Cancel)">
                 @Localizer["company_view_modal_action_button_cancel"]
             </MudButton>
+            
             <MudButton ButtonType="@ButtonType.Submit"
                        Color="@Color.Tertiary"
                        Variant="@Variant.Filled">
                 @Localizer["company_view_modal_action_button_create"]
             </MudButton>
         </DialogActions>
+        
     </MudDialog>
 </EditForm>

@@ -1,0 +1,32 @@
+﻿<MudDialog Class="confirmation-modal-container" 
+           Gutters="true"
+           ActionsClass="justify-space-between align-center pl-6 pr-6 pb-3">
+    <TitleContent>
+        <MudText Color="@Color.Primary" 
+                 GutterBottom="true" 
+                 Typo="@Typo.h4">
+            @Localizer["confirmation_modal_title"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText Color="@Color.Secondary"
+                 GutterBottom="true"
+                 Typo="Typo.body2">
+            @Localizer[Message]
+        </MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton ButtonType="@ButtonType.Button"
+                   Color="@Color.Warning"
+                   Variant="@Variant.Filled"
+                   OnClick="@(() => MudDialog.Close(true))">
+            @Localizer["confirmation_modal_action_button_confirm"]
+        </MudButton>
+        <MudButton ButtonType="@ButtonType.Button"
+                   Color="@Color.Tertiary"
+                   Variant="@Variant.Filled"
+                   OnClick="@(() => MudDialog.Close(false))">
+            @Localizer["confirmation_modal_action_button_decline"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>

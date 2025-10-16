@@ -267,6 +267,9 @@ public partial class StocksGrid : ComponentBase
     {
         try
         {
+            var isConfirmed = await ShowConfirmModal();
+            if (!isConfirmed) return;
+            
             var res = await StocksHttpService.DeleteStock(stockId);
             if (res)
                 await _dataGrid.ReloadServerData();
@@ -276,6 +279,40 @@ public partial class StocksGrid : ComponentBase
         catch (Exception e)
         {
             Logger.LogError(e, e.Message);
+        }
+    }
+
+    private async Task<bool> ShowConfirmModal()
+    {
+        try
+        {
+            var parameters = new DialogParameters<ConfirmationModal>
+            {
+                { x => x.Message, $"stock_delete_confirmation_message" },
+            };
+            
+            var options = new DialogOptions
+            {
+                Position = DialogPosition.Center,
+                CloseOnEscapeKey = true,
+                NoHeader = false,
+                CloseButton = true,
+                FullScreen = false,
+                FullWidth = false,
+                MaxWidth = MaxWidth.Large,
+            };
+            
+            var dialogReference = await DialogService.ShowAsync<ConfirmationModal>("", parameters, options);
+            var dialogResult = await dialogReference.Result;
+            if (dialogResult is { Canceled: true })
+                return false;
+            
+            return dialogResult?.Data is bool;
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+            return false;
         }
     }
 }
