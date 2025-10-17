@@ -1,7 +1,9 @@
 ﻿using System.Net.Http.Json;
 using Blazored.LocalStorage;
 using Microsoft.Extensions.Logging;
+using VSMS.Domain.Models;
 using VSMS.Domain.Models.ViewModels;
+using VSMS.Domain.Models.ViewModels.Shared.Filters;
 using VSMS.Infrastructure.Settings;
 
 namespace VSMS.Infrastructure.Services.HttpServices;
@@ -46,6 +48,25 @@ public class StocksHttpService(
                 return null;
             
             var content = await result.Content.ReadFromJsonAsync<List<StockViewModel>>();
+            return content;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, e.Message);
+            return null;
+        }
+    }
+    
+    public async Task<PagedResult<StockViewModel>?> GetStocksByFilter(StocksFilterViewModel filter)
+    {
+        try
+        {
+            await AddAuthorizationAsync();
+            var result = await Client.PostAsJsonAsync(Url("ByFilter"), filter);
+            if (!result.IsSuccessStatusCode)
+                return null;
+            
+            var content = await result.Content.ReadFromJsonAsync<PagedResult<StockViewModel>>();
             return content;
         }
         catch (Exception e)

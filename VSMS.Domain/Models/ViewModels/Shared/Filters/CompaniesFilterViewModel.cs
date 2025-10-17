@@ -1,7 +1,7 @@
 ﻿namespace VSMS.Domain.Models.ViewModels.Shared.Filters;
 
 /// <summary>
-/// Represents a filtering model for querying company data.
+/// Represents a filtering model for querying <see cref="CompanyViewModel"/> data.
 /// </summary>
 public class CompaniesFilterViewModel : BaseFilterViewModel
 {

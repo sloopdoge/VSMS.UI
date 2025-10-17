@@ -21,3 +21,8 @@
 .stock-view-modal-content {
     height: 12rem;
 }
+
+.stocks-grid .toolbar-actions {
+    width: 34rem;
+    margin-right: 2rem;
+}

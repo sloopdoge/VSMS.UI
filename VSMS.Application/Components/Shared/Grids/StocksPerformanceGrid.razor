@@ -1,0 +1,159 @@
+﻿<MudDataGrid T="StockPerformanceViewModel" 
+             @ref="@_dataGrid"
+             ServerData="@RefreshGrid"
+             Hover="true" 
+             Dense="true"
+             Filterable="true"
+             FilterMode="@DataGridFilterMode.ColumnFilterRow"
+             Loading="@IsLoading"
+             SortMode="@SortMode.Single">
+    <ToolBarContent>
+        @if (CompanyId == Guid.Empty)
+        {
+            <MudText Typo="Typo.h6"
+                     Class="d-flex justify-start">
+                @Localizer["stocks_grid_title"]
+            </MudText>
+        }
+        else
+        {
+            <MudText Typo="Typo.h6"
+                     Class="d-flex justify-start">
+                @Localizer["stocks_grid_title_company"]
+            </MudText>
+        }
+
+        @if (ShowCreateStockButton)
+        {
+            <MudSpacer/>
+
+            <MudStack Justify="Justify.SpaceBetween" Row="true">
+                <MudTooltip Text="@Localizer["stocks_grid_create_stock_button_text"]"
+                            Placement="@Placement.Bottom" Class="pr-3">
+                    <MudIconButton Icon="@Icons.Material.Rounded.AddCircle"
+                                   Size="@Size.Small"
+                                   Variant="@Variant.Outlined"
+                                   Color="@Color.Secondary"
+                                   OnClick="@OpenCreateStockModal"/>
+                </MudTooltip>
+            </MudStack>
+        }
+    </ToolBarContent>
+    <Columns>
+        <TemplateColumn T="StockPerformanceViewModel" 
+                        Title="@Localizer["stocks_grid_field_name"]"
+                        Filterable="false">
+            <CellTemplate>
+                @if (DirectToStockPage)
+                {
+                    <MudLink Href="@($"/Stock/{context.Item.Id}")" Underline="Underline.Always">
+                        @context.Item.Title
+                    </MudLink>
+                }
+                else
+                {
+                    <MudText>
+                        @context.Item.Title
+                    </MudText>
+                }
+            </CellTemplate>
+        </TemplateColumn>
+        <PropertyColumn Property="x => x.Symbol"
+                        Title="@Localizer["stocks_grid_field_symbol"]"
+                        Filterable="true">
+            <FilterTemplate>
+                <MudIconButton OnClick="@OpenStockSymbolFilter" 
+                               Icon="@Icons.Material.Rounded.FilterAlt" 
+                               Size="@Size.Small" />
+                <MudOverlay Visible="@_symbolFilterOpened" 
+                            OnClick="@(() => _symbolFilterOpened = false)" />
+                <MudPopover Open="@_symbolFilterOpened" 
+                            AnchorOrigin="Origin.BottomCenter" 
+                            TransformOrigin="Origin.TopCenter"
+                            Class="stocks-grid-symbol-filter-popover">
+                    <MudStack Spacing="0">
+                        <MudCheckBox T="bool" 
+                                     Label="@Localizer["stocks_grid_field_symbol_filter_select_all"]" 
+                                     Size="@Size.Small" 
+                                     Value="@_symbolFilterSelectedAll" 
+                                     ValueChanged="@SelectAllFilterStockSymbols" />
+                        <MudStack Spacing="0" 
+                                  Class="symbol-filter-list">
+                            @foreach (var item in context.Items)
+                            {
+                                <MudCheckBox T="bool" 
+                                             Label="@($"{item.Symbol}")" 
+                                             Size="@Size.Small" 
+                                             Value="@(SelectedStocks.Contains(item))"
+                                             ValueChanged="@((value) => SelectedFilterStockSymbolChanged(value, item))" />
+                            }
+                        </MudStack>
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                            <MudButton OnClick="@(() => ClearStockSymbolFilter(context))">
+                                @Localizer["stocks_grid_field_symbol_filter_clear"]
+                            </MudButton>
+                            <MudButton Color="@Color.Primary"
+                                       OnClick="@(() => ApplyStockSymbolFilter(context))">
+                                @Localizer["stocks_grid_field_symbol_filter_filter"]
+                            </MudButton>
+                        </MudStack>
+                    </MudStack>
+                </MudPopover>
+            </FilterTemplate>
+        </PropertyColumn>
+        <TemplateColumn T="StockPerformanceViewModel"
+                        Title="@Localizer["stocks_grid_field_price"]"
+                        Filterable="false">
+            <CellTemplate Context="itemContext">
+                @if (itemContext.Item is { PreviousPrice: not null, HasIncreased: not null , PriceChange: not null})
+                {
+                    var color = itemContext.Item.HasIncreased.Value 
+                        ? Color.Success 
+                        : Color.Error;
+                    var icon = itemContext.Item.HasIncreased.Value 
+                        ? Icons.Material.Rounded.TrendingUp 
+                        : Icons.Material.Rounded.TrendingDown;
+                    <MudStack Row="true" AlignItems="@AlignItems.Center">
+                        <MudText>@itemContext.Item.Price.ToString("G29")</MudText>
+                        <MudText Color="@color" Typo="@Typo.overline" Class="ml-1">
+                            @itemContext.Item.PriceChange.Value.ToString("G29")
+                            <MudIcon Icon="@icon" Color="@color" Size="Size.Small" />
+                        </MudText>
+                    </MudStack>
+                }
+                else
+                {
+                    <MudText>@itemContext.Item.Price</MudText>
+                }
+            </CellTemplate>
+        </TemplateColumn>
+        <AuthorizeView Roles="@($"{RoleNames.Admin},{RoleNames.CompanyAdmin}")">
+            <TemplateColumn StickyRight="true"
+                            Title="@Localizer["users_grid_column_title_actions"]">
+                <CellTemplate Context="itemContext">
+                    <MudStack Row="true">
+                        <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_edit"]"
+                                    Placement="@Placement.Bottom">
+                            <MudIconButton Icon="@Icons.Material.Rounded.Edit"
+                                           Size="@Size.Small"
+                                           Variant="@Variant.Outlined"
+                                           Color="@Color.Info"
+                                           OnClick="@(() => OnEditClick(itemContext.Item.Id))"/>
+                        </MudTooltip>
+                        <MudTooltip Text="@Localizer["users_grid_column_actions_tooltip_text_delete"]"
+                                    Placement="@Placement.Bottom">
+                            <MudIconButton Icon="@Icons.Material.Rounded.Delete"
+                                           Size="@Size.Small"
+                                           Variant="@Variant.Outlined"
+                                           Color="@Color.Warning"
+                                           OnClick="@(() => OnDeleteClick(itemContext.Item.Id))"/>
+                        </MudTooltip>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </AuthorizeView>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="StockPerformanceViewModel" />
+    </PagerContent>
+</MudDataGrid>

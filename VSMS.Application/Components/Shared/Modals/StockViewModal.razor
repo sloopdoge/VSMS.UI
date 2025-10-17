@@ -45,8 +45,7 @@
                                      Label="@Localizer["stock_view_modal_field_label_price"]"
                                      Margin="@Margin.Dense"
                                      Variant="@Variant.Outlined" 
-                                     HideSpinButtons="true" 
-                                     ReadOnly="true"/>
+                                     HideSpinButtons="true"/>
                 </DialogContent>
                 <DialogActions>
                     <MudButton ButtonType="@ButtonType.Button"
@@ -87,7 +86,8 @@
                                   Margin="@Margin.Dense"
                                   T="string"
                                   Variant="@Variant.Outlined" 
-                                  Class="mb-3"/>
+                                  Class="mb-3"
+                                  ReadOnly="true"/>
 
                     <MudTextField @bind-Value="@Model.Title"
                                   For="@(() => Model.Title)"
@@ -97,14 +97,16 @@
                                   Margin="@Margin.Dense"
                                   T="string"
                                   Variant="@Variant.Outlined" 
-                                  Class="mb-3"/>
+                                  Class="mb-3"
+                                  ReadOnly="true"/>
 
                     <MudNumericField @bind-Value="@Model.Price"
                                      For="@(() => Model.Price)"
                                      Label="@Localizer["stock_view_modal_field_label_price"]"
                                      Margin="@Margin.Dense"
                                      Variant="@Variant.Outlined" 
-                                     HideSpinButtons="true"/>
+                                     HideSpinButtons="true"
+                                     ReadOnly="true"/>
                 </DialogContent>
                 <DialogActions>
                     <MudButton ButtonType="@ButtonType.Button"

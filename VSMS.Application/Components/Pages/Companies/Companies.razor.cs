@@ -40,22 +40,6 @@ public partial class Companies : ComponentBase
         }
     }
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     try
-    //     {
-    //         var companies = await CompaniesHttpService.GetCompaniesByFilter(Filter);
-    //         if (companies is null)
-    //             return;
-    //         
-    //         Items = companies.Items.ToList();
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         Logger.LogError(e, e.Message);
-    //     }
-    // }
-
     private async Task<GridData<CompanyViewModel>> LoadServerData(GridState<CompanyViewModel> state)
     {
         IsLoading = true;

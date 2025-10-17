@@ -4,10 +4,6 @@
     margin-top: 2rem;
 }
 
-.companies-container .toolbar-actions {
-    width: 34rem;
-}
-
 .companies-container .column-actions {
     display: flex;
     justify-content: end;
@@ -16,4 +12,9 @@
 
 .company-view-modal-container {
     width: 28rem;
+}
+
+.companies-grid .toolbar-actions {
+    width: 34rem;
+    margin-right: 2rem;
 }

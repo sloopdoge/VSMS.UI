@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using VSMS.Application.Components.Shared.Modals;
 using VSMS.Domain;
 using VSMS.Domain.Enums;
 using VSMS.Domain.Models.ViewModels;
-using VSMS.Domain.Models.ViewModels.Shared.Filters;
 using VSMS.Infrastructure.Helpers;
 using VSMS.Infrastructure.Hubs;
 using VSMS.Infrastructure.Services.HttpServices;
 
 namespace VSMS.Application.Components.Shared.Grids;
 
-public partial class StocksGrid : ComponentBase
+public partial class StocksPerformanceGrid : ComponentBase
 {
-    [Inject] private ILogger<StocksGrid> Logger { get; set; }
+    [Inject] private ILogger<StocksPerformanceGrid> Logger { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private CompaniesHttpService CompaniesHttpService { get; set; }
     [Inject] private StocksHttpService StocksHttpService { get; set; }
@@ -27,9 +27,15 @@ public partial class StocksGrid : ComponentBase
     [Parameter] public bool DirectToStockPage { get; set; } = false;
     [Parameter] public bool ShowCreateStockButton { get; set; } = false;
     
-    private MudDataGrid<StockViewModel> DataGrid { get; set; } = new();
-    private StocksFilterViewModel Filter { get; set; } = new() { SortBy = nameof(StockViewModel.CreatedAt) };
+    private HashSet<StockPerformanceViewModel> Stocks { get; set; } = [];
+    private HashSet<StockPerformanceViewModel> SelectedStocks { get; set; } = [];
+    private HashSet<StockPerformanceViewModel> FilteredStocks { get; set; } = [];
     private bool IsLoading { get; set; } = true;
+
+    private FilterDefinition<StockPerformanceViewModel> _stocksFilterDefinition;
+    private MudDataGrid<StockPerformanceViewModel> _dataGrid;
+    private bool _symbolFilterOpened = false;
+    private bool _symbolFilterSelectedAll = false;
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -45,41 +51,77 @@ public partial class StocksGrid : ComponentBase
             }
         }
     }
-    
-    private async Task<GridData<StockViewModel>> LoadServerData(GridState<StockViewModel> state)
-    {
-        IsLoading = true;
 
+    protected override async Task OnInitializedAsync()
+    {
         try
         {
-            Filter.Page = state.Page + 1;
-            Filter.PageSize = state.PageSize;
+            if (!StocksHub.IsConnected)
+                await StocksHub.InitializeHub();
 
-            var sort = state.SortDefinitions.FirstOrDefault();
-            if (sort is not null)
+            RegisterHubHandlers();
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+        }
+    }
+
+    private async Task<GridData<StockPerformanceViewModel>> RefreshGrid(GridState<StockPerformanceViewModel> state)
+    {
+        IsLoading = true;
+        try
+        {
+            var data = CompanyId != Guid.Empty 
+                ? await StocksHttpService.GetStocksPerformanceByCompanyId(CompanyId)
+                : await StocksHttpService.GetAllStocksPerformance();
+            if (data is null)
             {
-                Filter.SortBy = sort.SortBy;
-                Filter.SortAscending = !sort.Descending;
+                return new()
+                {
+                    TotalItems = 0,
+                    Items = []
+                };
+            }
+            
+            var totalItems = data.Count();
+            
+            var sortDefinition = state.SortDefinitions.FirstOrDefault();
+            if (sortDefinition != null)
+            {
+                switch (sortDefinition.SortBy)
+                {
+                    case nameof(StockPerformanceViewModel.Title):
+                        data = data.OrderByDirection(
+                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
+                            o => o.Title).ToList();
+                        break;
+                    
+                    case nameof(StockPerformanceViewModel.Symbol):
+                        data = data.OrderByDirection(
+                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
+                            o => o.Symbol).ToList();
+                        break;
+                    
+                    case nameof(StockPerformanceViewModel.Price):
+                        data = data.OrderByDirection(
+                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
+                            o => o.Price).ToList();
+                        break;
+                }
             }
 
-            if (CompanyId != Guid.Empty)
-                Filter.CompanyIds = [CompanyId];
-
-            var result = await StocksHttpService.GetStocksByFilter(Filter);
-
-            if (result is null)
-                return new GridData<StockViewModel> { Items = [], TotalItems = 0 };
-
-            return new GridData<StockViewModel>
+            var pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
+            return new()
             {
-                Items = result.Items,
-                TotalItems = result.TotalCount
+                TotalItems = totalItems,
+                Items = pagedData,
             };
         }
         catch (Exception e)
         {
-            Logger.LogError(e, "Error loading stocks with filter");
-            return new GridData<StockViewModel> { Items = [], TotalItems = 0 };
+            Logger.LogError(e, e.Message);
+            return new();
         }
         finally
         {
@@ -87,12 +129,75 @@ public partial class StocksGrid : ComponentBase
         }
     }
 
-    private async Task OnSearch(string search)
+    private void RegisterHubHandlers()
     {
-        Filter.Search = search;
-        await DataGrid.ReloadServerData();
+        StocksHub.RegisterHandler<List<StockViewModel>>($"OnStocksPriceChanged",
+            async (stocks) => _ = OnStocksPriceChanged(stocks));
     }
-    
+
+    private async Task OnStocksPriceChanged(List<StockViewModel> updatedStocks)
+    {
+        try
+        {
+            await InvokeAsync(async () =>
+            {
+                    if (Stocks.Any(s => updatedStocks.Select(us => us.Id).Contains(s.Id)))
+                    {
+                        await _dataGrid.ReloadServerData();
+                        StateHasChanged();
+                    }
+            });
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+        }
+    }
+
+    private void OpenStockSymbolFilter()
+    {
+        _symbolFilterOpened = true;
+    }
+
+    private void SelectAllFilterStockSymbols(bool value)
+    {
+        _symbolFilterSelectedAll = true;
+        
+        if (value)
+        {
+            SelectedStocks = Stocks.ToHashSet();
+        }
+        else
+        {
+            SelectedStocks.Clear();
+        }
+    }
+
+    private void SelectedFilterStockSymbolChanged(bool value, StockPerformanceViewModel item)
+    {
+        if (value)
+            SelectedStocks.Add(item);
+        else
+            SelectedStocks.Remove(item);
+
+        _symbolFilterSelectedAll = SelectedStocks.Count == Stocks.Count;
+    }
+
+    private async Task ClearStockSymbolFilter(FilterContext<StockPerformanceViewModel> context)
+    {
+        SelectedStocks = Stocks.ToHashSet();
+        FilteredStocks = Stocks.ToHashSet();
+        await context.Actions.ClearFilterAsync(_stocksFilterDefinition);
+        _symbolFilterOpened = false;
+    }
+
+    private async Task ApplyStockSymbolFilter(FilterContext<StockPerformanceViewModel> context)
+    {
+        FilteredStocks = SelectedStocks;
+        await context.Actions.ApplyFilterAsync(_stocksFilterDefinition);
+        _symbolFilterOpened = false;
+    }
+
     private async Task OpenCreateStockModal()
     {
         try
@@ -117,7 +222,7 @@ public partial class StocksGrid : ComponentBase
             var dialogReference = await DialogService.ShowAsync<StockViewModal>(@Localizer["company_stocks_title"], parameters, options);
             var dialogResult = await dialogReference.Result;
             if (dialogResult is { Canceled: false })
-                await DataGrid.ReloadServerData();
+                await _dataGrid.ReloadServerData();
         }
         catch (Exception e)
         {
@@ -150,7 +255,7 @@ public partial class StocksGrid : ComponentBase
             var dialogReference = await DialogService.ShowAsync<StockViewModal>(@Localizer["company_stocks_title"], parameters, options);
             var dialogResult = await dialogReference.Result;
             if (dialogResult is { Canceled: false })
-                await DataGrid.ReloadServerData();
+                await _dataGrid.ReloadServerData();
         }
         catch (Exception e)
         {
@@ -167,7 +272,7 @@ public partial class StocksGrid : ComponentBase
             
             var res = await StocksHttpService.DeleteStock(stockId);
             if (res)
-                await DataGrid.ReloadServerData();
+                await _dataGrid.ReloadServerData();
             else
                 Logger.LogError($"Failed to delete stock {stockId}");
         }

@@ -3,27 +3,43 @@
 
 <PageTitle>@CompanyModel.Title</PageTitle>
 
-<MudContainer Gutters="true" MaxWidth="@MaxWidth.ExtraExtraLarge">
-    <MudPaper Class="pa-6 mt-5" Square="false">
+<MudContainer Gutters="true"
+              MaxWidth="@MaxWidth.ExtraExtraLarge">
+    
+    <MudPaper Class="pa-6 mt-5"
+              Square="false">
+        
         @if (IsLoading)
         {
-            <MudStack AlignItems="@AlignItems.Center" Justify="@Justify.Center" Class="pa-6">
-                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+            <MudStack AlignItems="@AlignItems.Center"
+                      Justify="@Justify.Center"
+                      Class="pa-6">
+
+                <MudProgressCircular Color="@Color.Primary"
+                                     Size="@Size.Large"
+                                     Indeterminate="true"/>
             </MudStack>
         }
         else
         {
-            <MudText Typo="Typo.h4" GutterBottom="true">@Localizer["company_details_title"]</MudText>
-    
+            <MudText Typo="@Typo.h4"
+                     GutterBottom="true">
+                @Localizer["company_details_title"]
+            </MudText>
+
             @if (IsEditMode)
             {
-                <EditForm EditContext="@_editContext" OnValidSubmit="@HandleCompanyEdit">
-                    <DataAnnotationsValidator />
-                    
+                <EditForm EditContext="@_editContext" 
+                          OnValidSubmit="@HandleCompanyEdit">
+
+                    <DataAnnotationsValidator/>
+
                     <MudGrid Justify="@Justify.FlexStart">
+
                         <MudItem xs="6">
-                            <MudTextField T="string" 
-                                          @bind-Value="@CompanyModel.Title" 
+
+                            <MudTextField T="string"
+                                          @bind-Value="@CompanyModel.Title"
                                           Label="@Localizer["company_details_field_label_name"]"
                                           InputType="@InputType.Text"
                                           Variant="@Variant.Outlined"
@@ -36,22 +52,33 @@
                         @if (AdditionalInfoRoles.Any(role => string.Equals(role, ViewUserRole, StringComparison.OrdinalIgnoreCase)))
                         {
                             <MudItem xs="6">
+
                                 <MudGrid Justify="@Justify.FlexStart">
+
                                     <MudItem xs="6">
-                                        <MudText Typo="Typo.subtitle1"
-                                                 Color="Color.Secondary">
+
+                                        <MudText Typo="@Typo.subtitle1"
+                                                 Color="@Color.Secondary">
+                                            
                                             @Localizer["company_details_field_label_created_at"]
                                         </MudText>
-                                        <MudText Typo="Typo.body1">
+
+                                        <MudText Typo="@Typo.body1">
+
                                             @CompanyModel.CreatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
                                         </MudText>
                                     </MudItem>
+
                                     <MudItem xs="6">
-                                        <MudText Typo="Typo.subtitle1"
-                                                 Color="Color.Secondary">
+
+                                        <MudText Typo="@Typo.subtitle1"
+                                                 Color="@Color.Secondary">
+                                            
                                             @Localizer["company_details_field_label_updated_at"]
                                         </MudText>
-                                        <MudText Typo="Typo.body1">
+
+                                        <MudText Typo="@Typo.body1">
+                                            
                                             @CompanyModel.UpdatedAt.ConvertUtcToLocal(TimeZoneHelper.UserTimeZone).ToString("g")
                                         </MudText>
                                     </MudItem>
@@ -60,11 +87,14 @@
                         }
 
                         <MudItem xs="12">
+
                             <MudGrid Justify="@Justify.FlexEnd">
-                                <MudButton ButtonType="@ButtonType.Submit" 
-                                           Color="@Color.Tertiary" 
-                                           Variant="@Variant.Filled" 
+
+                                <MudButton ButtonType="@ButtonType.Submit"
+                                           Color="@Color.Tertiary"
+                                           Variant="@Variant.Filled"
                                            Class="login-button">
+
                                     @Localizer["company_details_button_text_save"]
                                 </MudButton>
                             </MudGrid>
@@ -75,28 +105,44 @@
             else
             {
                 <MudGrid Justify="@Justify.FlexStart">
+
                     <MudItem xs="3">
-                        <MudText Typo="Typo.subtitle1"
-                                 Color="Color.Secondary">@Localizer["company_details_field_label_name"]</MudText>
-                        <MudText Typo="Typo.body1">@CompanyModel.Title</MudText>
+
+                        <MudText Typo="@Typo.subtitle1"
+                                 Color="@Color.Secondary">
+                            
+                            @Localizer["company_details_field_label_name"]
+                        </MudText>
+
+                        <MudText Typo="@Typo.body1">@CompanyModel.Title</MudText>
                     </MudItem>
                 </MudGrid>
             }
         }
     </MudPaper>
-    
-    <MudDivider Class="my-4" />
-    
-    <MudTabs Elevation="1" Rounded="true" ApplyEffectsToContainer="true" >
+
+    <MudDivider Class="my-4"/>
+
+    <MudTabs Elevation="1"
+             Rounded="true"
+             ApplyEffectsToContainer="true">
+
         <MudTabPanel Text="@Localizer["company_tabs_label_stocks"]">
-            <StocksGrid CompanyId="@CompanyId" DirectToStockPage="true" ShowCreateStockButton="@IsEditMode"/>
+
+            <StocksGrid CompanyId="@CompanyId"
+                        DirectToStockPage="true"
+                        ShowCreateStockButton="@IsEditMode"/>
         </MudTabPanel>
+
         @if (AdditionalInfoRoles.Any(role => string.Equals(role, ViewUserRole, StringComparison.OrdinalIgnoreCase)))
         {
             <MudTabPanel Text="@Localizer["company_tabs_label_users"]">
-                <UsersGrid CompanyId="@CompanyId" DirectToUserPage="true" ShowCreateUserButton="@IsEditMode"/>
+
+                <UsersGrid CompanyId="@CompanyId"
+                           DirectToUserPage="true"
+                           ShowCreateUserButton="@IsEditMode"/>
             </MudTabPanel>
         }
     </MudTabs>
-    
+
 </MudContainer>

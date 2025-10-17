@@ -10,13 +10,18 @@
                  Filterable="false"
                  Dense
                  Hover
-                 Loading="@IsLoading">
+                 Loading="@IsLoading"
+                 Class="companies-grid">
 
         <ToolBarContent>
+            
             <MudText Typo="Typo.h6">@Localizer["companies_grid_title"]</MudText>
+            
             <MudSpacer/>
 
-            <MudStack Row="true" Spacing="5" Class="toolbar-actions">
+            <MudStack Row="true" 
+                      Spacing="5" 
+                      Class="toolbar-actions">
 
                 <MudTextField T="string"
                               Value="@Filter.Search"

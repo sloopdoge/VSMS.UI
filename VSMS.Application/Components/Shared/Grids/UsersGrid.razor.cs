@@ -13,7 +13,7 @@ namespace VSMS.Application.Components.Shared.Grids;
 
 public partial class UsersGrid : ComponentBase
 {
-    [Inject] private ILogger<StocksGrid> Logger { get; set; }
+    [Inject] private ILogger<StocksPerformanceGrid> Logger { get; set; }
     [Inject] private IStringLocalizer<SharedResources> Localizer { get; set; }
     [Inject] private CompaniesHttpService CompaniesHttpService { get; set; }
     [Inject] private UsersHttpService UsersHttpService { get; set; }
