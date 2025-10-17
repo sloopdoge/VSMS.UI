@@ -1,7 +1,9 @@
 ﻿using System.Net.Http.Json;
 using Blazored.LocalStorage;
 using Microsoft.Extensions.Logging;
+using VSMS.Domain.Models;
 using VSMS.Domain.Models.ViewModels;
+using VSMS.Domain.Models.ViewModels.Shared.Filters;
 using VSMS.Infrastructure.Settings;
 
 namespace VSMS.Infrastructure.Services.HttpServices;
@@ -43,6 +45,26 @@ public class CompaniesHttpService(
             await AddAuthorizationAsync();
             var result = await Client.GetAsync(Url());
             var content = await result.Content.ReadFromJsonAsync<List<CompanyViewModel>>();
+            return content;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, e.Message);
+            return null;
+        }
+    }
+    
+    /// <summary>
+    /// Gets the collection of all available companies from the API.
+    /// </summary>
+    /// <returns>A list of companies or <c>null</c> if the request fails.</returns>
+    public async Task<PagedResult<CompanyViewModel>?> GetCompaniesByFilter(CompaniesFilterViewModel filter)
+    {
+        try
+        {
+            await AddAuthorizationAsync();
+            var result = await Client.PostAsJsonAsync(Url("ByFilter"), filter);
+            var content = await result.Content.ReadFromJsonAsync<PagedResult<CompanyViewModel>>();
             return content;
         }
         catch (Exception e)

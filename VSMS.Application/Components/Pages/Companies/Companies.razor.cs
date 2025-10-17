@@ -4,6 +4,7 @@ using MudBlazor;
 using VSMS.Application.Components.Shared.Modals;
 using VSMS.Domain;
 using VSMS.Domain.Models.ViewModels;
+using VSMS.Domain.Models.ViewModels.Shared.Filters;
 using VSMS.Infrastructure.Helpers;
 using VSMS.Infrastructure.Services.HttpServices;
 
@@ -18,9 +19,11 @@ public partial class Companies : ComponentBase
     [Inject] private IDialogService DialogService { get; set; }
     [Inject] private TimeZoneHelper TimeZoneHelper { get; set; }
     
-    private MudDataGrid<CompanyViewModel> _dataGrid;
+    private MudDataGrid<CompanyViewModel> DataGrid { get; set; } = new();
+    private List<CompanyViewModel> Items { get; set; } = [];
     private string SearchString { get; set; } = "";
     private bool IsLoading { get; set; } = false;
+    private CompaniesFilterViewModel Filter { get; set; } = new(){ SortBy = nameof(CompanyViewModel.CreatedAt)};
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -37,62 +40,53 @@ public partial class Companies : ComponentBase
         }
     }
 
-    private async Task<GridData<CompanyViewModel>> RefreshGrid(GridState<CompanyViewModel> state)
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     try
+    //     {
+    //         var companies = await CompaniesHttpService.GetCompaniesByFilter(Filter);
+    //         if (companies is null)
+    //             return;
+    //         
+    //         Items = companies.Items.ToList();
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Logger.LogError(e, e.Message);
+    //     }
+    // }
+
+    private async Task<GridData<CompanyViewModel>> LoadServerData(GridState<CompanyViewModel> state)
     {
         IsLoading = true;
+
         try
         {
-            var data = await CompaniesHttpService.GetAllCompanies();
-            if (data is null)
+            Filter.Page = state.Page + 1;
+            Filter.PageSize = state.PageSize;
+
+            var sort = state.SortDefinitions.FirstOrDefault();
+            if (sort is not null)
             {
-                return new()
-                {
-                    TotalItems = 0,
-                    Items = []
-                };
+                Filter.SortBy = sort.SortBy;
+                Filter.SortAscending = !sort.Descending;
             }
 
-            data = data.Where(company =>
-            {
-                if (string.IsNullOrWhiteSpace(SearchString))
-                    return true;
-                if (company.Title.Contains(SearchString, StringComparison.OrdinalIgnoreCase))
-                    return true;
-                return false;
-            }).ToList();
-            var totalItems = data.Count();
+            var result = await CompaniesHttpService.GetCompaniesByFilter(Filter);
 
-            var sortDefinition = state.SortDefinitions.FirstOrDefault();
-            if (sortDefinition is not null)
-            {
-                data = sortDefinition.SortBy switch
-                {
-                    nameof(CompanyViewModel.Title) => data.OrderByDirection(
-                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending, 
-                            c => c.Title)
-                        .ToList(),
-                    nameof(CompanyViewModel.UpdatedAt) => data.OrderByDirection(
-                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
-                            c => c.UpdatedAt)
-                        .ToList(),
-                    nameof(CompanyViewModel.CreatedAt) => data.OrderByDirection(
-                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
-                            c => c.CreatedAt)
-                        .ToList()
-                };
-            }
+            if (result is null)
+                return new GridData<CompanyViewModel> { Items = [], TotalItems = 0 };
 
-            var pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
-            return new()
+            return new GridData<CompanyViewModel>
             {
-                TotalItems = totalItems,
-                Items = pagedData,
+                Items = result.Items,
+                TotalItems = result.TotalCount
             };
         }
         catch (Exception e)
         {
-            Logger.LogError(e, e.Message);
-            return new();
+            Logger.LogError(e, "Error loading companies with filter");
+            return new GridData<CompanyViewModel> { Items = [], TotalItems = 0 };
         }
         finally
         {
@@ -103,7 +97,7 @@ public partial class Companies : ComponentBase
     private Task OnSearch(string text)
     {
         SearchString = text;
-        return _dataGrid.ReloadServerData();
+        return DataGrid.ReloadServerData();
     }
 
     private void OnEditClick(Guid companyId)
@@ -120,7 +114,7 @@ public partial class Companies : ComponentBase
             
             var res = await CompaniesHttpService.DeleteCompanyById(companyId);
             if (res)
-                await _dataGrid.ReloadServerData();
+                await DataGrid.ReloadServerData();
             else
                 Logger.LogError($"Failed to delete company {companyId}");
         }
@@ -148,7 +142,7 @@ public partial class Companies : ComponentBase
             var dialogReference = await DialogService.ShowAsync<CompanyViewModal>(@Localizer["companies_grid_modal_text"], options);
             var dialogResult = await dialogReference.Result;
             if (dialogResult is { Canceled: false })
-                await _dataGrid.ReloadServerData();
+                await DataGrid.ReloadServerData();
         }
         catch (Exception e)
         {
