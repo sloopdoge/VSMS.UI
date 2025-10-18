@@ -629,6 +629,87 @@ namespace VSMS.Domain.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string stocks_grid_action_delete {
+            get {
+                return ResourceManager.GetString("stocks_grid_action_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_action_edit {
+            get {
+                return ResourceManager.GetString("stocks_grid_action_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_add_tooltip {
+            get {
+                return ResourceManager.GetString("stocks_grid_add_tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_column_title_actions {
+            get {
+                return ResourceManager.GetString("stocks_grid_column_title_actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_column_title_created_at {
+            get {
+                return ResourceManager.GetString("stocks_grid_column_title_created_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_column_title_name {
+            get {
+                return ResourceManager.GetString("stocks_grid_column_title_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_column_title_price {
+            get {
+                return ResourceManager.GetString("stocks_grid_column_title_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_column_title_symbol {
+            get {
+                return ResourceManager.GetString("stocks_grid_column_title_symbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_column_title_updated_at {
+            get {
+                return ResourceManager.GetString("stocks_grid_column_title_updated_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string stocks_grid_create_stock_button_text {
             get {
                 return ResourceManager.GetString("stocks_grid_create_stock_button_text", resourceCulture);
@@ -704,6 +785,15 @@ namespace VSMS.Domain.Resources {
         internal static string stocks_grid_field_updated_at {
             get {
                 return ResourceManager.GetString("stocks_grid_field_updated_at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string stocks_grid_search_placeholder {
+            get {
+                return ResourceManager.GetString("stocks_grid_search_placeholder", resourceCulture);
             }
         }
         

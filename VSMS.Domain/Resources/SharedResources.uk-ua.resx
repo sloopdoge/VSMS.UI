@@ -411,4 +411,34 @@
     <data name="confirmation_modal_action_button_decline" xml:space="preserve">
         <value>Ні</value>
     </data>
+    <data name="stocks_grid_search_placeholder" xml:space="preserve">
+        <value>Шукайте по Символу або Назві</value>
+    </data>
+    <data name="stocks_grid_add_tooltip" xml:space="preserve">
+        <value>Добавити акцію</value>
+    </data>
+    <data name="stocks_grid_column_title_name" xml:space="preserve">
+        <value>Назва</value>
+    </data>
+    <data name="stocks_grid_column_title_symbol" xml:space="preserve">
+        <value>Символ</value>
+    </data>
+    <data name="stocks_grid_column_title_price" xml:space="preserve">
+        <value>Ціна</value>
+    </data>
+    <data name="stocks_grid_column_title_updated_at" xml:space="preserve">
+        <value>Час оновлення</value>
+    </data>
+    <data name="stocks_grid_column_title_created_at" xml:space="preserve">
+        <value>Час створення</value>
+    </data>
+    <data name="stocks_grid_column_title_actions" xml:space="preserve">
+        <value>Дії</value>
+    </data>
+    <data name="stocks_grid_action_edit" xml:space="preserve">
+        <value>Змінити акцію</value>
+    </data>
+    <data name="stocks_grid_action_delete" xml:space="preserve">
+        <value>Видалити акцію</value>
+    </data>
 </root>

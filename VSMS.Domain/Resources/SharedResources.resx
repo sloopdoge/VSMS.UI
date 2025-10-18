@@ -390,4 +390,34 @@
     <data name="confirmation_modal_action_button_decline" xml:space="preserve">
         <value />
     </data>
+    <data name="stocks_grid_search_placeholder" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_add_tooltip" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_column_title_name" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_column_title_symbol" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_column_title_price" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_column_title_updated_at" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_column_title_created_at" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_column_title_actions" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_action_edit" xml:space="preserve">
+        <value />
+    </data>
+    <data name="stocks_grid_action_delete" xml:space="preserve">
+        <value />
+    </data>
 </root>
