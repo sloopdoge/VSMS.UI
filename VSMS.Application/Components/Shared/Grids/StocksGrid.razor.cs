@@ -31,21 +31,6 @@ public partial class StocksGrid : ComponentBase
     private StocksFilterViewModel Filter { get; set; } = new() { SortBy = nameof(StockViewModel.CreatedAt) };
     private bool IsLoading { get; set; } = true;
     
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                await TimeZoneHelper.DetectTimeZone();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-            }
-        }
-    }
-    
     private async Task<GridData<StockViewModel>> LoadServerData(GridState<StockViewModel> state)
     {
         IsLoading = true;

@@ -31,21 +31,6 @@ public partial class UserProfilePage : ComponentBase
     private ValidationMessageStore _errorMessageStore;
     private List<string> AdditionalInfoRoles = [Admin, CompanyAdmin];
     private List<string> AvailableRoles = [CompanyAdmin, CompanyManager];
-    
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                await TimeZoneHelper.DetectTimeZone();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-            }
-        }
-    }
 
     protected override async Task OnInitializedAsync()
     {

@@ -24,6 +24,7 @@ public partial class MainLayout : LayoutComponentBase
     [Inject] private WebPageHelper WebPageHelper { get; set; }
     [Inject] private ApplicationHub ApplicationHub { get; set; }
     [Inject] private CookieHelper CookieHelper { get; set; }
+    [Inject] private TimeZoneHelper TimeZoneHelper { get; set; }
 
     private AuthenticationState AuthenticationState { get; set; }
     private bool DarkThemeState { get; set; } = true;
@@ -60,6 +61,8 @@ public partial class MainLayout : LayoutComponentBase
                         return;
                     }
 
+                await TimeZoneHelper.DetectTimeZone();
+                
                 StateHasChanged();
             }
             catch (Exception e)

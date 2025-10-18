@@ -48,21 +48,6 @@ public partial class StockPage : ComponentBase
         StackedBarWidthRatio = 1,
     };
     private List<string> AdditionalInfoRoles { get; set; } = [Admin, CompanyAdmin];
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                await TimeZoneHelper.DetectTimeZone();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-            }
-        }
-    }
     
     protected override async Task OnInitializedAsync()
     {

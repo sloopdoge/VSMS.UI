@@ -30,21 +30,6 @@ public partial class Company : ComponentBase
     private EditContext _editContext;
     private ValidationMessageStore _errorMessageStore;
     private List<string> AdditionalInfoRoles { get; set; } = [Admin, CompanyAdmin];
-    
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                await TimeZoneHelper.DetectTimeZone();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-            }
-        }
-    }
 
     protected override async Task OnInitializedAsync()
     {

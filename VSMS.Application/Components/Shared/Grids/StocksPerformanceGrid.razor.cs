@@ -36,21 +36,6 @@ public partial class StocksPerformanceGrid : ComponentBase
     private MudDataGrid<StockPerformanceViewModel> _dataGrid;
     private bool _symbolFilterOpened = false;
     private bool _symbolFilterSelectedAll = false;
-    
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                await TimeZoneHelper.DetectTimeZone();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-            }
-        }
-    }
 
     protected override async Task OnInitializedAsync()
     {

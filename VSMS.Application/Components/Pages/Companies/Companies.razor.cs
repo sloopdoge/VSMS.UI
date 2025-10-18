@@ -25,21 +25,6 @@ public partial class Companies : ComponentBase
     private bool IsLoading { get; set; } = false;
     private CompaniesFilterViewModel Filter { get; set; } = new(){ SortBy = nameof(CompanyViewModel.CreatedAt)};
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                await TimeZoneHelper.DetectTimeZone();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-            }
-        }
-    }
-
     private async Task<GridData<CompanyViewModel>> LoadServerData(GridState<CompanyViewModel> state)
     {
         IsLoading = true;

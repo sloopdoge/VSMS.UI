@@ -16,19 +16,4 @@ public partial class StocksPage : ComponentBase
     [Inject] private TimeZoneHelper TimeZoneHelper { get; set; }
     
     private bool IsLoading { get; set; } = true;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            try
-            {
-                await TimeZoneHelper.DetectTimeZone();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-            }
-        }
-    }
 }

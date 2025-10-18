@@ -42,11 +42,11 @@
 
     <Columns>
 
-        <PropertyColumn Property="x => x.Title" Title="@Localizer["stocks_grid_column_title_name"]"
-                        Sortable="true"/>
-
         <PropertyColumn Property="x => x.Symbol"
                         Title="@Localizer["stocks_grid_column_title_symbol"]"
+                        Sortable="true"/>
+        
+        <PropertyColumn Property="x => x.Title" Title="@Localizer["stocks_grid_column_title_name"]"
                         Sortable="true"/>
 
         <PropertyColumn Property="x => x.Price"
